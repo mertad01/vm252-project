@@ -1,6 +1,4 @@
 
-package bettermousetest;
-
 //
 // This example program was adapted from an example program provided with
 //
@@ -203,8 +201,9 @@ class MouseComponent extends JComponent
                 );
 
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
-            if (previousSquare != currentSquare())
+            if (previousSquare != currentSquare()) {
                 clickCounter = 1;
+            }
 
             if (currentSquare() == null) {
                 placeAdditionalSquare(event.getPoint());
@@ -230,6 +229,12 @@ class MouseComponent extends JComponent
                     "Mouse double-click " + myClicks + " at (" + event.getX() + ", " + event.getY() + ")"
                     );
 
+            System.out.println("[DEBUG] " + "getClickCount : " + event.getClickCount());
+
+            System.out.print("[DEBUG] ");
+            System.out.print((currentSquare() != null) + " : ");
+            System.out.print((event.getClickCount() >= 2) + " : ");
+            System.out.println(clickCounter > 2);
 
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
             setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
@@ -239,12 +244,15 @@ class MouseComponent extends JComponent
                 removeExistingSquare(currentSquare());
                 setCurrentSquare(findSquareContainingPoint(event.getPoint()));
                 //after removing square, we check if there is another existing square below it, if so we change the cursor to crosshair-cursor, else the default cursor
-                if (currentSquare() != null)
+                if (currentSquare() != null) {
                    setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-                else
+                   clickCounter = 1;
+                }
+                else {
                    setCursor(Cursor.getDefaultCursor());
+                   clickCounter = 0;
+                }
 
-                clickCounter = 0;
             }
 
             }
@@ -286,7 +294,7 @@ class MouseComponent extends JComponent
 
            if (currentSquare() != null) {
                 //while dragging we check if there is an existing square, if yes we change the cursor to crosshair, then we remove that square for arraylist squares and add the same square again
-                //in the initial position, because the dragged square becomes our current square. So, when we double click to remove it, we can find it in the beginning of the arraylist 
+                //in the initial position, because the dragged square becomes our current square. So, when we double click to remove it, we can find it in the beginning of the arraylist
                  setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                  squares().remove(currentSquare());
                  repaint();
