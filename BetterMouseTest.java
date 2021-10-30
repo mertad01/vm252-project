@@ -154,7 +154,9 @@ class MouseComponent extends JComponent
                 )
             );
 
-        squares().add(currentSquare());
+        //since method findSquareContainingPoint finds squares from the beginning of the arraylist,
+        //I added all the squares in the beginning of arraylist squares
+        squares().add(0,currentSquare());
 
         repaint();
 
@@ -231,19 +233,19 @@ class MouseComponent extends JComponent
 
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
 
-            System.out.println("[DEBUG] " + "getClickCount : " + event.getClickCount());
-
-            System.out.print("[DEBUG] ");
-            System.out.print((currentSquare() != null) + " : ");
-            System.out.print((event.getClickCount() >= 2) + " : ");
-            System.out.println(clickCounter > 2);
             if (currentSquare() != null && event.getClickCount() >= 2 && clickCounter > 2) {
+            //if there is a current square then we set the cursor to cross-cursor.
+                setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                 removeExistingSquare(currentSquare());
+                //after removing square, we check if there is another existing square below it, if so we change the cursor to crosshair-cursor, else the default cursor
+                if (currentSquare() != null)
+                   setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                else
+                   setCursor(Cursor.getDefaultCursor());
+
                 clickCounter = 0;
             }
 
-
-            System.out.println(clickCounter);
             }
 
 
@@ -281,7 +283,25 @@ class MouseComponent extends JComponent
 //                "Mouse drag " + myDrags + " to (" + event.getX() + ", " + event.getY() + ")"
 //                );
 
-            if (currentSquare() != null) {
+           if (currentSquare() != null) {
+                //while dragging we check if there is an existing square, if yes we change the cursor to crosshair, then we remove that square for arraylist squares and add the same square again
+                //in the initial position, because the dragged square becomes our current square. So, when we double click to remove it, we can find it in the beginning of the arraylist 
+                 setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                 squares().remove(currentSquare());
+                 repaint();
+                 setCurrentSquare(
+                     new Rectangle2D.Double(
+                         event.getX() - OUR_SQUARE_SIDE_LENGTH / 2,
+                         event.getY() - OUR_SQUARE_SIDE_LENGTH / 2,
+                         OUR_SQUARE_SIDE_LENGTH,
+                         OUR_SQUARE_SIDE_LENGTH
+                     )
+                 );
+
+                 squares().add(0,currentSquare());
+
+                 repaint();
+
 
                 currentSquare().setFrame(
                     event.getX() - OUR_SQUARE_SIDE_LENGTH / 2,
