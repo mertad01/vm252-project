@@ -229,13 +229,6 @@ class MouseComponent extends JComponent
                     "Mouse double-click " + myClicks + " at (" + event.getX() + ", " + event.getY() + ")"
                     );
 
-            System.out.println("[DEBUG] " + "getClickCount : " + event.getClickCount());
-
-            System.out.print("[DEBUG] ");
-            System.out.print((currentSquare() != null) + " : ");
-            System.out.print((event.getClickCount() >= 2) + " : ");
-            System.out.println(clickCounter > 2);
-
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
             setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
             if (currentSquare() != null && event.getClickCount() >= 2 && clickCounter > 2) {
@@ -272,9 +265,9 @@ class MouseComponent extends JComponent
         {
 
             ++ myMoves;
-//            System.out.println(
-//                "Mouse move " + myMoves + " to (" + event.getX() + ", " + event.getY() + ")"
-//                );
+            System.out.println(
+                "Mouse move " + myMoves + " to (" + event.getX() + ", " + event.getY() + ")"
+                );
 
             if (findSquareContainingPoint(event.getPoint()) == null)
                 setCursor(Cursor.getDefaultCursor());
