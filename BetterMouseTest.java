@@ -188,7 +188,7 @@ class MouseComponent extends JComponent
 
         int myPresses = 0;
         int myClicks = 0;
-        int clickCounter = 0; // Field to handle clicks to detect double clicks independently from MouseEvent getClickCount
+        private int clickCounter = 0; // Field to handle clicks to detect double clicks independently from MouseEvent getClickCount
 
         @Override
         public void mousePressed(MouseEvent event)
