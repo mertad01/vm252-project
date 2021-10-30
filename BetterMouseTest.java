@@ -237,6 +237,7 @@ class MouseComponent extends JComponent
             //if there is a current square then we set the cursor to cross-cursor.
                 setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                 removeExistingSquare(currentSquare());
+                setCurrentSquare(findSquareContainingPoint(event.getPoint()));
                 //after removing square, we check if there is another existing square below it, if so we change the cursor to crosshair-cursor, else the default cursor
                 if (currentSquare() != null)
                    setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
