@@ -232,7 +232,7 @@ class MouseComponent extends JComponent
 
 
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
-
+            setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
             if (currentSquare() != null && event.getClickCount() >= 2 && clickCounter > 2) {
             //if there is a current square then we set the cursor to cross-cursor.
                 setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
