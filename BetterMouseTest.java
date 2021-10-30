@@ -279,9 +279,9 @@ class MouseComponent extends JComponent
         {
 
             ++ myDrags;
-//            System.out.println(
-//                "Mouse drag " + myDrags + " to (" + event.getX() + ", " + event.getY() + ")"
-//                );
+            System.out.println(
+                "Mouse drag " + myDrags + " to (" + event.getX() + ", " + event.getY() + ")"
+                );
 
            if (currentSquare() != null) {
                 //while dragging we check if there is an existing square, if yes we change the cursor to crosshair, then we remove that square for arraylist squares and add the same square again
