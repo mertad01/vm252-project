@@ -188,7 +188,7 @@ class MouseComponent extends JComponent
 
         int myPresses = 0;
         int myClicks = 0;
-        int clickCounter = 0;
+        int clickCounter = 0; // Field to handle clicks to detect double clicks independently from MouseEvent getClickCount
 
         @Override
         public void mousePressed(MouseEvent event)
@@ -201,14 +201,18 @@ class MouseComponent extends JComponent
                 );
 
             setCurrentSquare(findSquareContainingPoint(event.getPoint()));
+
+            // If the previous square is different than the current square set the clickCounter to 1 since we are selecting a new one, which is like a click
             if (previousSquare != currentSquare()) {
                 clickCounter = 1;
             }
 
             if (currentSquare() == null) {
                 placeAdditionalSquare(event.getPoint());
+                // When creating a new square we set the clickCounter to 0 so future clicks are handled seperately (prevents double click creaitng and destroying the same rectangle)
                 clickCounter = 0;
             }
+            // Finally, increase the clickCounter after the press.
             ++ clickCounter;
 
             }
@@ -239,10 +243,12 @@ class MouseComponent extends JComponent
                 //after removing square, we check if there is another existing square below it, if so we change the cursor to crosshair-cursor, else the default cursor
                 if (currentSquare() != null) {
                    setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                   // If we have a square selected then we must have clicked to get here, set clickCounter to 1
                    clickCounter = 1;
                 }
                 else {
                    setCursor(Cursor.getDefaultCursor());
+                   // If the current square is null then we reset back to no clicks.
                    clickCounter = 0;
                 }
 
