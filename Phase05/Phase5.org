@@ -1,0 +1,13 @@
+#+TITLE: Group 1: Phase 5
+
+* Repository Information
+
+| URL      | https://github.com/mertad01/vm252-project.git |
+| Revision | TK                                             |
+| Date     | TK                                             |
+
+* GUI Explanation Image
+
+* Progress Report
+
+** Work Log
