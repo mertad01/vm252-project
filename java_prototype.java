@@ -61,7 +61,9 @@ class gui {
         pc_acc.add(tf_acc);
 
         // Text Area at the Center
-//        JTextArea ta = new JTextArea();
+        // A visualization of what memory contents will look
+        // like when our program is running
+
         JTable memoryTable = new JTable(20, 20);
         memoryTable.setValueAt("80", 0, 0);
         memoryTable.setValueAt("10", 0, 1);
@@ -144,7 +146,7 @@ class gui {
         memoryTable.setValueAt("00", 3, 18);
         memoryTable.setValueAt("00", 3, 19);
 
-        for (int row = 4; row < 20; ++ row) {
+        for (int row = 4; row < 20; ++row) {
             memoryTable.setValueAt("00", row, 0);
             memoryTable.setValueAt("00", row, 1);
             memoryTable.setValueAt("00", row, 2);
