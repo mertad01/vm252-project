@@ -5,66 +5,29 @@ import javax.swing.*;
 import java.awt.*;
 
 class gui {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
+        EventQueue.invokeLater(
+                () ->
+                {
+                    ProgramFrame frame = new ProgramFrame();
+                    frame.setTitle("VM252 Debugger");
 
-        // Creating the Frame
-        JFrame frame = new JFrame("Gui Minimal Framework");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(720, 480);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setSize(1280, 720);
+                    frame.setVisible(true);
+                }
+        );
+    }
+}
 
-        // Creating the MenuBar and adding components as seen in prototype
-        JMenuBar menu_item = new JMenuBar();
-        JMenu m1 = new JMenu("Load");
-        JMenu m2 = new JMenu("Edit");
-        JMenu m3 = new JMenu("Run");
-        JMenu m4 = new JMenu("Pause");
-        JMenu m5 = new JMenu("Stop");
-        JMenu label = new JMenu("Enter File Name:");
-        // Takes up to 30 characters for file name.
-        JTextField tf = new JTextField(30);
-        menu_item.add(m1);
-        menu_item.add(m2);
-        menu_item.add(label);
-        menu_item.add(tf);
-        menu_item.add(m3);
-        menu_item.add(m4);
-        menu_item.add(m5);
-        JMenuItem m11 = new JMenuItem("Open");
-        m1.add(m11);
+class ProgramFrame extends JFrame {
 
-        JPanel buttonPanel = new JPanel();
+    private ProgramMenuBar programMenuBar = new ProgramMenuBar();
+    private ProgramButtonPanel programButtonPanel = new ProgramButtonPanel();
+    private ProgramStatePanel programStatePanel = new ProgramStatePanel();
+    private JTable memoryTable = new JTable(20, 20);
 
-        // Add buttons to buttonPanel as seen in prototype
-        JButton ap = new JButton("ap");
-        JButton ba = new JButton("ba");
-        JButton h = new JButton("h");
-        JButton mb = new JButton("mb");
-        JButton n = new JButton("n");
-        JButton ob = new JButton("ob");
-        buttonPanel.add(ap);
-        buttonPanel.add(ba);
-        buttonPanel.add(h);
-        buttonPanel.add(mb);
-        buttonPanel.add(n);
-        buttonPanel.add(ob);
-
-        JPanel pc_acc = new JPanel();
-
-        // Add buttons to buttonPanel
-        JButton PC = new JButton("PC: ");
-        JTextField tf_pc = new JTextField(4);
-        JButton ACC = new JButton("ACC: ");
-        JTextField tf_acc = new JTextField(4);
-        pc_acc.add(PC);
-        pc_acc.add(tf_pc);
-        pc_acc.add(ACC);
-        pc_acc.add(tf_acc);
-
-        // Text Area at the Center
-        // A visualization of what memory contents will look
-        // like when our program is running
-
-        JTable memoryTable = new JTable(20, 20);
+    public ProgramFrame() {
         memoryTable.setValueAt("80", 0, 0);
         memoryTable.setValueAt("10", 0, 1);
         memoryTable.setValueAt("00", 0, 2);
@@ -169,18 +132,76 @@ class gui {
             memoryTable.setValueAt("00", row, 19);
         }
 
+        // Text Area at the Center
+        // A visualization of what memory contents will look
+        // like when our program is running
+
+
         // this is where positioning is done on the page
         // But when we implement as classes we need to use Box_layout which is a better
         // approach
-        frame.getContentPane().add(BorderLayout.NORTH, menu_item);
-        frame.getContentPane().add(BorderLayout.CENTER, memoryTable);
-        frame.getContentPane().add(BorderLayout.WEST, buttonPanel);
-        frame.getContentPane().add(BorderLayout.EAST, pc_acc);
-        frame.setVisible(true);
-
-        // TO Do
-        // Convert elements of this skeleton to classes
-        // Use Zaring's model-view-control architecture
-
+        getContentPane().add(BorderLayout.NORTH, programMenuBar);
+        getContentPane().add(BorderLayout.CENTER, memoryTable);
+        getContentPane().add(BorderLayout.WEST, programButtonPanel);
+        getContentPane().add(BorderLayout.EAST, programStatePanel);
     }
+
+}
+
+class ProgramMenuBar extends JMenuBar {
+
+    public ProgramMenuBar() {
+        JMenu m1 = new JMenu("Load");
+        JMenu m2 = new JMenu("Edit");
+        JMenu m3 = new JMenu("Run");
+        JMenu m4 = new JMenu("Pause");
+        JMenu m5 = new JMenu("Stop");
+        JMenu label = new JMenu("Enter File Name:");
+        // Takes up to 30 characters for file name.
+        JTextField tf = new JTextField(30);
+        add(m1);
+        add(m2);
+        add(label);
+        add(tf);
+        add(m3);
+        add(m4);
+        add(m5);
+        JMenuItem m11 = new JMenuItem("Open");
+        m1.add(m11);
+    }
+
+}
+
+class ProgramButtonPanel extends JPanel {
+
+    public ProgramButtonPanel() {
+        JButton ap = new JButton("ap");
+        JButton ba = new JButton("ba");
+        JButton h = new JButton("h");
+        JButton mb = new JButton("mb");
+        JButton n = new JButton("n");
+        JButton ob = new JButton("ob");
+        add(ap);
+        add(ba);
+        add(h);
+        add(mb);
+        add(n);
+        add(ob);
+    }
+
+}
+
+class ProgramStatePanel extends JPanel {
+
+    public ProgramStatePanel() {
+        JButton PC = new JButton("PC: ");
+        JTextField tf_pc = new JTextField(4);
+        JButton ACC = new JButton("ACC: ");
+        JTextField tf_acc = new JTextField(4);
+        add(PC);
+        add(tf_pc);
+        add(ACC);
+        add(tf_acc);
+    }
+
 }
