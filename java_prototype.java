@@ -176,6 +176,16 @@ class ProgramMenuBar extends JMenuBar {
         JMenu fileNameLabel = new JMenu("Enter File Name:");
 
         //
+        // Set help tooltips
+        //
+        loadMenu.setToolTipText("Load a vm252 object file");
+        editMenu.setToolTipText("???"); // TODO
+        runMenu.setToolTipText("Run program until breakpoint reached");
+        pauseMenu.setToolTipText("Pause the execution of the program");
+        stopMenu.setToolTipText("Stop the execution of the program");
+        fileNameLabel.setToolTipText("Enter a name to load a vm252 object file");
+
+        //
         // TextField Takes up to 30 characters for a given file name input.
         //
         JTextField fileNameField = new JTextField(30);
@@ -205,10 +215,17 @@ class ProgramButtonPanel extends JPanel {
         Box left = Box.createVerticalBox();
         JButton alterProgramCounterButton = new JButton("ap");
         JButton breakpointAddButton = new JButton("ba");
-        JButton helpButton = new JButton("h ");
+        JButton helpButton = new JButton("h");
         JButton displayBytesButton = new JButton("mb");
         JButton nextInstructionButton = new JButton("n ");
         JButton displayObjectBytesButton = new JButton("ob");
+
+        //
+        // Set help tooltips
+        //
+        breakpointAddButton.setToolTipText("Add a breakpoint at selected location");
+        helpButton.setToolTipText("Spawn a help dialog explaining the application");
+        nextInstructionButton.setToolTipText("Run Next Program Instruction");
 
         //
         // We create a vertical spacer that separates elements for every 45 pixels
@@ -238,12 +255,22 @@ class ProgramStatePanel extends JPanel {
     public ProgramStatePanel() {
 
         Box machineStateBox = Box.createVerticalBox();
+
         JMenu programCounterMenu = new JMenu("PC: ");
-        JTextField programCounterField = new JTextField(4);
         JMenu accumulatorMenu = new JMenu("ACC: ");
-        JTextField accumulatorField = new JTextField(4);
         JMenu nextInstructionMenu = new JMenu("Next: ");
+
+        JTextField programCounterField = new JTextField(4);
+        JTextField accumulatorField = new JTextField(4);
         JTextField nextInstructionField = new JTextField(4);
+
+        //
+        // Set help tooltips
+        //
+        programCounterField.setToolTipText("View or edit the program counter");
+        accumulatorField.setToolTipText("View or edit the accumulator");
+        nextInstructionField.setToolTipText("View the next instruction that will be ran");
+
         machineStateBox.add(programCounterMenu);
         machineStateBox.add(programCounterField);
         machineStateBox.add(accumulatorMenu);
@@ -271,6 +298,12 @@ class ProgramInputPanel extends JPanel {
     public ProgramInputPanel() {
         JMenu inputOutputMenu = new JMenu("Input/Output: ");
         JTextField inputOutputField = new JTextField(50);
+
+        //
+        // Set help tooltips
+        //
+        inputOutputField.setToolTipText("Enter input or receive output here");
+
         add(inputOutputMenu);
         add(inputOutputField);
     }
