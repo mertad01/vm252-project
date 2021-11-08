@@ -36,6 +36,7 @@ public class VirtualMachine252 {
         private short programCounter = 0; // the program counter
         private String nextInstruction; // TODO
         private final byte[] memory; // program memory
+        private boolean[] breakpoints = new boolean[8092];
         private final Scanner in = new Scanner(System.in); // input
         private final PrintStream out = System.out; // output
         private int[] instructionComponents;
@@ -113,8 +114,8 @@ public class VirtualMachine252 {
         }
 
         // TODO: Create breakpoints
-        public void setBreakpoint(int memoryAddress) {
-            throw new UnsupportedOperationException("Not implemented, yet");
+        public void toggleBreakpoint(int memoryAddress) {
+            breakpoints[memoryAddress] = !breakpoints[memoryAddress];
         }
 
         public void nextInstruction() {
@@ -157,15 +158,13 @@ public class VirtualMachine252 {
                                 out.println(accumulator);
                                 programCounter += 1;
                             }
-                            case NO_OP_OPCODE -> {
-                                programCounter += 1;
-                            }
+                            case NO_OP_OPCODE -> programCounter += 1;
                             case STOP_OPCODE -> {
 //                                running = false; // End program FIXME: do something maybe???
                             }
                         }
                     }
-                    // Components holds opcode and operand
+                    // "Components" holds opcode and operand
                     case 2 -> {
                         opcode = getInstructionComponents()[0];
                         operand = getInstructionComponents()[1];
@@ -189,9 +188,7 @@ public class VirtualMachine252 {
                                 accumulator -= ((short) ((memory[operand] << 8) | (memory[operand+1] & 0b011111111)));
                                 programCounter += 2;
                             }
-                            case JUMP_OPCODE -> {
-                                programCounter = (short) operand;
-                            }
+                            case JUMP_OPCODE -> programCounter = (short) operand;
                             case JUMP_ON_ZERO_OPCODE -> {
                                 if (accumulator == 0)
                                     programCounter = (short) operand;
