@@ -6,17 +6,14 @@ import java.awt.*;
 
 class gui {
     public static void main(String[] args) {
-        EventQueue.invokeLater(
-                () ->
-                {
-                    ProgramFrame frame = new ProgramFrame();
-                    frame.setTitle("VM252 Debugger");
+        EventQueue.invokeLater(() -> {
+            ProgramFrame frame = new ProgramFrame();
+            frame.setTitle("VM252 Debugger");
 
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(1280, 720);
-                    frame.setVisible(true);
-                }
-        );
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1280, 720);
+            frame.setVisible(true);
+        });
     }
 }
 
@@ -136,13 +133,12 @@ class ProgramFrame extends JFrame {
         // A visualization of what memory contents will look
         // like when our program is running
 
-
         // this is where positioning is done on the page
         // But when we implement as classes we need to use Box_layout which is a better
         // approach
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
         getContentPane().add(BorderLayout.CENTER, memoryTable);
-        getContentPane().add(BorderLayout.WEST, programButtonPanel);
+        getContentPane().add(BorderLayout.SOUTH, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
     }
 
