@@ -168,12 +168,21 @@ class ProgramFrame extends JFrame {
 class ProgramMenuBar extends JMenuBar {
 
     public ProgramMenuBar() {
+        //
+        // Create menu items
+        //
         JMenu loadMenu = new JMenu("Load");
         JMenu editMenu = new JMenu("Edit");
         JMenu runMenu = new JMenu("Run");
         JMenu pauseMenu = new JMenu("Pause");
         JMenu stopMenu = new JMenu("Stop");
         JMenu fileNameLabel = new JMenu("Enter File Name:");
+
+        //
+        // TextField Takes up to 30 characters for a given file name input.
+        //
+        JTextField fileNameField = new JTextField(100);
+        JTextField runDelayField = new JTextField("Delay", 10);
 
         //
         // Set help tooltips
@@ -184,17 +193,15 @@ class ProgramMenuBar extends JMenuBar {
         pauseMenu.setToolTipText("Pause the execution of the program");
         stopMenu.setToolTipText("Stop the execution of the program");
         fileNameLabel.setToolTipText("Enter a name to load a vm252 object file");
+        runDelayField.setToolTipText("Delay executing each instruction of the program");
 
-        //
-        // TextField Takes up to 30 characters for a given file name input.
-        //
-        JTextField fileNameField = new JTextField(30);
 
         add(loadMenu);
         add(editMenu);
         add(fileNameLabel);
         add(fileNameField);
         add(runMenu);
+        add(runDelayField);
         add(pauseMenu);
         add(stopMenu);
         JMenuItem m11 = new JMenuItem("Open");
