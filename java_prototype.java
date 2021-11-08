@@ -1,6 +1,12 @@
 
-//Michael Musa
+//
+// Title: VM252 debugger interface
+// Authors: Michael Musa, Kritib Bhattarai, Adam Mert
+// Date: 11/8/21
+//
+
 //Import Swing and awt packages
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,6 +32,12 @@ class ProgramFrame extends JFrame {
     private JTable memoryTable = new JTable(20, 20);
 
     public ProgramFrame() {
+
+        //
+        // Creating a visualization of what memory contents will look
+        // like when our program is running
+        //
+
         memoryTable.setValueAt("80", 0, 0);
         memoryTable.setValueAt("10", 0, 1);
         memoryTable.setValueAt("00", 0, 2);
@@ -130,13 +142,10 @@ class ProgramFrame extends JFrame {
             memoryTable.setValueAt("00", row, 19);
         }
 
-        // Text Area at the Center
-        // A visualization of what memory contents will look
-        // like when our program is running
+        //
+        // Utilizing BorderLayout to position elements across the debugger GUI
+        //
 
-        // this is where positioning is done on the page
-        // But when we implement as classes we need to use Box_layout which is a better
-        // approach
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
         getContentPane().add(BorderLayout.CENTER, memoryTable);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
@@ -155,7 +164,11 @@ class ProgramMenuBar extends JMenuBar {
         JMenu m4 = new JMenu("Pause");
         JMenu m5 = new JMenu("Stop");
         JMenu label = new JMenu("Enter File Name:");
-        // Takes up to 30 characters for file name.
+
+        //
+        // TextField Takes up to 30 characters for a given file name input.
+        //
+
         JTextField tf = new JTextField(30);
         add(m1);
         add(m2);
@@ -174,8 +187,10 @@ class ProgramButtonPanel extends JPanel {
 
     public ProgramButtonPanel() {
 
+        //
         // We create a vertical box to contain buttons and have them displayed in blocks
-        // (one after another)
+        // (one after another) using the Box class (aligned left)
+        //
 
         Box left = Box.createVerticalBox();
         JButton ap = new JButton("ap");
@@ -184,10 +199,15 @@ class ProgramButtonPanel extends JPanel {
         JButton mb = new JButton("mb");
         JButton n = new JButton("n ");
         JButton ob = new JButton("ob");
-        left.add(ap);
 
+        //
         // We create a vertical spacer that separates elements for every 45 pixels
+        // We utilise the box class that creates invisible components in spaces
+        // with the help of rigidarea as the Box filler
+        //
 
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(ap);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
         left.add(ba);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
@@ -206,14 +226,24 @@ class ProgramButtonPanel extends JPanel {
 class ProgramStatePanel extends JPanel {
 
     public ProgramStatePanel() {
-        JButton PC = new JButton("PC: ");
+
+        Box right = Box.createVerticalBox();
+        JMenu PC = new JMenu("PC: ");
         JTextField tf_pc = new JTextField(4);
-        JButton ACC = new JButton("ACC: ");
+        JMenu ACC = new JMenu("ACC: ");
         JTextField tf_acc = new JTextField(4);
-        add(PC);
-        add(tf_pc);
-        add(ACC);
-        add(tf_acc);
+        right.add(PC);
+        right.add(tf_pc);
+        right.add(ACC);
+        right.add(tf_acc);
+        add(right);
+
+        //
+        // Initialize all machine states to 0 for visualization
+        //
+
+        tf_pc.setText("0");
+        tf_acc.setText("0");
     }
 
 }
