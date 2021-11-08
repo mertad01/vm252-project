@@ -22,6 +22,7 @@ class ProgramFrame extends JFrame {
     private ProgramMenuBar programMenuBar = new ProgramMenuBar();
     private ProgramButtonPanel programButtonPanel = new ProgramButtonPanel();
     private ProgramStatePanel programStatePanel = new ProgramStatePanel();
+    private ProgramInputPanel programInputPanel = new ProgramInputPanel();
     private JTable memoryTable = new JTable(20, 20);
 
     public ProgramFrame() {
@@ -138,8 +139,9 @@ class ProgramFrame extends JFrame {
         // approach
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
         getContentPane().add(BorderLayout.CENTER, memoryTable);
-        getContentPane().add(BorderLayout.SOUTH, programButtonPanel);
+        getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
+        getContentPane().add(BorderLayout.SOUTH, programInputPanel);
     }
 
 }
@@ -171,18 +173,32 @@ class ProgramMenuBar extends JMenuBar {
 class ProgramButtonPanel extends JPanel {
 
     public ProgramButtonPanel() {
+
+        // We create a vertical box to contain buttons and have them displayed in blocks
+        // (one after another)
+
+        Box left = Box.createVerticalBox();
         JButton ap = new JButton("ap");
         JButton ba = new JButton("ba");
-        JButton h = new JButton("h");
+        JButton h = new JButton("h ");
         JButton mb = new JButton("mb");
-        JButton n = new JButton("n");
+        JButton n = new JButton("n ");
         JButton ob = new JButton("ob");
-        add(ap);
-        add(ba);
-        add(h);
-        add(mb);
-        add(n);
-        add(ob);
+        left.add(ap);
+
+        // We create a vertical spacer that separates elements for every 45 pixels
+
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(ba);
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(h);
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(mb);
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(n);
+        left.add(Box.createRigidArea(new Dimension(0, 45)));
+        left.add(ob);
+        add(left);
     }
 
 }
@@ -198,6 +214,17 @@ class ProgramStatePanel extends JPanel {
         add(tf_pc);
         add(ACC);
         add(tf_acc);
+    }
+
+}
+
+class ProgramInputPanel extends JPanel {
+
+    public ProgramInputPanel() {
+        JMenu input_output = new JMenu("Input/Output: ");
+        JTextField input_output_txt = new JTextField(50);
+        add(input_output);
+        add(input_output_txt);
     }
 
 }
