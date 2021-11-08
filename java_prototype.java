@@ -1,8 +1,8 @@
 
 //
 // Title: VM252 debugger interface
-// Authors: Michael Musa, Kritib Bhattarai, Adam Mert
-// Date: 11/8/21
+// Authors: Michael Musa, Kritib Bhattarai, Adam Mertzenich
+// Date: 11/09/21
 //
 
 //Import Swing and awt packages
@@ -25,17 +25,27 @@ class gui {
 
 class ProgramFrame extends JFrame {
 
-    private ProgramMenuBar programMenuBar = new ProgramMenuBar();
-    private ProgramButtonPanel programButtonPanel = new ProgramButtonPanel();
-    private ProgramStatePanel programStatePanel = new ProgramStatePanel();
-    private ProgramInputPanel programInputPanel = new ProgramInputPanel();
-    private JTable memoryTable = new JTable(20, 20);
+    private ProgramMenuBar programMenuBar;
+    private ProgramButtonPanel programButtonPanel;
+    private ProgramStatePanel programStatePanel;
+    private ProgramInputPanel programInputPanel;
+    private JTable memoryTable;
 
     public ProgramFrame() {
+        programMenuBar = new ProgramMenuBar();
+        programButtonPanel = new ProgramButtonPanel();
+        programStatePanel = new ProgramStatePanel();
+        programInputPanel = new ProgramInputPanel();
+        memoryTable = new JTable(20, 20);
 
         //
         // Creating a visualization of what memory contents will look
-        // like when our program is running
+        // like when our program is running.
+        //
+        // Currently, we are using JTable for this, which would allow
+        // editing and viewing the memory in the same location, but may
+        // switch to using different objects in order to implement the
+        // "ba" breakpoint feature (checkboxes, text fields, etc).
         //
 
         memoryTable.setValueAt("80", 0, 0);
@@ -158,27 +168,27 @@ class ProgramFrame extends JFrame {
 class ProgramMenuBar extends JMenuBar {
 
     public ProgramMenuBar() {
-        JMenu m1 = new JMenu("Load");
-        JMenu m2 = new JMenu("Edit");
-        JMenu m3 = new JMenu("Run");
-        JMenu m4 = new JMenu("Pause");
-        JMenu m5 = new JMenu("Stop");
-        JMenu label = new JMenu("Enter File Name:");
+        JMenu loadMenu = new JMenu("Load");
+        JMenu editMenu = new JMenu("Edit");
+        JMenu runMenu = new JMenu("Run");
+        JMenu pauseMenu = new JMenu("Pause");
+        JMenu stopMenu = new JMenu("Stop");
+        JMenu fileNameLabel = new JMenu("Enter File Name:");
 
         //
         // TextField Takes up to 30 characters for a given file name input.
         //
+        JTextField fileNameField = new JTextField(30);
 
-        JTextField tf = new JTextField(30);
-        add(m1);
-        add(m2);
-        add(label);
-        add(tf);
-        add(m3);
-        add(m4);
-        add(m5);
+        add(loadMenu);
+        add(editMenu);
+        add(fileNameLabel);
+        add(fileNameField);
+        add(runMenu);
+        add(pauseMenu);
+        add(stopMenu);
         JMenuItem m11 = new JMenuItem("Open");
-        m1.add(m11);
+        loadMenu.add(m11);
     }
 
 }
@@ -193,31 +203,31 @@ class ProgramButtonPanel extends JPanel {
         //
 
         Box left = Box.createVerticalBox();
-        JButton ap = new JButton("ap");
-        JButton ba = new JButton("ba");
-        JButton h = new JButton("h ");
-        JButton mb = new JButton("mb");
-        JButton n = new JButton("n ");
-        JButton ob = new JButton("ob");
+        JButton alterProgramCounterButton = new JButton("ap");
+        JButton breakpointAddButton = new JButton("ba");
+        JButton helpButton = new JButton("h ");
+        JButton displayBytesButton = new JButton("mb");
+        JButton nextInstructionButton = new JButton("n ");
+        JButton displayObjectBytesButton = new JButton("ob");
 
         //
         // We create a vertical spacer that separates elements for every 45 pixels
         // We utilise the box class that creates invisible components in spaces
-        // with the help of rigidarea as the Box filler
+        // with the help of createRigidArea as the Box filler
         //
 
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(ap);
+        left.add(alterProgramCounterButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(ba);
+        left.add(breakpointAddButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(h);
+        left.add(helpButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(mb);
+        left.add(displayBytesButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(n);
+        left.add(nextInstructionButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(ob);
+        left.add(displayObjectBytesButton);
         add(left);
     }
 
@@ -227,23 +237,31 @@ class ProgramStatePanel extends JPanel {
 
     public ProgramStatePanel() {
 
-        Box right = Box.createVerticalBox();
-        JMenu PC = new JMenu("PC: ");
-        JTextField tf_pc = new JTextField(4);
-        JMenu ACC = new JMenu("ACC: ");
-        JTextField tf_acc = new JTextField(4);
-        right.add(PC);
-        right.add(tf_pc);
-        right.add(ACC);
-        right.add(tf_acc);
-        add(right);
+        Box machineStateBox = Box.createVerticalBox();
+        JMenu programCounterMenu = new JMenu("PC: ");
+        JTextField programCounterField = new JTextField(4);
+        JMenu accumulatorMenu = new JMenu("ACC: ");
+        JTextField accumulatorField = new JTextField(4);
+        JMenu nextInstructionMenu = new JMenu("Next: ");
+        JTextField nextInstructionField = new JTextField(4);
+        machineStateBox.add(programCounterMenu);
+        machineStateBox.add(programCounterField);
+        machineStateBox.add(accumulatorMenu);
+        machineStateBox.add(accumulatorField);
+        machineStateBox.add(nextInstructionMenu);
+        machineStateBox.add(nextInstructionField);
 
         //
         // Initialize all machine states to 0 for visualization
         //
 
-        tf_pc.setText("0");
-        tf_acc.setText("0");
+        programCounterField.setText("0");
+        accumulatorField.setText("0");
+        // TODO: update and display the next instruction (for the "s" command)
+        nextInstructionField.setText("INPUT");
+
+        // Add the machine state box to the panel
+        add(machineStateBox);
     }
 
 }
@@ -251,10 +269,10 @@ class ProgramStatePanel extends JPanel {
 class ProgramInputPanel extends JPanel {
 
     public ProgramInputPanel() {
-        JMenu input_output = new JMenu("Input/Output: ");
-        JTextField input_output_txt = new JTextField(50);
-        add(input_output);
-        add(input_output_txt);
+        JMenu inputOutputMenu = new JMenu("Input/Output: ");
+        JTextField inputOutputField = new JTextField(50);
+        add(inputOutputMenu);
+        add(inputOutputField);
     }
 
 }
