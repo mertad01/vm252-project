@@ -1,5 +1,6 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
@@ -7,7 +8,11 @@ import java.awt.*;
 
 public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
-    public ProgramButtonPanel() {
+    private VirtualMachine252 vm252;
+
+    public ProgramButtonPanel(VirtualMachine252 vm252) {
+
+        this.vm252 = vm252;
 
         //
         // We create a vertical box to contain buttons and have them displayed in blocks

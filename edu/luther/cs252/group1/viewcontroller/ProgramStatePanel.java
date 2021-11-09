@@ -1,12 +1,26 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
 
 public class ProgramStatePanel extends JPanel implements BasicObserver {
 
-    public ProgramStatePanel() {
+    //
+    // Private Instance Fields
+    //
+    private VirtualMachine252 vm252;
+
+    private JTextField programCounterField;
+    private JTextField accumulatorField;
+    private JTextField nextInstructionField;
+
+    //
+    // Constructor
+    //
+    public ProgramStatePanel(VirtualMachine252 vm252) {
+        this.vm252 = vm252;
 
         Box machineStateBox = Box.createVerticalBox();
 
@@ -14,9 +28,9 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         JMenu accumulatorMenu = new JMenu("ACC: ");
         JMenu nextInstructionMenu = new JMenu("Next: ");
 
-        JTextField programCounterField = new JTextField(4);
-        JTextField accumulatorField = new JTextField(4);
-        JTextField nextInstructionField = new JTextField(4);
+        programCounterField = new JTextField(4);
+        accumulatorField = new JTextField(4);
+        nextInstructionField = new JTextField(4);
 
         //
         // Set help tooltips
@@ -45,8 +59,25 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         add(machineStateBox);
     }
 
+    //
+    // Public Accessors
+    //
+    public VirtualMachine252 getVm252() {
+        return vm252;
+    }
+
+    //
+    // Public Mutators
+    //
+    public void setVm252(VirtualMachine252 vm252) {
+        this.vm252 = vm252;
+    }
+
     @Override
     public void update() {
-
+        programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
+        accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
+        nextInstructionField.setText(vm252.getNextInstruction());
+        JOptionPane.showMessageDialog(null, "bing bong foo bar");
     }
 }

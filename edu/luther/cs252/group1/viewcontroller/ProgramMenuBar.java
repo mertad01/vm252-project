@@ -1,12 +1,20 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
 
 public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
-    public ProgramMenuBar() {
+    private VirtualMachine252 vm252;
+    private JTextField fileNameField;
+    private JTextField runDelayField;
+
+    public ProgramMenuBar(VirtualMachine252 vm252) {
+
+        this.vm252 = vm252;
+
         //
         // Create menu items
         //
@@ -20,8 +28,8 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         //
         // TextField Takes up to 30 characters for a given file name input.
         //
-        JTextField fileNameField = new JTextField(100);
-        JTextField runDelayField = new JTextField("Delay", 10);
+        fileNameField = new JTextField(100);
+        runDelayField = new JTextField("Delay", 10);
 
         //
         // Set help tooltips
@@ -49,6 +57,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
     @Override
     public void update() {
-
+        // TODO: implement when model is integrated
     }
 }

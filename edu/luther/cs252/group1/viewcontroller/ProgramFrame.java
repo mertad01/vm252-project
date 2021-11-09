@@ -30,11 +30,19 @@ public class ProgramFrame extends JFrame {
         //
         // Create View-Controller Panels
         //
-        programMenuBar = new ProgramMenuBar();
-        programButtonPanel = new ProgramButtonPanel();
-        programStatePanel = new ProgramStatePanel();
-        programInputPanel = new ProgramInputPanel();
+        programMenuBar = new ProgramMenuBar(vm252);
+        programButtonPanel = new ProgramButtonPanel(vm252);
+        programStatePanel = new ProgramStatePanel(vm252);
+        programInputPanel = new ProgramInputPanel(vm252);
         memoryTable = new JTable(8192, 20);
+
+        //
+        // Attach observers to check for changes
+        //
+        vm252.attach(programMenuBar);
+        vm252.attach(programButtonPanel);
+        vm252.attach(programStatePanel);
+        vm252.attach(programInputPanel);
 
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
