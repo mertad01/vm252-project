@@ -1,6 +1,7 @@
 package edu.luther.cs252.group1.model;
 
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
+import edu.luther.cs252.group1.observation.BasicObservable;
 
 import java.io.PrintStream;
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.*;
 import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.decodedInstructionComponents;
 
-public class VirtualMachine252 {
+public class VirtualMachine252 extends BasicObservable {
 
     public static void main(String[] args) {
         VirtualMachine252 vm252 = new VirtualMachine252(
@@ -49,10 +50,12 @@ public class VirtualMachine252 {
             // Create and fill the memory with 0
             this.memory = new byte[8192];
             Arrays.fill(this.memory, (byte) 0x0);
+            announceChange();
         }
 
         public VirtualMachine252(String objectFileName) {
             this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
+            announceChange();
         }
 
     //
@@ -78,6 +81,7 @@ public class VirtualMachine252 {
                 instructionBytes[1] = memory[programCounter + 1];
                 instructionComponents = decodedInstructionComponents(instructionBytes);
             }
+            announceChange();
         }
 
     //
@@ -110,25 +114,30 @@ public class VirtualMachine252 {
             this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
             this.programCounter = 0;
             this.accumulator = 0;
+            announceChange();
         }
 
         public void setAccumulator(short accumulator) {
             this.accumulator = accumulator;
+            announceChange();
         }
 
         public void setProgramCounter(short programCounter) {
             this.programCounter = programCounter;
+            announceChange();
         }
 
         // FIXME: Does not handle hex properly yet
         public void setMemoryByte(int memoryAddress, byte hexByte) {
 //            memory[memoryAddress] = hexByte;
+            announceChange();
             throw new UnsupportedOperationException("Not implemented properly");
         }
 
         // TODO: Create breakpoints
         public void toggleBreakpoint(int memoryAddress) {
             breakpoints[memoryAddress] = !breakpoints[memoryAddress];
+            announceChange();
         }
 
 
@@ -230,14 +239,17 @@ public class VirtualMachine252 {
             else
                 programCounter += 1;
 //        throw new UnsupportedOperationException("Not implemented, yet");
+            announceChange();
         }
 
     public void runMachine() {
+        announceChange();
         throw new UnsupportedOperationException("Not implemented, yet");
     }
 
     public void reinitializeProgramCounter() {
         setProgramCounter((short) 0);
+        announceChange();
     }
 
     // Probably not necessary to have this method, Java garbage collection should do this for us
@@ -246,7 +258,7 @@ public class VirtualMachine252 {
     }
 
     // TODO: Create a help message.
-    // Depending on how we decide to fulfill the "help" command we might now need this method
+    // Depending on how we decide to fulfill the "help" command we might not need this method
     public static void help() {
         throw new UnsupportedOperationException("Not implemented, yet");
     }

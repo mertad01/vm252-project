@@ -20,6 +20,7 @@ public class ProgramFrame extends JFrame {
     // Constructor
     //
     public ProgramFrame() {
+
         //
         // Create Model Object
         //
