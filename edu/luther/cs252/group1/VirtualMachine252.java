@@ -3,6 +3,7 @@ package edu.luther.cs252.group1;
 import edu.luther.cs252.group1.vm252utilities.VM252Utilities;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class VirtualMachine252 {
         private short accumulator = 0; // the accumulator
         private short programCounter = 0; // the program counter
         private String nextInstruction; // TODO
-        private final byte[] memory; // program memory
+        private byte[] memory; // program memory
         private boolean[] breakpoints = new boolean[8092];
         private final Scanner in = new Scanner(System.in); // input
         private final PrintStream out = System.out; // output
@@ -44,6 +45,12 @@ public class VirtualMachine252 {
     //
     // Constructors
     //
+        public VirtualMachine252() {
+            // Create and fill the memory with 0
+            this.memory = new byte[8192];
+            Arrays.fill(this.memory, (byte) 0x0);
+        }
+
         public VirtualMachine252(String objectFileName) {
             this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
         }
@@ -116,6 +123,12 @@ public class VirtualMachine252 {
         // TODO: Create breakpoints
         public void toggleBreakpoint(int memoryAddress) {
             breakpoints[memoryAddress] = !breakpoints[memoryAddress];
+        }
+
+        public void setFile(String objectFileName) {
+            this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
+            this.programCounter = 0;
+            this.accumulator = 0;
         }
 
         public void nextInstruction() {
