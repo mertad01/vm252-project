@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-09 Tue 07:27 -->
+<!-- 2021-11-09 Tue 13:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Group 1: Phase 5</title>
@@ -201,22 +201,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4d2d65b">1. Repository Information</a></li>
-<li><a href="#orgb8556fb">2. GUI Explanation Image</a></li>
-<li><a href="#orgc1dc348">3. Progress Report</a>
+<li><a href="#org444ae92">1. Repository Information</a></li>
+<li><a href="#org89f70c7">2. GUI Explanation Image</a></li>
+<li><a href="#orga55cb75">3. Progress Report</a>
 <ul>
-<li><a href="#orge904020">3.1. Changes Made</a></li>
-<li><a href="#org0971e6e">3.2. Issues Encountered</a></li>
-<li><a href="#orgb63eede">3.3. Changes to Make</a></li>
-<li><a href="#org25983ac">3.4. Work Log</a></li>
+<li><a href="#orgfdc6932">3.1. Changes Made</a></li>
+<li><a href="#orgab66c03">3.2. Issues Encountered</a></li>
+<li><a href="#org875cae5">3.3. Changes to Make</a></li>
+<li><a href="#org3613a39">3.4. Work Log</a>
+<ul>
+<li><a href="#org40175bd">3.4.1. Michael Musa</a></li>
+<li><a href="#org9691f78">3.4.2. Adam Mertzenich</a></li>
+<li><a href="#org120f603">3.4.3. Kritib Bhattarai</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4d2d65b" class="outline-2">
-<h2 id="org4d2d65b"><span class="section-number-2">1.</span> Repository Information</h2>
+<div id="outline-container-org444ae92" class="outline-2">
+<h2 id="org444ae92"><span class="section-number-2">1.</span> Repository Information</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Below you will find our repository URL, hosted on GitHub, as well as the revision number and date of our final commit for this phase of the project.
@@ -250,27 +256,27 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 </div>
 </div>
 
-<div id="outline-container-orgb8556fb" class="outline-2">
-<h2 id="orgb8556fb"><span class="section-number-2">2.</span> GUI Explanation Image</h2>
+<div id="outline-container-org89f70c7" class="outline-2">
+<h2 id="org89f70c7"><span class="section-number-2">2.</span> GUI Explanation Image</h2>
 <div class="outline-text-2" id="text-2">
 
-<div id="org306bb5f" class="figure">
+<div id="orgf82c3a0" class="figure">
 <p><img src="./annotated-screenshot.png" alt="annotated-screenshot.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc1dc348" class="outline-2">
-<h2 id="orgc1dc348"><span class="section-number-2">3.</span> Progress Report</h2>
+<div id="outline-container-orga55cb75" class="outline-2">
+<h2 id="orga55cb75"><span class="section-number-2">3.</span> Progress Report</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design.
 </p>
 </div>
 
-<div id="outline-container-orge904020" class="outline-3">
-<h3 id="orge904020"><span class="section-number-3">3.1.</span> Changes Made</h3>
+<div id="outline-container-orgfdc6932" class="outline-3">
+<h3 id="orgfdc6932"><span class="section-number-3">3.1.</span> Changes Made</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 In phase04 our Accumulator and Program Counter did not have explicit text fields where they could be viewed and or edited. In the implementation of our design we added these text fields on the right hand side (same location as our design). This lets us remove the <code>aa</code> and <code>ap</code> commands from the menu since the text fields will perform those actions.
@@ -286,8 +292,8 @@ During development of our initial graphical application we also found a way we c
 </div>
 </div>
 
-<div id="outline-container-org0971e6e" class="outline-3">
-<h3 id="org0971e6e"><span class="section-number-3">3.2.</span> Issues Encountered</h3>
+<div id="outline-container-orgab66c03" class="outline-3">
+<h3 id="orgab66c03"><span class="section-number-3">3.2.</span> Issues Encountered</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 A few issues have been encountered and will need to be changed in the future (see the &ldquo;changes to make&rdquo; section below). One of these was what way we are going to display the program memory. Using a JTable seems like a good path forward but it will come with a few issues that must be solved. First, we will want a better way of adding break points. Currently our design would, when the model is integrated, allow you to click a cell and add a breakpoint by clicking a button. This causes the problem of being able to visually tell the user where breakpoints are. In the future we might try to add a checkbox as well as the input field to each cell of the table so that users can toggle on and off breakpoints at certain memory addresses.
@@ -299,8 +305,8 @@ Displaying the current memory instruction using the tables was also an issue we 
 </div>
 </div>
 
-<div id="outline-container-orgb63eede" class="outline-3">
-<h3 id="orgb63eede"><span class="section-number-3">3.3.</span> Changes to Make</h3>
+<div id="outline-container-org875cae5" class="outline-3">
+<h3 id="org875cae5"><span class="section-number-3">3.3.</span> Changes to Make</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 There are not many large changes that need to be made with the user interface as of now. One item we would like to change is to use icons for the next, run, pause, and stop buttons (which we had in our phase04 design). We also plan on switching to a different method of adding break points by using check boxes or switching from a JTable to some different set of components to represent the data (as discussed in the &ldquo;issues encountered&rdquo; section above). Going forward we also will better integrate our model into the interface as it is developed.
@@ -308,9 +314,13 @@ There are not many large changes that need to be made with the user interface as
 </div>
 </div>
 
-<div id="outline-container-org25983ac" class="outline-3">
-<h3 id="org25983ac"><span class="section-number-3">3.4.</span> Work Log</h3>
+<div id="outline-container-org3613a39" class="outline-3">
+<h3 id="org3613a39"><span class="section-number-3">3.4.</span> Work Log</h3>
 <div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-org40175bd" class="outline-4">
+<h4 id="org40175bd"><span class="section-number-4">3.4.1.</span> Michael Musa</h4>
+<div class="outline-text-4" id="text-3-4-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -321,24 +331,131 @@ There are not many large changes that need to be made with the user interface as
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Name</th>
-<th scope="col" class="org-left">Time Spent</th>
+<th scope="col" class="org-left">Date</th>
+<th scope="col" class="org-left">Hours Worked</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">Kritib Bhattarai</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">11/05/21</td>
+<td class="org-left">03:00pm-05:30pm</td>
 </tr>
 
 <tr>
-<td class="org-left">Michael Musa</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">11/07/21</td>
+<td class="org-left">07:00pm-08:00pm</td>
 </tr>
 
 <tr>
-<td class="org-left">Adam Mertzenich</td>
-<td class="org-left">4</td>
+<td class="org-left">11/08/21</td>
+<td class="org-left">02:00pm-02:30pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/09/21</td>
+<td class="org-left">11:10am-12:42pm</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Total:</td>
+<td class="org-left">~6 Hours</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org9691f78" class="outline-4">
+<h4 id="org9691f78"><span class="section-number-4">3.4.2.</span> Adam Mertzenich</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Date</th>
+<th scope="col" class="org-left">Hours Worked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">11/05/21</td>
+<td class="org-left">05:00pm-07:00pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/07/21</td>
+<td class="org-left">06:00pm-08:30pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/07/21</td>
+<td class="org-left">04:00pm-08:00pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/09/21</td>
+<td class="org-left">06:30am-07:30am</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Total:</td>
+<td class="org-left">~9 Hours</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org120f603" class="outline-4">
+<h4 id="org120f603"><span class="section-number-4">3.4.3.</span> Kritib Bhattarai</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Date</th>
+<th scope="col" class="org-left">Hours Worked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">11/04/21</td>
+<td class="org-left">12:00pm-01:00pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/06/21</td>
+<td class="org-left">05:00pm-06:00pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/07/21</td>
+<td class="org-left">12:00pm-01:00pm</td>
+</tr>
+
+<tr>
+<td class="org-left">11/09/21</td>
+<td class="org-left">09:30pm-10:00pm</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Total:</td>
+<td class="org-left">~4 Hours</td>
 </tr>
 </tbody>
 </table>
@@ -346,9 +463,10 @@ There are not many large changes that need to be made with the user interface as
 </div>
 </div>
 </div>
+</div>
 <div id="postamble" class="status">
 <p class="author">Author: Adam Mertzenich</p>
-<p class="date">Created: 2021-11-09 Tue 07:27</p>
+<p class="date">Created: 2021-11-09 Tue 13:35</p>
 </div>
 </body>
 </html>
