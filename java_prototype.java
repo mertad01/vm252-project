@@ -38,7 +38,10 @@ class ProgramFrame extends JFrame {
         programButtonPanel = new ProgramButtonPanel();
         programStatePanel = new ProgramStatePanel();
         programInputPanel = new ProgramInputPanel();
-        memoryTable = new JTable(20, 20);
+        memoryTable = new JTable(8192, 20);
+
+        // Make the memory scrollable
+        JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
 
         //
         // Creating a visualization of what memory contents will look
@@ -131,7 +134,7 @@ class ProgramFrame extends JFrame {
         memoryTable.setValueAt("00", 3, 18);
         memoryTable.setValueAt("00", 3, 19);
 
-        for (int row = 4; row < 20; ++row) {
+        for (int row = 4; row < 8192; ++row) {
             memoryTable.setValueAt("00", row, 0);
             memoryTable.setValueAt("00", row, 1);
             memoryTable.setValueAt("00", row, 2);
@@ -159,7 +162,7 @@ class ProgramFrame extends JFrame {
         //
 
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
-        getContentPane().add(BorderLayout.CENTER, memoryTable);
+        getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
         getContentPane().add(BorderLayout.SOUTH, programInputPanel);
