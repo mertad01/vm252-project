@@ -36,8 +36,32 @@ There are not many large changes that need to be made with the user interface as
 
 ** Work Log
 
-| Name             | Time Spent |
-|------------------+------------|
-| Kritib Bhattarai |            |
-| Michael Musa     |            |
-| Adam Mertzenich  |          4 |
+*** Michael Musa
+| Date     | Hours Worked    |
+|----------+-----------------|
+| 11/05/21 | 03:00pm-05:30pm |
+| 11/07/21 | 07:00pm-08:00pm |
+| 11/08/21 | 02:00pm-02:30pm |
+| 11/09/21 | 11:10am-12:42pm |
+|----------+-----------------|
+| Total:   | ~6 Hours        |
+
+*** Adam Mertzenich
+| Date     | Hours Worked    |
+|----------+-----------------|
+| 11/05/21 | 05:00pm-07:00pm |
+| 11/07/21 | 06:00pm-08:30pm |
+| 11/07/21 | 04:00pm-08:00pm |
+| 11/09/21 | 06:30am-07:30am |
+|----------+-----------------|
+| Total:   | ~9 Hours        |
+
+*** Kritib Bhattarai
+| Date     | Hours Worked    |
+|----------+-----------------|
+| 11/04/21 | 12:00pm-01:00pm |
+| 11/06/21 | 05:00pm-06:00pm |
+| 11/07/21 | 12:00pm-01:00pm |
+| 11/09/21 | 09:30pm-10:00pm |
+|----------+-----------------|
+| Total:   | ~4 Hours        |
