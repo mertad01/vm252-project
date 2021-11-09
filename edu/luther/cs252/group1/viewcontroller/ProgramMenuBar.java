@@ -1,8 +1,10 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.observation.BasicObserver;
+
 import javax.swing.*;
 
-public class ProgramMenuBar extends JMenuBar {
+public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
     public ProgramMenuBar() {
         //
@@ -45,4 +47,8 @@ public class ProgramMenuBar extends JMenuBar {
         loadMenu.add(m11);
     }
 
+    @Override
+    public void update() {
+
+    }
 }

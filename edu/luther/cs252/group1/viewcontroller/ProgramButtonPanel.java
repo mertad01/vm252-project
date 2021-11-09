@@ -1,9 +1,11 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.observation.BasicObserver;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ProgramButtonPanel extends JPanel {
+public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
     public ProgramButtonPanel() {
 
@@ -50,4 +52,7 @@ public class ProgramButtonPanel extends JPanel {
         );
     }
 
+    @Override
+    public void update() {
+    }
 }

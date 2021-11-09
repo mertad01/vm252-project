@@ -1,8 +1,10 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.observation.BasicObserver;
+
 import javax.swing.*;
 
-public class ProgramInputPanel extends JPanel {
+public class ProgramInputPanel extends JPanel implements BasicObserver {
 
     public ProgramInputPanel() {
         JMenu inputOutputMenu = new JMenu("Input/Output: ");
@@ -17,4 +19,8 @@ public class ProgramInputPanel extends JPanel {
         add(inputOutputField);
     }
 
+    @Override
+    public void update() {
+
+    }
 }

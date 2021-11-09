@@ -1,8 +1,10 @@
 package edu.luther.cs252.group1.viewcontroller;
 
+import edu.luther.cs252.group1.observation.BasicObserver;
+
 import javax.swing.*;
 
-public class ProgramStatePanel extends JPanel {
+public class ProgramStatePanel extends JPanel implements BasicObserver {
 
     public ProgramStatePanel() {
 
@@ -43,4 +45,8 @@ public class ProgramStatePanel extends JPanel {
         add(machineStateBox);
     }
 
+    @Override
+    public void update() {
+
+    }
 }
