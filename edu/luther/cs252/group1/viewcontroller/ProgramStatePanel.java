@@ -1,8 +1,8 @@
-package edu.luther.cs252.group1;
+package edu.luther.cs252.group1.viewcontroller;
 
 import javax.swing.*;
 
-class ProgramStatePanel extends JPanel {
+public class ProgramStatePanel extends JPanel {
 
     public ProgramStatePanel() {
 

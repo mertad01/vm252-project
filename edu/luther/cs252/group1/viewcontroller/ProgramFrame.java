@@ -1,17 +1,33 @@
-package edu.luther.cs252.group1;
+package edu.luther.cs252.group1.viewcontroller;
+
+import edu.luther.cs252.group1.model.VirtualMachine252;
 
 import javax.swing.*;
 import java.awt.*;
 
-class ProgramFrame extends JFrame {
+public class ProgramFrame extends JFrame {
 
+    //
+    // Private Instance Fields
+    //
     private ProgramMenuBar programMenuBar;
     private ProgramButtonPanel programButtonPanel;
     private ProgramStatePanel programStatePanel;
     private ProgramInputPanel programInputPanel;
     private JTable memoryTable;
 
+    //
+    // Constructor
+    //
     public ProgramFrame() {
+        //
+        // Create Model Object
+        //
+        VirtualMachine252 vm252 = new VirtualMachine252();
+
+        //
+        // Create View-Controller Panels
+        //
         programMenuBar = new ProgramMenuBar();
         programButtonPanel = new ProgramButtonPanel();
         programStatePanel = new ProgramStatePanel();

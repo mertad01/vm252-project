@@ -1,8 +1,8 @@
-package edu.luther.cs252.group1;
+package edu.luther.cs252.group1.viewcontroller;
 
 import javax.swing.*;
 
-class ProgramMenuBar extends JMenuBar {
+public class ProgramMenuBar extends JMenuBar {
 
     public ProgramMenuBar() {
         //

@@ -1,9 +1,9 @@
-package edu.luther.cs252.group1;
+package edu.luther.cs252.group1.viewcontroller;
 
 import javax.swing.*;
 import java.awt.*;
 
-class ProgramButtonPanel extends JPanel {
+public class ProgramButtonPanel extends JPanel {
 
     public ProgramButtonPanel() {
 
@@ -12,7 +12,7 @@ class ProgramButtonPanel extends JPanel {
         // (one after another) using the Box class (aligned left)
         //
 
-        Box left = Box.createVerticalBox();
+        Box leftControlBox = Box.createVerticalBox();
 //        JButton alterProgramCounterButton = new JButton("ap"); // I don't think this is needed any longer -adam
         JButton breakpointAddButton = new JButton("ba");
         JButton helpButton = new JButton("h");
@@ -33,19 +33,13 @@ class ProgramButtonPanel extends JPanel {
         // with the help of createRigidArea as the Box filler
         //
 
-//        left.add(Box.createRigidArea(new Dimension(0, 45)));
-//        left.add(alterProgramCounterButton); // I don't think this is needed any longer -adam
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(breakpointAddButton);
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(helpButton);
-//        left.add(Box.createRigidArea(new Dimension(0, 45)));
-//        left.add(displayBytesButton); // Not needed, we are using a graphical element for this
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(nextInstructionButton);
-//        left.add(Box.createRigidArea(new Dimension(0, 45)));
-//        left.add(displayObjectBytesButton); // Not needed, we are using a graphical element for this
-        add(left);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(breakpointAddButton);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(helpButton);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(nextInstructionButton);
+        add(leftControlBox);
 
         // Add help dialog which explains how to see what each command/component does
         helpButton.addActionListener(actionEvent ->
