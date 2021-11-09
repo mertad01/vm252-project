@@ -151,6 +151,7 @@ public class VirtualMachine252 {
                                 // Check if input is a short
                                 if (!in.hasNextShort()) {
                                     // Attempt to move past incorrectly inputted value
+                                    // FIXME: don't use try:catch for this
                                     try {
                                         in.next();
                                         System.out.println("Bad integer value; try again");
@@ -159,7 +160,6 @@ public class VirtualMachine252 {
                                     catch (NoSuchElementException exception) {
                                         System.out.println("EOF reading input;  machine halts");
                                         // Stop the program
-                                        break; // FIXME: temporary, don't use break later
                                     }
                                 }
                                 else {
