@@ -9,6 +9,8 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 class gui {
     public static void main(String[] args) {
@@ -64,7 +66,7 @@ class ProgramFrame extends JFrame {
         memoryTable.setValueAt("00", 0, 13);
         memoryTable.setValueAt("00", 0, 14);
         memoryTable.setValueAt("00", 0, 15);
-        memoryTable.setValueAt("f0", 0, 16);
+        memoryTable.setValueAt("[f0]", 0, 16);
         memoryTable.setValueAt("20", 0, 17);
         memoryTable.setValueAt("02", 0, 18);
         memoryTable.setValueAt("00", 0, 19);
@@ -172,7 +174,7 @@ class ProgramMenuBar extends JMenuBar {
         // Create menu items
         //
         JMenu loadMenu = new JMenu("Load");
-        JMenu editMenu = new JMenu("Edit");
+//        JMenu editMenu = new JMenu("Edit"); // What purpose would this serve? -adam
         JMenu runMenu = new JMenu("Run");
         JMenu pauseMenu = new JMenu("Pause");
         JMenu stopMenu = new JMenu("Stop");
@@ -188,7 +190,7 @@ class ProgramMenuBar extends JMenuBar {
         // Set help tooltips
         //
         loadMenu.setToolTipText("Load a vm252 object file");
-        editMenu.setToolTipText("???"); // TODO
+//        editMenu.setToolTipText("???"); // what purpose does this serve? -adam
         runMenu.setToolTipText("Run program until breakpoint reached");
         pauseMenu.setToolTipText("Pause the execution of the program");
         stopMenu.setToolTipText("Stop the execution of the program");
@@ -197,7 +199,7 @@ class ProgramMenuBar extends JMenuBar {
 
 
         add(loadMenu);
-        add(editMenu);
+//        add(editMenu);
         add(fileNameLabel);
         add(fileNameField);
         add(runMenu);
@@ -220,12 +222,12 @@ class ProgramButtonPanel extends JPanel {
         //
 
         Box left = Box.createVerticalBox();
-        JButton alterProgramCounterButton = new JButton("ap");
+//        JButton alterProgramCounterButton = new JButton("ap"); // I don't think this is needed any longer -adam
         JButton breakpointAddButton = new JButton("ba");
         JButton helpButton = new JButton("h");
-        JButton displayBytesButton = new JButton("mb");
+//        JButton displayBytesButton = new JButton("mb"); // Not needed, we are using a graphical element for this
         JButton nextInstructionButton = new JButton("n ");
-        JButton displayObjectBytesButton = new JButton("ob");
+//        JButton displayObjectBytesButton = new JButton("ob"); // Not needed, we are using a graphical element for this
 
         //
         // Set help tooltips
@@ -240,19 +242,27 @@ class ProgramButtonPanel extends JPanel {
         // with the help of createRigidArea as the Box filler
         //
 
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(alterProgramCounterButton);
+//        left.add(Box.createRigidArea(new Dimension(0, 45)));
+//        left.add(alterProgramCounterButton); // I don't think this is needed any longer -adam
         left.add(Box.createRigidArea(new Dimension(0, 45)));
         left.add(breakpointAddButton);
         left.add(Box.createRigidArea(new Dimension(0, 45)));
         left.add(helpButton);
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(displayBytesButton);
+//        left.add(Box.createRigidArea(new Dimension(0, 45)));
+//        left.add(displayBytesButton); // Not needed, we are using a graphical element for this
         left.add(Box.createRigidArea(new Dimension(0, 45)));
         left.add(nextInstructionButton);
-        left.add(Box.createRigidArea(new Dimension(0, 45)));
-        left.add(displayObjectBytesButton);
+//        left.add(Box.createRigidArea(new Dimension(0, 45)));
+//        left.add(displayObjectBytesButton); // Not needed, we are using a graphical element for this
         add(left);
+
+        // Add help dialog which explains how to see what each command/component does
+        helpButton.addActionListener(actionEvent ->
+                JOptionPane.showMessageDialog(
+                        getRootPane(),
+                        "Help:\nTo receive help for the program you can hover over a component and read the tooltip"
+                )
+        );
     }
 
 }
