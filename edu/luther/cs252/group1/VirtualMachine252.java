@@ -106,6 +106,12 @@ public class VirtualMachine252 {
     //
     // Public Mutators
     //
+        public void setFile(String objectFileName) {
+            this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
+            this.programCounter = 0;
+            this.accumulator = 0;
+        }
+
         public void setAccumulator(short accumulator) {
             this.accumulator = accumulator;
         }
@@ -125,11 +131,6 @@ public class VirtualMachine252 {
             breakpoints[memoryAddress] = !breakpoints[memoryAddress];
         }
 
-        public void setFile(String objectFileName) {
-            this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
-            this.programCounter = 0;
-            this.accumulator = 0;
-        }
 
         public void nextInstruction() {
             updateInstructionComponents();
