@@ -14,6 +14,9 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
 
         this.vm252 = vm252;
 
+        //
+        // Create Input/Output Menu and Text Field
+        //
         JMenu inputOutputMenu = new JMenu("Input/Output: ");
         inputOutputField = new JTextField(50);
 

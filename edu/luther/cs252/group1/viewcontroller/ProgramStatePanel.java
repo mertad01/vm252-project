@@ -39,6 +39,9 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         accumulatorField.setToolTipText("View or edit the accumulator");
         nextInstructionField.setToolTipText("View the next instruction that will be ran");
 
+        //
+        // Add menus and fields to the machine state box
+        //
         machineStateBox.add(programCounterMenu);
         machineStateBox.add(programCounterField);
         machineStateBox.add(accumulatorMenu);

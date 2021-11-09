@@ -19,7 +19,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         // Create menu items
         //
         JMenu loadMenu = new JMenu("Load");
-//        JMenu editMenu = new JMenu("Edit"); // What purpose would this serve? -adam
         JMenu runMenu = new JMenu("Run");
         JMenu pauseMenu = new JMenu("Pause");
         JMenu stopMenu = new JMenu("Stop");
@@ -35,7 +34,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         // Set help tooltips
         //
         loadMenu.setToolTipText("Load a vm252 object file");
-//        editMenu.setToolTipText("???"); // what purpose does this serve? -adam
         runMenu.setToolTipText("Run program until breakpoint reached");
         pauseMenu.setToolTipText("Pause the execution of the program");
         stopMenu.setToolTipText("Stop the execution of the program");
@@ -43,8 +41,10 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         runDelayField.setToolTipText("Delay executing each instruction of the program");
 
 
+        //
+        // Add components to the menu bar
+        //
         add(loadMenu);
-//        add(editMenu);
         add(fileNameLabel);
         add(fileNameField);
         add(runMenu);

@@ -13,6 +13,9 @@ import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.decode
 
 public class VirtualMachine252 extends BasicObservable {
 
+    //
+    // Main method for testing
+    //
     public static void main(String[] args) {
         VirtualMachine252 vm252 = new VirtualMachine252(
                 "/home/adam/Documents/School/CS-252/Project/Phase0/phase00.vm252obj"
@@ -46,6 +49,7 @@ public class VirtualMachine252 extends BasicObservable {
     //
     // Constructors
     //
+
         public VirtualMachine252() {
             // Create and fill the memory with 0
             this.memory = new byte[8192];
@@ -61,6 +65,26 @@ public class VirtualMachine252 extends BasicObservable {
     //
     // Private Accessors
     //
+        // Public Instance Method int[] getInstructionComponents()
+        //
+        // Purpose:
+        //     Access the next instruction's internal representation as an array of one or two elements
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     Array of integers, size of either one or two, which represents the next instruction
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         private int[] getInstructionComponents() {
             return instructionComponents;
         }
@@ -68,37 +92,138 @@ public class VirtualMachine252 extends BasicObservable {
     //
     // Private Mutators
     //
+        // Public Instance Method void updateInstructionComponents()
+        //
+        // Purpose:
+        //     Update the internal instruction byte representation of the next instruction
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         private void updateInstructionComponents() {
             byte[] instructionBytes = new byte[1];
-            instructionBytes[0] = memory[programCounter];
-
-            // If instructionBytes is a valid opcode then it will hold it
-            instructionComponents = decodedInstructionComponents(instructionBytes);
-            // If components is null then we need to check for a 2-byte opcode/operand encoding
-            if (instructionComponents == null) {
-                instructionBytes = new byte[2];
                 instructionBytes[0] = memory[programCounter];
-                instructionBytes[1] = memory[programCounter + 1];
+
+                // If instructionBytes is a valid opcode then it will hold it
                 instructionComponents = decodedInstructionComponents(instructionBytes);
+                // If components is null then we need to check for a 2-byte opcode/operand encoding
+                if (instructionComponents == null) {
+                    instructionBytes = new byte[2];
+                    instructionBytes[0] = memory[programCounter];
+                    instructionBytes[1] = memory[programCounter + 1];
+                    instructionComponents = decodedInstructionComponents(instructionBytes);
+                }
+                announceChange();
             }
-            announceChange();
-        }
 
     //
     // Public Accessors
     //
+        // Public Instance Method short getAccumulator()
+        //
+        // Purpose:
+        //     Access the vm252's current accumulator value
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     Accumulator of the vm252 as a short
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public short getAccumulator() {
             return accumulator;
         }
 
+        // Public Instance Method short getProgramCounter()
+        //
+        // Purpose:
+        //     Access the vm252's current programCounter value
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     Program counter of the vm252 as a short
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public short getProgramCounter() {
             return programCounter;
         }
 
+        // Public Instance Method String getNextInstruction()
+        //
+        // Purpose:
+        //     Retrieve the next instruction string
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     String containing the next instruction in line to be run
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public String getNextInstruction() {
             return nextInstruction;
         }
 
+
+        // Public Instance Method byte[] getMemory()
+        //
+        // Purpose:
+        //     Access the vm252 program memory
+        //
+        // Formals:
+        //     none
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     Current program memory as an array
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         // TODO: Extend to support both "mb" and "ob" commands
         // mb ⇒ Display all of machine memory as bytes in hex
         // ob ⇒ Display the portion of machine memory holding object code as bytes in hex
@@ -110,6 +235,27 @@ public class VirtualMachine252 extends BasicObservable {
     //
     // Public Mutators
     //
+
+        // Public Instance Method void setFile(String objectFileName)
+        //
+        // Purpose:
+        //     Load a new file into memory and reset the programCounter/accumulator
+        //
+        // Formals:
+        //     objectFileName (in) - name of a valid vm252 object file
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public void setFile(String objectFileName) {
             this.memory = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
             this.programCounter = 0;
@@ -117,33 +263,134 @@ public class VirtualMachine252 extends BasicObservable {
             announceChange();
         }
 
+        // Public Instance Method void setAccumulator(short accumulator)
+        //
+        // Purpose:
+        //     Alter the contents of the accumulator
+        //
+        // Formals:
+        //     accumulator (in) - new accumulator value
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public void setAccumulator(short accumulator) {
             this.accumulator = accumulator;
             announceChange();
         }
 
+        // Public Instance Method void setProgramCounter(short programCounter)
+        //
+        // Purpose:
+        //     Alter the contents of the program counter
+        //
+        // Formals:
+        //     programCounter (in) - new program counter value
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public void setProgramCounter(short programCounter) {
             this.programCounter = programCounter;
-            announceChange();
-        }
+                announceChange();
+            }
 
-        // FIXME: Does not handle hex properly yet
+        // FIXME: handle hex properly yet
+        // Public Instance Method void setMemoryByte(int memoryAddress, byte hexByte)
+        //
+        // Purpose:
+        //     Alter the memory at memoryAddress to the unsigned hex value hexByte (amb MA HB command).
+        //
+        // Formals:
+        //     memoryAddress (in) - memory address
+        //     hexByte (in) - new unsigned hex value
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public void setMemoryByte(int memoryAddress, byte hexByte) {
-//            memory[memoryAddress] = hexByte;
+    //            memory[memoryAddress] = hexByte;
             announceChange();
             throw new UnsupportedOperationException("Not implemented properly");
         }
 
         // TODO: Create breakpoints
+        // Public Instance Method void toggleBreakpoint(int memoryAddress)
+        //
+        // Purpose:
+        //     Toggle on or off a breakpoint at a specific address in the vm252 memory
+        //
+        // Formals:
+        //     memoryAddress (in) - memory address
+        //
+        // Pre-conditions:
+        //     none
+        //
+        // Post-conditions:
+        //     none
+        //
+        // Returns:
+        //     none
+        //
+        // Worst-case asymptotic runtime:
+        //     O(1)
+        //
         public void toggleBreakpoint(int memoryAddress) {
             breakpoints[memoryAddress] = !breakpoints[memoryAddress];
             announceChange();
         }
 
 
-        public void nextInstruction() {
-            updateInstructionComponents();
-            if (getInstructionComponents() != null) {
+    // Public Instance Method void nextInstruction()
+    //
+    // Purpose:
+    //     Execute the next instruction in the vm252 memory
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     none
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
+    public void nextInstruction() {
+        updateInstructionComponents();
+        if (getInstructionComponents() != null) {
                 int opcode;
                 int operand;
 
@@ -242,22 +489,57 @@ public class VirtualMachine252 extends BasicObservable {
             announceChange();
         }
 
+    // Public Instance Method void runMachine()
+    //
+    // Purpose:
+    //     Run through the vm252 instructions with a specific delay between executing instructions
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     none
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void runMachine() {
         announceChange();
         throw new UnsupportedOperationException("Not implemented, yet");
     }
 
+    // Public Instance Method void reinitializeProgramCounter()
+    //
+    // Purpose:
+    //     Act as the "z" command to reset the program counter back to 0
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     none
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void reinitializeProgramCounter() {
         setProgramCounter((short) 0);
         announceChange();
     }
 
-    // Probably not necessary to have this method, Java garbage collection should do this for us
-    public void quit() {
-        throw new UnsupportedOperationException("Not implemented, yet");
-    }
-
-    // TODO: Create a help message.
+    // TODO: Create a help message (or add tooltips to every component)
     // Depending on how we decide to fulfill the "help" command we might not need this method
     public static void help() {
         throw new UnsupportedOperationException("Not implemented, yet");

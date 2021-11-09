@@ -20,12 +20,9 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         //
 
         Box leftControlBox = Box.createVerticalBox();
-//        JButton alterProgramCounterButton = new JButton("ap"); // I don't think this is needed any longer -adam
         JButton breakpointAddButton = new JButton("ba");
         JButton helpButton = new JButton("h");
-//        JButton displayBytesButton = new JButton("mb"); // Not needed, we are using a graphical element for this
         JButton nextInstructionButton = new JButton("n ");
-//        JButton displayObjectBytesButton = new JButton("ob"); // Not needed, we are using a graphical element for this
 
         //
         // Set help tooltips
