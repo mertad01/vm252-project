@@ -10,6 +10,8 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 
 * GUI Explanation Image
 
+[[./annotated-screenshot.png]]
+
 * Progress Report
 
 During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design.
