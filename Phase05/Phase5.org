@@ -5,8 +5,8 @@
 Below you will find our repository URL, hosted on GitHub, as well as the revision number and date of our final commit for this phase of the project.
 
 | URL      | https://github.com/mertad01/vm252-project |
-| Revision | TK                                        |
-| Date     | TK                                        |
+| Revision | b7b413160ea1d007f68e10d71adea68c655689cb  |
+| Date     | 2021-11-09T14:38:44-06:00                 |
 
 * GUI Explanation Image
 

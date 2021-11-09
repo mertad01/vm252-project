@@ -1,4 +1,4 @@
-% Created 2021-11-09 Tue 14:38
+% Created 2021-11-09 Tue 14:42
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,32 +29,32 @@
 
 
 \section{Repository Information}
-\label{sec:org5227a2e}
+\label{sec:orgdf63753}
 
 Below you will find our repository URL, hosted on GitHub, as well as the revision number and date of our final commit for this phase of the project.
 
 \begin{center}
 \begin{tabular}{ll}
 URL & \url{https://github.com/mertad01/vm252-project}\\
-Revision & TK\\
-Date & TK\\
+Revision & b7b413160ea1d007f68e10d71adea68c655689cb\\
+Date & 2021-11-09T14:38:44-06:00\\
 \end{tabular}
 \end{center}
 
 \section{GUI Explanation Image}
-\label{sec:orgaca61c9}
+\label{sec:orgda459b7}
 
 \begin{center}
 \includegraphics[width=.9\linewidth]{./annotated-screenshot.png}
 \end{center}
 
 \section{Progress Report}
-\label{sec:orgfc4744a}
+\label{sec:org25acdc0}
 
 During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design. Our work is contained in the ``edu.luther.cs252.group1'' package. \texttt{Main.java} will launch the application. Within the ``model'' package we have a semi-working skeleton of the model we will use, which implements Observable. Our program frame, views, and controllers are in the viewcontroller directory and are all implementing Observer so that they will be able to react to changes in the model once we integrate it.
 
 \subsection{Changes Made}
-\label{sec:org476ee19}
+\label{sec:org0ae6243}
 
 In phase04 our Accumulator and Program Counter did not have explicit text fields where they could be viewed and or edited. In the implementation of our design we added these text fields on the right hand side (same location as our design). This lets us remove the \texttt{aa} and \texttt{ap} commands from the menu since the text fields will perform those actions.
 
@@ -63,22 +63,22 @@ We also began testing how we will show our data in the center, which in turn let
 During development of our initial graphical application we also found a way we can remove an explicit \texttt{h} help command and instead have each element explain itself. We have added tool-tips using the setToolTipText() method which is available to components. This lets the user hover over each element on the screen to get vital information to how they can use the program. We believe that this is a more elegant way of explaining each feature of the debugger rather than displaying a dialog box containing a list of explanations.
 
 \subsection{Issues Encountered}
-\label{sec:orgbc5ac92}
+\label{sec:org1dcfec0}
 
 A few issues have been encountered and will need to be changed in the future (see the ``changes to make'' section below). One of these was what way we are going to display the program memory. Using a JTable seems like a good path forward but it will come with a few issues that must be solved. First, we will want a better way of adding break points. Currently our design would, when the model is integrated, allow you to click a cell and add a breakpoint by clicking a button. This causes the problem of being able to visually tell the user where breakpoints are. In the future we might try to add a checkbox as well as the input field to each cell of the table so that users can toggle on and off breakpoints at certain memory addresses.
 
 Displaying the current memory instruction using the tables was also an issue we encountered. We opted to use brackets, such as [f0], around the memory instruction to indicate it to be the current instruction. This represents highlighting which we were not yet able to get working. It seems that in order to change the highlighting of individual cells will require overriding some methods relating to cell rendering which will take some investigation. Because of this we will also reconsider using different components to build our memory as a solution to the problem.
 
 \subsection{Changes to Make}
-\label{sec:org039e808}
+\label{sec:orgb18e89b}
 
 There are not many large changes that need to be made with the user interface as of now. One item we would like to change is to use icons for the next, run, pause, and stop buttons (which we had in our phase04 design). We also plan on switching to a different method of adding break points by using check boxes or switching from a JTable to some different set of components to represent the data (as discussed in the ``issues encountered'' section above). Going forward we also will better integrate our model into the interface as it is developed.
 
 \subsection{Work Log}
-\label{sec:orge3f7b2a}
+\label{sec:org803bb56}
 
 \subsubsection{Michael Musa}
-\label{sec:org0b64098}
+\label{sec:org1700236}
 \begin{center}
 \begin{tabular}{ll}
 Date & Hours Worked\\
@@ -93,7 +93,7 @@ Total: & \textasciitilde{}6 Hours\\
 \end{center}
 
 \subsubsection{Adam Mertzenich}
-\label{sec:orgb9094f3}
+\label{sec:org68950e1}
 \begin{center}
 \begin{tabular}{ll}
 Date & Hours Worked\\
@@ -108,7 +108,7 @@ Total: & \textasciitilde{}9 Hours\\
 \end{center}
 
 \subsubsection{Kritib Bhattarai}
-\label{sec:orgbbe0d92}
+\label{sec:orgc779a77}
 \begin{center}
 \begin{tabular}{ll}
 Date & Hours Worked\\
