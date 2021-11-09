@@ -11,6 +11,9 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
     private JTextField fileNameField;
     private JTextField runDelayField;
 
+    //
+    // Constructor
+    //
     public ProgramMenuBar(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;

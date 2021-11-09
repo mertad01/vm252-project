@@ -10,6 +10,10 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
     private VirtualMachine252 vm252;
 
+
+    //
+    // Constructor
+    //
     public ProgramButtonPanel(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;

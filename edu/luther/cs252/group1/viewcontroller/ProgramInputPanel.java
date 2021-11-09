@@ -10,6 +10,9 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
     private VirtualMachine252 vm252;
     private JTextField inputOutputField;
 
+    //
+    // Constructor
+    //
     public ProgramInputPanel(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;
