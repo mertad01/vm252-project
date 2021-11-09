@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-09 Tue 13:35 -->
+<!-- 2021-11-09 Tue 13:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Group 1: Phase 5</title>
@@ -201,18 +201,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org444ae92">1. Repository Information</a></li>
-<li><a href="#org89f70c7">2. GUI Explanation Image</a></li>
-<li><a href="#orga55cb75">3. Progress Report</a>
+<li><a href="#orge33bda5">1. Repository Information</a></li>
+<li><a href="#org9ec85a4">2. GUI Explanation Image</a></li>
+<li><a href="#orgf9e3e44">3. Progress Report</a>
 <ul>
-<li><a href="#orgfdc6932">3.1. Changes Made</a></li>
-<li><a href="#orgab66c03">3.2. Issues Encountered</a></li>
-<li><a href="#org875cae5">3.3. Changes to Make</a></li>
-<li><a href="#org3613a39">3.4. Work Log</a>
+<li><a href="#org320b3fd">3.1. Changes Made</a></li>
+<li><a href="#orgabd081e">3.2. Issues Encountered</a></li>
+<li><a href="#org2fbc23e">3.3. Changes to Make</a></li>
+<li><a href="#org1a48b19">3.4. Work Log</a>
 <ul>
-<li><a href="#org40175bd">3.4.1. Michael Musa</a></li>
-<li><a href="#org9691f78">3.4.2. Adam Mertzenich</a></li>
-<li><a href="#org120f603">3.4.3. Kritib Bhattarai</a></li>
+<li><a href="#org4926f48">3.4.1. Michael Musa</a></li>
+<li><a href="#org1841c58">3.4.2. Adam Mertzenich</a></li>
+<li><a href="#org768f4d1">3.4.3. Kritib Bhattarai</a></li>
 </ul>
 </li>
 </ul>
@@ -221,8 +221,8 @@
 </div>
 </div>
 
-<div id="outline-container-org444ae92" class="outline-2">
-<h2 id="org444ae92"><span class="section-number-2">1.</span> Repository Information</h2>
+<div id="outline-container-orge33bda5" class="outline-2">
+<h2 id="orge33bda5"><span class="section-number-2">1.</span> Repository Information</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Below you will find our repository URL, hosted on GitHub, as well as the revision number and date of our final commit for this phase of the project.
@@ -256,27 +256,27 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 </div>
 </div>
 
-<div id="outline-container-org89f70c7" class="outline-2">
-<h2 id="org89f70c7"><span class="section-number-2">2.</span> GUI Explanation Image</h2>
+<div id="outline-container-org9ec85a4" class="outline-2">
+<h2 id="org9ec85a4"><span class="section-number-2">2.</span> GUI Explanation Image</h2>
 <div class="outline-text-2" id="text-2">
 
-<div id="orgf82c3a0" class="figure">
+<div id="org980d74d" class="figure">
 <p><img src="./annotated-screenshot.png" alt="annotated-screenshot.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga55cb75" class="outline-2">
-<h2 id="orga55cb75"><span class="section-number-2">3.</span> Progress Report</h2>
+<div id="outline-container-orgf9e3e44" class="outline-2">
+<h2 id="orgf9e3e44"><span class="section-number-2">3.</span> Progress Report</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design.
+During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design. Our work is contained in the &ldquo;edu.luther.cs252.group1&rdquo; package. <code>Main.java</code> will launch the application. Within the &ldquo;model&rdquo; package we have a semi-working skeleton of the model we will use, which implements Observable. Our program frame, views, and controllers are in the viewcontroller directory and are all implementing Observer so that they will be able to react to changes in the model once we integrate it.
 </p>
 </div>
 
-<div id="outline-container-orgfdc6932" class="outline-3">
-<h3 id="orgfdc6932"><span class="section-number-3">3.1.</span> Changes Made</h3>
+<div id="outline-container-org320b3fd" class="outline-3">
+<h3 id="org320b3fd"><span class="section-number-3">3.1.</span> Changes Made</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 In phase04 our Accumulator and Program Counter did not have explicit text fields where they could be viewed and or edited. In the implementation of our design we added these text fields on the right hand side (same location as our design). This lets us remove the <code>aa</code> and <code>ap</code> commands from the menu since the text fields will perform those actions.
@@ -292,8 +292,8 @@ During development of our initial graphical application we also found a way we c
 </div>
 </div>
 
-<div id="outline-container-orgab66c03" class="outline-3">
-<h3 id="orgab66c03"><span class="section-number-3">3.2.</span> Issues Encountered</h3>
+<div id="outline-container-orgabd081e" class="outline-3">
+<h3 id="orgabd081e"><span class="section-number-3">3.2.</span> Issues Encountered</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 A few issues have been encountered and will need to be changed in the future (see the &ldquo;changes to make&rdquo; section below). One of these was what way we are going to display the program memory. Using a JTable seems like a good path forward but it will come with a few issues that must be solved. First, we will want a better way of adding break points. Currently our design would, when the model is integrated, allow you to click a cell and add a breakpoint by clicking a button. This causes the problem of being able to visually tell the user where breakpoints are. In the future we might try to add a checkbox as well as the input field to each cell of the table so that users can toggle on and off breakpoints at certain memory addresses.
@@ -305,8 +305,8 @@ Displaying the current memory instruction using the tables was also an issue we 
 </div>
 </div>
 
-<div id="outline-container-org875cae5" class="outline-3">
-<h3 id="org875cae5"><span class="section-number-3">3.3.</span> Changes to Make</h3>
+<div id="outline-container-org2fbc23e" class="outline-3">
+<h3 id="org2fbc23e"><span class="section-number-3">3.3.</span> Changes to Make</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 There are not many large changes that need to be made with the user interface as of now. One item we would like to change is to use icons for the next, run, pause, and stop buttons (which we had in our phase04 design). We also plan on switching to a different method of adding break points by using check boxes or switching from a JTable to some different set of components to represent the data (as discussed in the &ldquo;issues encountered&rdquo; section above). Going forward we also will better integrate our model into the interface as it is developed.
@@ -314,12 +314,12 @@ There are not many large changes that need to be made with the user interface as
 </div>
 </div>
 
-<div id="outline-container-org3613a39" class="outline-3">
-<h3 id="org3613a39"><span class="section-number-3">3.4.</span> Work Log</h3>
+<div id="outline-container-org1a48b19" class="outline-3">
+<h3 id="org1a48b19"><span class="section-number-3">3.4.</span> Work Log</h3>
 <div class="outline-text-3" id="text-3-4">
 </div>
-<div id="outline-container-org40175bd" class="outline-4">
-<h4 id="org40175bd"><span class="section-number-4">3.4.1.</span> Michael Musa</h4>
+<div id="outline-container-org4926f48" class="outline-4">
+<h4 id="org4926f48"><span class="section-number-4">3.4.1.</span> Michael Musa</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -366,8 +366,8 @@ There are not many large changes that need to be made with the user interface as
 </div>
 </div>
 
-<div id="outline-container-org9691f78" class="outline-4">
-<h4 id="org9691f78"><span class="section-number-4">3.4.2.</span> Adam Mertzenich</h4>
+<div id="outline-container-org1841c58" class="outline-4">
+<h4 id="org1841c58"><span class="section-number-4">3.4.2.</span> Adam Mertzenich</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -414,8 +414,8 @@ There are not many large changes that need to be made with the user interface as
 </div>
 </div>
 
-<div id="outline-container-org120f603" class="outline-4">
-<h4 id="org120f603"><span class="section-number-4">3.4.3.</span> Kritib Bhattarai</h4>
+<div id="outline-container-org768f4d1" class="outline-4">
+<h4 id="org768f4d1"><span class="section-number-4">3.4.3.</span> Kritib Bhattarai</h4>
 <div class="outline-text-4" id="text-3-4-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -466,7 +466,7 @@ There are not many large changes that need to be made with the user interface as
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Adam Mertzenich</p>
-<p class="date">Created: 2021-11-09 Tue 13:35</p>
+<p class="date">Created: 2021-11-09 Tue 13:50</p>
 </div>
 </body>
 </html>

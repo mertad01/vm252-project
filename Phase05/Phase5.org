@@ -14,7 +14,7 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 
 * Progress Report
 
-During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design.
+During our designing of the application in Java Swing a few design issues were made clear. Different aspects of our design have been tweaked to embrace the graphical user interface design. Below we cover the changes we have made, issues encountered in making those changes, and our plans for the future to improve our design. Our work is contained in the "edu.luther.cs252.group1" package. ~Main.java~ will launch the application. Within the "model" package we have a semi-working skeleton of the model we will use, which implements Observable. Our program frame, views, and controllers are in the viewcontroller directory and are all implementing Observer so that they will be able to react to changes in the model once we integrate it.
 
 ** Changes Made
 
