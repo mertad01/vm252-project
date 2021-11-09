@@ -1,4 +1,4 @@
-package edu.luther.cs252.group1.vm252utilities;
+package edu.luther.cs252.group1.model.vm252utilities;
 
 
 import java.io.File;

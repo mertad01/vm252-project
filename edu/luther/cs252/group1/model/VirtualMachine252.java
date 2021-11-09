@@ -1,14 +1,14 @@
-package edu.luther.cs252.group1;
+package edu.luther.cs252.group1.model;
 
-import edu.luther.cs252.group1.vm252utilities.VM252Utilities;
+import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static edu.luther.cs252.group1.vm252utilities.VM252Utilities.*;
-import static edu.luther.cs252.group1.vm252utilities.VM252Utilities.decodedInstructionComponents;
+import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.*;
+import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.decodedInstructionComponents;
 
 public class VirtualMachine252 {
 

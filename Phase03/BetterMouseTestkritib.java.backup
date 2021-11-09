@@ -24,7 +24,7 @@ public class BetterMouseTest
             () ->
                 {
 
-                    ProgramFrame frame = new ProgramFrame();
+                    edu.luther.cs252.group1.ProgramFrame frame = new edu.luther.cs252.group1.ProgramFrame();
 
                     frame.setTitle("Better Mouse Test");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,10 +38,10 @@ public class BetterMouseTest
     }
 
 
-class ProgramFrame extends JFrame
+class edu.luther.cs252.group1.ProgramFrame extends JFrame
 {
 
-    public ProgramFrame()
+    public edu.luther.cs252.group1.ProgramFrame()
     {
 
         add(new MouseComponent());
