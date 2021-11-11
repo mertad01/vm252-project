@@ -80,7 +80,7 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
     public void update() {
         programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
         accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
-        nextInstructionField.setText(vm252.getNextInstruction());
+        nextInstructionField.setText("todo");
         JOptionPane.showMessageDialog(null, "bing bong foo bar");
     }
 }
