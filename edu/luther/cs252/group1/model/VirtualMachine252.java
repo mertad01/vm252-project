@@ -114,19 +114,19 @@ public class VirtualMachine252 extends BasicObservable {
         //
         private void updateInstructionComponents() {
             byte[] instructionBytes = new byte[1];
-                instructionBytes[0] = memory[programCounter];
+            instructionBytes[0] = memory[programCounter];
 
-                // If instructionBytes is a valid opcode then it will hold it
+            // If instructionBytes is a valid opcode then it will hold it
+            instructionComponents = decodedInstructionComponents(instructionBytes);
+            // If components is null then we need to check for a 2-byte opcode/operand encoding
+            if (instructionComponents == null) {
+                instructionBytes = new byte[2];
+                instructionBytes[0] = memory[programCounter];
+                instructionBytes[1] = memory[programCounter + 1];
                 instructionComponents = decodedInstructionComponents(instructionBytes);
-                // If components is null then we need to check for a 2-byte opcode/operand encoding
-                if (instructionComponents == null) {
-                    instructionBytes = new byte[2];
-                    instructionBytes[0] = memory[programCounter];
-                    instructionBytes[1] = memory[programCounter + 1];
-                    instructionComponents = decodedInstructionComponents(instructionBytes);
-                }
-                announceChange();
             }
+            announceChange();
+        }
 
     //
     // Public Accessors
@@ -310,8 +310,8 @@ public class VirtualMachine252 extends BasicObservable {
         //
         public void setProgramCounter(short programCounter) {
             this.programCounter = programCounter;
-                announceChange();
-            }
+            announceChange();
+        }
 
         // FIXME: handle hex properly yet
         // Public Instance Method void setMemoryByte(int memoryAddress, byte hexByte)
