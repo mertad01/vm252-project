@@ -15,3 +15,9 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 ** Changes Made
 
 ** Problems Encountered
+
+- add more to the help message
+- better way to add and display break points
+- Remove "Enter file name", just use the "Load" menu and display current file with a label
+  
+  
