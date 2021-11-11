@@ -7,7 +7,6 @@ package edu.luther.cs252.group1;
 
 //Import Swing and awt packages
 
-import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.viewcontroller.ProgramFrame;
 
 import javax.swing.*;
