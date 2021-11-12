@@ -34,7 +34,6 @@ public class BasicObservable implements Observable {
     @Override
     public void announceChange()
     {
-
         for (Observer currentObserver : myObservers)
             currentObserver.update();
 

@@ -4,6 +4,8 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProgramStatePanel extends JPanel implements BasicObserver {
 
@@ -60,6 +62,12 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
         // Add the machine state box to the panel
         add(machineStateBox);
+
+
+        // Listen for changes to the programCounter and accumulator fields
+        StateInputAction inputAction = new StateInputAction();
+        programCounterField.addActionListener(inputAction);
+        accumulatorField.addActionListener(inputAction);
     }
 
     //
@@ -76,11 +84,29 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         this.vm252 = vm252;
     }
 
+    //
+    // Listeners
+    //
+    private class StateInputAction implements ActionListener {
+
+        public StateInputAction() {
+
+        }
+
+        @Override
+        // TODO: preface
+        public void actionPerformed(ActionEvent actionEvent) {
+            // Set the programCounter and accumulator of the VM252 to be what has been inputted
+            vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
+            vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
+        }
+    }
+
     @Override
     public void update() {
         programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
         accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
         nextInstructionField.setText("todo");
-        JOptionPane.showMessageDialog(null, "bing bong foo bar");
+//        System.out.println("foo");
     }
 }
