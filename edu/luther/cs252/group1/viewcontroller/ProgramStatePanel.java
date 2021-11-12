@@ -73,16 +73,10 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
     //
     // Public Accessors
     //
-    public VirtualMachine252 getVm252() {
-        return vm252;
-    }
 
     //
     // Public Mutators
     //
-    public void setVm252(VirtualMachine252 vm252) {
-        this.vm252 = vm252;
-    }
 
     //
     // Listeners

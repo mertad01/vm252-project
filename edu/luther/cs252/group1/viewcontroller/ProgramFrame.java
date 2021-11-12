@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class ProgramFrame extends JFrame {
 
+    public int foo = 5;
+
     //
     // Private Instance Fields
     //

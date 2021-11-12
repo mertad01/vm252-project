@@ -12,6 +12,9 @@ public class VirtualMachine252 extends BasicObservable {
 
     // TODO: preface
     public VirtualMachine252() {
+        this.accumulator = 0;
+        this.programCounter = 0;
+        this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
 
         // Initialize each element of the memory to 0
         Arrays.fill(this.memory, (byte) 0x0);
@@ -20,6 +23,9 @@ public class VirtualMachine252 extends BasicObservable {
 
     // TODO: preface
     public VirtualMachine252(String objectFileName) {
+        this.accumulator = 0;
+        this.programCounter = 0;
+        this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
 
         byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
         if (program != null) {
@@ -51,9 +57,9 @@ public class VirtualMachine252 extends BasicObservable {
     //
     // Simulated Hardware
     //
-    private short accumulator = 0;
-    private short programCounter = 0;
-    private byte[] memory = new byte[VM252Utilities.numberOfMemoryBytes];
+    private short accumulator;
+    private short programCounter;
+    private byte[] memory;
 
     private boolean suppressPcIncrement;
     private boolean lastInstructionCausedHalt;
@@ -108,6 +114,24 @@ public class VirtualMachine252 extends BasicObservable {
 
 
     //region Public Instance Mutators
+
+    // TODO: preface
+    public void loadFile(String objectFileName) {
+        this.accumulator = 0;
+        this.programCounter = 0;
+        this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
+
+        byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
+        if (program != null) {
+
+            // Initialize each element of the memory to 0
+            Arrays.fill(this.memory, (byte) 0x0);
+
+            // Copy the program bytes into memory
+            System.arraycopy(program, 0, memory, 0, program.length);
+        }
+        announceChange();
+    }
 
     // TODO: preface
     public void setProgramCounter(short programCounter) {

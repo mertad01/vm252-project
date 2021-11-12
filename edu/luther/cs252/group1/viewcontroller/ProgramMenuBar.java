@@ -4,6 +4,7 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
@@ -21,7 +22,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         //
         // Create menu items
         //
-        JMenu loadMenu = new JMenu("Load");
+        JMenu loadMenu = new JMenu("File");
         JMenu runMenu = new JMenu("Run");
         JMenu pauseMenu = new JMenu("Pause");
         JMenu stopMenu = new JMenu("Stop");
@@ -54,8 +55,23 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         add(runDelayField);
         add(pauseMenu);
         add(stopMenu);
-        JMenuItem m11 = new JMenuItem("Open");
-        loadMenu.add(m11);
+
+        JFileChooser vm252FileChooser = new JFileChooser();
+        FileNameExtensionFilter vm252ExtensionFilter = new FileNameExtensionFilter(
+                "VM252 Object File", "vm252obj"
+        );
+        vm252FileChooser.setFileFilter(vm252ExtensionFilter);
+
+        JMenuItem fileMenuItem = new JMenuItem("Open");
+        fileMenuItem.addActionListener(
+                actionEvent -> {
+                    int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
+                    System.out.println(returnVal);
+                    if (returnVal == JFileChooser.APPROVE_OPTION)
+                        vm252.loadFile(vm252FileChooser.getSelectedFile().toString());
+                }
+        );
+        loadMenu.add(fileMenuItem);
     }
 
     @Override
