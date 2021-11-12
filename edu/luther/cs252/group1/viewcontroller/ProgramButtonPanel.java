@@ -52,18 +52,19 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         // Run the next instruction when the button is pressed
         nextInstructionButton.addActionListener(
                 actionEvent -> {
-                    System.out.print("Before: ");
-                    System.out.print("PC: ");
-                    System.out.print(vm252.getProgramCounter());
-                    System.out.print(" | ACC: ");
-                    System.out.println(vm252.getAccumulator());
-                    if (!vm252.isLastInstructionCausedHalt())
+                    if (!vm252.isLastInstructionCausedHalt()) {
+                        System.out.print("Before: ");
+                        System.out.print("PC: ");
+                        System.out.print(vm252.getProgramCounter());
+                        System.out.print(" | ACC: ");
+                        System.out.println(vm252.getAccumulator());
                         vm252.runNextInstruction();
-                    System.out.print("After : ");
-                    System.out.print("PC: ");
-                    System.out.print(vm252.getProgramCounter());
-                    System.out.print(" | ACC: ");
-                    System.out.println(vm252.getAccumulator());
+                        System.out.print("After : ");
+                        System.out.print("PC: ");
+                        System.out.print(vm252.getProgramCounter());
+                        System.out.print(" | ACC: ");
+                        System.out.println(vm252.getAccumulator());
+                    }
                 }
         );
 
