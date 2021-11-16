@@ -69,9 +69,16 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         helpMenu.add(quick_tips);
         helpMenu.add(command_list);
         quick_tips.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
-                "To receive fast help for the program you can hover over a component and read the tooltip. Otherwise you can view the full command list for all program controls and inputs"));
+                "To receive fast help for the program you can hover over a component and read the tooltip."
+                        + "Otherwise you can view the full command list for all program controls and inputs"));
         command_list.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
-                "n button: Run Next Program Instruction \n\nLoad: Load a vm252 object file \n\nRun: Run program until breakpoint reached \n\nPause: Pause the execution of the program \n\nStop: Stop the execution of the program \n\nFile Name: The name of the loaded vm252 object file \n\nDelay: Delay executing each instruction of the program \n\nInput/Output: Enter input or receive output here \n\nPC: View or edit the program counter \n\nACC: View or edit the accumulator \n\nNext: View the next instruction that will be ran"));
+                "n button: Run Next Program Instruction \n\n"
+                        + "Load: Load a vm252 object file \n\nRun: Run program until breakpoint reached \n\n"
+                        + "Pause: Pause the execution of the program \n\nStop: Stop the execution of the program \n\n"
+                        + "File Name: The name of the loaded vm252 object file \n\n"
+                        + "Delay: Delay executing each instruction of the program \n\n"
+                        + "Input/Output: Enter input or receive output here \n\nPC: View or edit the program counter \n\n"
+                        + "ACC: View or edit the accumulator \n\nNext: View the next instruction that will be ran"));
         
         add(loadMenu);
         add(fileNameLabel);
