@@ -25,14 +25,12 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
         Box leftControlBox = Box.createVerticalBox();
         JButton breakpointAddButton = new JButton("ba");
-        JButton helpButton = new JButton("h");
         JButton nextInstructionButton = new JButton("n ");
 
         //
         // Set help tooltips
         //
         breakpointAddButton.setToolTipText("Add a breakpoint at selected location");
-        helpButton.setToolTipText("Spawn a help dialog explaining the application");
         nextInstructionButton.setToolTipText("Run Next Program Instruction");
 
         //
@@ -40,11 +38,8 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         // We utilise the box class that creates invisible components in spaces
         // with the help of createRigidArea as the Box filler
         //
-
-        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        
         leftControlBox.add(breakpointAddButton);
-        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
-        leftControlBox.add(helpButton);
         leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
         leftControlBox.add(nextInstructionButton);
         add(leftControlBox);
@@ -66,14 +61,6 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
                         System.out.println(vm252.getAccumulator());
                     }
                 }
-        );
-
-        // Add help dialog which explains how to see what each command/component does
-        helpButton.addActionListener(actionEvent ->
-                JOptionPane.showMessageDialog(
-                        getRootPane(),
-                        "Help:\nTo receive help for the program you can hover over a component and read the tooltip"
-                )
         );
     }
 
