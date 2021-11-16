@@ -13,6 +13,7 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
     //
     // Constructor
     //
+    
     public ProgramInputPanel(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;
@@ -20,12 +21,20 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
         //
         // Create Input/Output Menu and Text Field
         //
+        
         JMenu inputOutputMenu = new JMenu("Input/Output: ");
         inputOutputField = new JTextField(50);
+        
+        //
+        // Set the height and width of the Input/Output textbox for better visibility
+        //
+
+        inputOutputField.setPreferredSize(new Dimension(450, 90));
 
         //
         // Set help tooltips
         //
+        
         inputOutputField.setToolTipText("Enter input or receive output here");
 
         add(inputOutputMenu);
