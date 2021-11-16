@@ -109,21 +109,22 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
                 actionEvent -> {
                     int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
                     System.out.println(returnVal);
-                    if (returnVal == JFileChooser.APPROVE_OPTION)
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
                         String file_name = vm252FileChooser.getSelectedFile().toString();
-                    
+
                         //
                         // Retrieve the filename of the vm252obj file selected by the user and display it in our
                         //      read-only field, fileNameField 
                         // 
-                    
+
                         fileNameField.setText(file_name);
-                    
+
                         //
                         // Load the vm252obj file
                         //
-                    
+
                         vm252.loadFile(file_name);
+                    }
                 }
         );
         
