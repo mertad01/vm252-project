@@ -31,11 +31,14 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         JMenu fileNameLabel = new JMenu("File Name:");
 
         //
-        // TextField Takes up to 30 characters for a given file name input.
+        // TextField, fileNameField's, width in columns is 100.
         //
+        
         fileNameField = new JTextField(100);
         
+        //
         // Set the textfield as read-only
+        //
         
         fileNameField.setEditable(false);
         
@@ -79,22 +82,29 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
                         + "Delay: Delay executing each instruction of the program \n\n"
                         + "Input/Output: Enter input or receive output here \n\nPC: View or edit the program counter \n\n"
                         + "ACC: View or edit the accumulator \n\nNext: View the next instruction that will be ran"));
+
+        
+        //
+        // Adding the load menu item with subsidiary open button to open files on a
+        // user's machine using JFileChooser
+        //
         
         add(loadMenu);
-        add(fileNameLabel);
-        add(fileNameField);
-        add(runMenu);
-        add(runDelayField);
-        add(pauseMenu);
-        add(stopMenu);
-
+        JMenuItem fileMenuItem = new JMenuItem("Open");
+        loadMenu.add(fileMenuItem);
         JFileChooser vm252FileChooser = new JFileChooser();
+            
+        //
+        // Filter the search to look for ".vm252obj" files
+        //
+        
         FileNameExtensionFilter vm252ExtensionFilter = new FileNameExtensionFilter(
                 "VM252 Object File", "vm252obj"
         );
         vm252FileChooser.setFileFilter(vm252ExtensionFilter);
-
-        JMenuItem fileMenuItem = new JMenuItem("Open");
+        
+        
+        
         fileMenuItem.addActionListener(
                 actionEvent -> {
                     int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
@@ -103,7 +113,13 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
                         vm252.loadFile(vm252FileChooser.getSelectedFile().toString());
                 }
         );
-        loadMenu.add(fileMenuItem);
+        
+        add(fileNameLabel);
+        add(fileNameField);
+        add(runMenu);
+        add(runDelayField);
+        add(pauseMenu);
+        add(stopMenu);
     }
 
     @Override
