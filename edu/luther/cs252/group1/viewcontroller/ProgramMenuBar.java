@@ -22,32 +22,57 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         //
         // Create menu items
         //
+        
+        JMenu helpMenu = new JMenu("Help");
         JMenu loadMenu = new JMenu("File");
         JMenu runMenu = new JMenu("Run");
         JMenu pauseMenu = new JMenu("Pause");
         JMenu stopMenu = new JMenu("Stop");
-        JMenu fileNameLabel = new JMenu("Enter File Name:");
+        JMenu fileNameLabel = new JMenu("File Name:");
 
         //
         // TextField Takes up to 30 characters for a given file name input.
         //
         fileNameField = new JTextField(100);
+        
+        // Set the textfield as read-only
+        
+        fileNameField.setEditable(false);
+        
         runDelayField = new JTextField("Delay", 10);
 
         //
         // Set help tooltips
         //
+        
+        helpMenu.setToolTipText("Spawn a help dialog explaining the application");
         loadMenu.setToolTipText("Load a vm252 object file");
         runMenu.setToolTipText("Run program until breakpoint reached");
         pauseMenu.setToolTipText("Pause the execution of the program");
         stopMenu.setToolTipText("Stop the execution of the program");
-        fileNameLabel.setToolTipText("Enter a name to load a vm252 object file");
+        fileNameLabel.setToolTipText("The name of the loaded vm252 object file");
         runDelayField.setToolTipText("Delay executing each instruction of the program");
 
 
         //
         // Add components to the menu bar
         //
+        
+        //
+        // Adding the Help menu item separated into quick tips and a full commandlist
+        // that appear on button click
+        //
+
+        add(helpMenu);
+        JMenuItem quick_tips = new JMenuItem("Quick Tip");
+        JMenuItem command_list = new JMenuItem("Command List");
+        helpMenu.add(quick_tips);
+        helpMenu.add(command_list);
+        quick_tips.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
+                "To receive fast help for the program you can hover over a component and read the tooltip. Otherwise you can view the full command list for all program controls and inputs"));
+        command_list.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
+                "n button: Run Next Program Instruction \n\nLoad: Load a vm252 object file \n\nRun: Run program until breakpoint reached \n\nPause: Pause the execution of the program \n\nStop: Stop the execution of the program \n\nFile Name: The name of the loaded vm252 object file \n\nDelay: Delay executing each instruction of the program \n\nInput/Output: Enter input or receive output here \n\nPC: View or edit the program counter \n\nACC: View or edit the accumulator \n\nNext: View the next instruction that will be ran"));
+        
         add(loadMenu);
         add(fileNameLabel);
         add(fileNameField);
