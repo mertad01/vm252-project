@@ -38,6 +38,9 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
 
         inputOutputField.setToolTipText("Enter input or receive output here");
 
+        //
+        // Add components to the panel
+        //
         add(inputOutputMenu);
         add(inputOutputField);
     }

@@ -88,7 +88,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         }
 
         @Override
-        // TODO: preface
         public void actionPerformed(ActionEvent actionEvent) {
             // Set the programCounter and accumulator of the VM252 to be what has been inputted
             vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
@@ -98,9 +97,9 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
     @Override
     public void update() {
+        // Update the programCounter and accumulator whenever the model changes
         programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
         accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
         nextInstructionField.setText("todo");
-//        System.out.println("foo");
     }
 }
