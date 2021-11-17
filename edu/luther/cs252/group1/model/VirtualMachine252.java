@@ -11,7 +11,27 @@ public class VirtualMachine252 extends BasicObservable {
 
     //region Constructors
 
-    // TODO: preface
+    //
+    // Public Constructor Method VirtualMachine252()
+    //
+    // Purpose:
+    //     Construct a VirtualMachine252 object containing an empty memory.
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     none
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public VirtualMachine252() {
         this.accumulator = 0;
         this.programCounter = 0;
@@ -22,7 +42,27 @@ public class VirtualMachine252 extends BasicObservable {
 
     }
 
-    // TODO: preface
+    //
+    // Public Constructor Method VirtualMachine252(String objectFileName)
+    //
+    // Purpose:
+    //     Construct a VirtualMachine252 object containing the memory bytes from the objectFileName's vm252 object code
+    //
+    // Formals:
+    //     objectFileName (in) - String containing the name+location of a vm252 object file
+    //
+    // Pre-conditions:
+    //     objectFileName must be an existing and valid vm252 object file
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     none
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public VirtualMachine252(String objectFileName) {
         this.accumulator = 0;
         this.programCounter = 0;
@@ -262,6 +302,7 @@ public class VirtualMachine252 extends BasicObservable {
 
     //
     // Public Instance Method Void runNextInstruction()
+    // Based on Zaring's Phase02 Example Solution runProgram() method
     //
     // Purpose:
     //     Simulate the execution of a VM252 instruction
