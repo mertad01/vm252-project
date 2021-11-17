@@ -227,16 +227,24 @@ public class VirtualMachine252 extends BasicObservable {
 
             case VM252Utilities.INPUT_OPCODE -> {
 
+		    JTextArea inputOutput= new JTextArea(10,25);
+
                 //
                 // Let lastInstructionCausedHalt = true iff no integer
                 //     is available from the standard input stream
                 //     (discarding non-integer inputs, if necessary)
                 //
 
-                for (System.out.print("INPUT: "),
+                // for (System.out.print("INPUT: "),
+		
+		    ProgramInputPanel panel= new ProgramInputPanel(this);
+		    inputOutput.setText("INPUT: ");
+                for (panel.InputOutput(inputOutput),
 			       	System.out.flush();
                      input.hasNext() && !input.hasNextInt();
-			System.out.print("INPUT: "),
+
+		     // panel.InputOutput(inputOutput),
+			// System.out.print("INPUT: "),
                              System.out.flush()) {
                     //
                     // Loop invariant:
