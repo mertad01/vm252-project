@@ -175,6 +175,6 @@ public class ProgramFrame extends JFrame {
         getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
-        getContentPane().add(BorderLayout.SOUTH, programInputPanel);
+        //getContentPane().add(BorderLayout.SOUTH, programInputPanel);
     }
 }
