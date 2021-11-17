@@ -2,11 +2,14 @@ package edu.luther.cs252.group1.model;
 
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 import edu.luther.cs252.group1.observation.BasicObservable;
-
+import edu.luther.cs252.group1.viewcontroller.ProgramMenuBar;
+import edu.luther.cs252.group1.viewcontroller.ProgramInputPanel;
 import java.util.Arrays;
+import javax.swing.*;
 import java.util.Scanner;
 
 public class VirtualMachine252 extends BasicObservable {
+	private JTextArea text_to_be_passed=new JTextArea(10,25);
 
     //region Constructors
 
@@ -230,9 +233,10 @@ public class VirtualMachine252 extends BasicObservable {
                 //     (discarding non-integer inputs, if necessary)
                 //
 
-                for (System.out.print("INPUT: "), System.out.flush();
+                for (System.out.print("INPUT: "),
+			       	System.out.flush();
                      input.hasNext() && !input.hasNextInt();
-                     System.out.print("INPUT: "),
+			System.out.print("INPUT: "),
                              System.out.flush()) {
                     //
                     // Loop invariant:
@@ -242,6 +246,7 @@ public class VirtualMachine252 extends BasicObservable {
                     //     non-integer tokens
                     //
                     input.next();
+		    announceChange();
                     System.out.println(
                             "INPUT: Bad integer value; try again"
                     );
