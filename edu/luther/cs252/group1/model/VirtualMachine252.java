@@ -2,8 +2,10 @@ package edu.luther.cs252.group1.model;
 
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 import edu.luther.cs252.group1.observation.BasicObservable;
-
+import edu.luther.cs252.group1.viewcontroller.ProgramMenuBar;
+import edu.luther.cs252.group1.viewcontroller.ProgramInputPanel;
 import java.util.Arrays;
+import javax.swing.*;
 import java.util.Scanner;
 
 public class VirtualMachine252 extends BasicObservable {
@@ -63,6 +65,8 @@ public class VirtualMachine252 extends BasicObservable {
 
     private boolean suppressPcIncrement;
     private boolean lastInstructionCausedHalt;
+
+		private int input_data=0;
 
     private final Scanner input = new Scanner(System.in);
 
@@ -224,31 +228,28 @@ public class VirtualMachine252 extends BasicObservable {
 
             case VM252Utilities.INPUT_OPCODE -> {
 
+
                 //
                 // Let lastInstructionCausedHalt = true iff no integer
                 //     is available from the standard input stream
                 //     (discarding non-integer inputs, if necessary)
                 //
 
-                for (System.out.print("INPUT: "), System.out.flush();
-                     input.hasNext() && !input.hasNextInt();
-                     System.out.print("INPUT: "),
-                             System.out.flush()) {
-                    //
-                    // Loop invariant:
-                    //     On the current INPUT attempt, all
-                    //     tokens in System.out prior to the
-                    //     next available one have been
-                    //     non-integer tokens
-                    //
-                    input.next();
-                    System.out.println(
-                            "INPUT: Bad integer value; try again"
-                    );
-                    System.out.flush();
-                }
+System.out.println("input section enterred");
+                    boolean integer_checker=true;         
+		String input_integer =JOptionPane.showInputDialog("INPUT: ");
+                    while (true){
+		try{
+			 input_data=Integer.parseInt(input_integer);
+	break;
+		}
+		catch (NumberFormatException e){
 
-                lastInstructionCausedHalt = !input.hasNext();
+	input_integer=JOptionPane.showInputDialog("Enter Valid Integer: ");
+	continue;
+		}
+		    }
+                lastInstructionCausedHalt = false;
 
                 //
                 // Issue an error message if no input was available
@@ -256,10 +257,7 @@ public class VirtualMachine252 extends BasicObservable {
 
                 if (lastInstructionCausedHalt) {
 
-                    System.out.println(
-                            "EOF reading input;  machine halts"
-                    );
-                    System.out.flush();
+		JOptionPane.showMessageDialog(null, "End of file reading input: ");
 
                 }
 
@@ -269,15 +267,12 @@ public class VirtualMachine252 extends BasicObservable {
                 //
 
                 else
+                    accumulator = (short) input_data;
 
-                    accumulator = ((short) input.nextInt());
-
-            }
-
+	    }
             case VM252Utilities.OUTPUT_OPCODE -> {
 
-                System.out.println("OUTPUT: " + accumulator);
-                System.out.flush();
+	JOptionPane.showMessageDialog(null, "OUTPUT: "+ accumulator);
 
             }
 
