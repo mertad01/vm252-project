@@ -35,14 +35,14 @@ Our plan has been executed for the most part without too much change. We did mak
 
 * Work Log
 ** Michael Musa
-| Date   | Hours Worked |
-|--------+--------------|
-|        |              |
-|        |              |
-|        |              |
-|        |              |
-|--------+--------------|
-| Total: |              |
+| Date   | Hours Worked    |
+|--------+-----------------|
+|11/12/21|03:00pm - 05:00pm|
+|11/13/21|06:00pm - 09:00pm|
+|11/14/21|01:00pm - 02:00pm|
+|11/15/21|11:00am - 12:00pm|
+|--------+-----------------|
+| Total: |~7               |
 
 ** Adam Mertzenich
 | Date     | Hours Worked    |
