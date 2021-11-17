@@ -6,12 +6,15 @@ import java.io.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.*;
+import java.awt.*;
 
 public class ProgramInputPanel extends JPanel implements BasicObserver{
 
     private VirtualMachine252 vm252;
 
-    public ProgramInputPanel() {}
+    //
+    // Constructor
+    //
     public ProgramInputPanel(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;
@@ -33,6 +36,18 @@ public class ProgramInputPanel extends JPanel implements BasicObserver{
      //   //
 	//passedTextArea.setText(passedTextArea.getText());
      //       JLabel inputOutputAreaLabel = new JLabel("Input/Output:");
+        //
+        // Create Input/Output Menu and Text Field
+        //
+        
+        //JMenu inputOutputMenu = new JMenu("Input/Output: ");
+        //inputOutputField = new JTextField(50);
+        
+        //
+        // Set the height and width of the Input/Output textbox for better visibility
+        //
+
+        //inputOutputField.setPreferredSize(new Dimension(450, 90));
 
         
 
@@ -46,6 +61,11 @@ public class ProgramInputPanel extends JPanel implements BasicObserver{
         // passedTextArea.setToolTipText("Enter input or receive output here");
         // add(inputOutputAreaLabel);
         // add(inputOutputScroller);
+        
+        //inputOutputField.setToolTipText("Enter input or receive output here");
+
+        //add(inputOutputMenu);
+        //add(inputOutputField);
     }
     
     @Override
