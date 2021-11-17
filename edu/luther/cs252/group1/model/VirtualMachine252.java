@@ -40,19 +40,6 @@ public class VirtualMachine252 extends BasicObservable {
     }
     //endregion
 
-
-    //region Public Class Constants
-    //endregion
-
-
-    //region Private Class Constants
-    //endregion
-
-
-    //region Public Instance Fields
-    //endregion
-
-
     //region Private Instance Fields
 
     //
@@ -69,45 +56,107 @@ public class VirtualMachine252 extends BasicObservable {
 
     private final Scanner input = new Scanner(System.in);
 
-    //
-    // Delay in execution of instructions when running the program
-    //
-    private int executionDelay = 0;
-
     //endregion
-
-
-    //region Public Class Methods
-    //endregion
-
-
-    //region Private Class Methods
-    //endregion
-
 
     //region Public Instance Accessors
 
-    // TODO: preface
+    //
+    // Public Instance Method short getProgramCounter()
+    //
+    // Purpose:
+    //     Acquire the contents of the virtual machine's programCounter
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Short value representing the contents of the machine's programCounter
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public short getProgramCounter() {
         return programCounter;
     }
 
-    // TODO: preface
+    //
+    // Public Instance Method short getAccumulator()
+    //
+    // Purpose:
+    //     Acquire the contents of the virtual machine's accumulator
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Short value representing the contents of the machine's accumulator
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public short getAccumulator() {
         return accumulator;
     }
 
-    // TODO: preface
-    public int getExecutionDelay() {
-        return executionDelay;
-    }
-
-    // TODO: preface
+    //
+    // Public Instance Method boolean isLastInstructionCausedHalt()
+    //
+    // Purpose:
+    //     Determine whether the execution of the virtual machine has been halted by the previously executed instruction
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Boolean value representing whether the previous instruction caused program halt
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public boolean isLastInstructionCausedHalt() {
         return lastInstructionCausedHalt;
     }
 
-    // TODO: preface
+    //
+    // Public Instance Method byte[] getMemory()
+    //
+    // Purpose:
+    //     Return the memory of the virtual machine instance
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     Virtual machine's memory has been initialized
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     An array of bytes, length of the VM252Utilities.numberOfMemoryBytes (8092),
+    //     representing the memory of a vm252 object file program
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public byte[] getMemory() {
         return memory;
     }
@@ -118,11 +167,33 @@ public class VirtualMachine252 extends BasicObservable {
 
     //region Public Instance Mutators
 
-    // TODO: preface
+    //
+    // Public Instance Method Void loadFile(String objectFileName)
+    //
+    // Purpose:
+    //     Replace the memory with the contents of a new vm252 object file
+    //
+    // Formals:
+    //     objectFileName (in) - name of a file which contains vm252 object code
+    //
+    // Pre-conditions:
+    //     String objectFileName contains a valid file location, objectFileName contains valid vm252 object code
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Void
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void loadFile(String objectFileName) {
         this.accumulator = 0;
         this.programCounter = 0;
         this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
+        this.lastInstructionCausedHalt = false;
+        this.suppressPcIncrement = false;
 
         byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
         if (program != null) {
@@ -136,25 +207,80 @@ public class VirtualMachine252 extends BasicObservable {
         announceChange();
     }
 
-    // TODO: preface
+    //
+    // Public Instance Method Void setProgramCounter(short programCounter)
+    //
+    // Purpose:
+    //     Set the value of the programCounter to a new short.
+    //
+    // Formals:
+    //     programCounter (in) - short value which you desire to set to program counter
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Void
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void setProgramCounter(short programCounter) {
         this.programCounter = programCounter;
         announceChange();
     }
 
-    // TODO: preface
+    //
+    // Public Instance Method Void setAccumulator(short accumulator)
+    //
+    // Purpose:
+    //     Set the value of the accumulator to a new short.
+    //
+    // Formals:
+    //     accumulator (in) - short value which you desire to set to accumulator
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Void
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void setAccumulator(short accumulator) {
         this.accumulator = accumulator;
         announceChange();
     }
 
-    // TODO: preface
-    public void setExecutionDelay(int executionDelay) {
-        this.executionDelay = executionDelay;
-        announceChange();
-    }
 
-    // TODO: preface
+    //
+    // Public Instance Method Void runNextInstruction()
+    //
+    // Purpose:
+    //     Simulate the execution of a VM252 instruction
+    //
+    // Formals:
+    //     none
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Void
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void runNextInstruction() {
 
         //
@@ -267,11 +393,7 @@ public class VirtualMachine252 extends BasicObservable {
                     accumulator = (short) input_data;
 
             }
-            case VM252Utilities.OUTPUT_OPCODE -> {
-
-                JOptionPane.showMessageDialog(null, "OUTPUT: " + accumulator);
-
-            }
+            case VM252Utilities.OUTPUT_OPCODE -> JOptionPane.showMessageDialog(null, "OUTPUT: " + accumulator);
 
             case VM252Utilities.NO_OP_OPCODE -> {
 
@@ -300,18 +422,33 @@ public class VirtualMachine252 extends BasicObservable {
         announceChange();
     }
 
-    // TODO: preface
+    //
+    // Public Instance Method Void setMemory(byte[] memory)
+    //
+    // Purpose:
+    //     Replace the virtual machine memory with another byte array
+    //
+    // Formals:
+    //     memory (in) - array of bytes from the VM252 object-code
+    //
+    // Pre-conditions:
+    //     none
+    //
+    // Post-conditions:
+    //     none
+    //
+    // Returns:
+    //     Void
+    //
+    // Worst-case asymptotic runtime:
+    //     O(1)
+    //
     public void setMemory(byte[] memory) {
         this.memory = memory;
     }
 
 
     //endregion
-
-
-    //region Private Instance Methods
-    //endregion
-
 
     public static void main(String[] args) {
         VirtualMachine252 vm252 = new VirtualMachine252();
