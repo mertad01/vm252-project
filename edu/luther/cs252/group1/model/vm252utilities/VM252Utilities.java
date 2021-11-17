@@ -26,19 +26,12 @@ public class VM252Utilities
     public static final int numberOfMemoryBytes = 8192;
     //endregion
 
-    //region Private Class Constants
-    //endregion
-
-    //region Public Instance Fields
-    //endregion
-
-    //region Private Instance Fields
-    //endregion
 
     //region Public Class Methods
 
     //
     // Public Class Method byte [] readObjectCodeFromObjectFile(String objectFileName)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Reads the object‑code bytes only from the VM252 object‑code file having a
@@ -263,6 +256,7 @@ public class VM252Utilities
     //
     // Public Class Method
     //     short bytesToInteger(byte mostSignificantByte, byte leastSignificantByte)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Combines two bytes into a 16-bit signed integer value
@@ -298,6 +292,7 @@ public class VM252Utilities
 
     //
     // Public Class Method byte [] integerToBytes(short data)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Splits a 16-bit signed integer value into two bytes
@@ -332,6 +327,7 @@ public class VM252Utilities
     }
 
     // Public Class Method short nextMemoryAddress(short address)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Determines the address of the next valid memory location following a given
@@ -360,6 +356,7 @@ public class VM252Utilities
 
     //
     // Public Class Method byte [] fetchBytePair(byte [] memory, short address)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Fetches a pair of sequential bytes from a simulated VM2525 memory
@@ -397,6 +394,7 @@ public class VM252Utilities
     //         byte byte0,
     //         byte byte1
     //         )
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Stores a pair of bytes into two sequential bytes in a simulated VM2525 memory
@@ -436,6 +434,7 @@ public class VM252Utilities
     //
     // Public Class Method
     //     short fetchIntegerValue(byte [] memory, short address)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Fetches a 16-bit signed integer from a simulated VM2525 memory
@@ -469,6 +468,7 @@ public class VM252Utilities
     //
     // Public Class Method
     //     void storeIntegerValue(byte [] memory, short address, short dataValue)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Stores a 16-bit signed integer to a simulated VM2525 memory
@@ -510,6 +510,7 @@ public class VM252Utilities
 
     //
     // Public Class Method int instructionSize(int opcode)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Gives the size (in bytes) of an instruction having a given opcode
@@ -559,6 +560,7 @@ public class VM252Utilities
 
     //
     // Public Class Method byte [] encodedInstructionBytes(int opcode, int operand)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Creates the binary encoding of a VM252 instruction
@@ -676,6 +678,7 @@ public class VM252Utilities
 
     //
     // Public Class Method int [] decodedInstructionComponents(byte [] instructionBytes)
+    // From Zaring's Phase 02 VM252ArchitectureSpecifications and VM252Utilities
     //
     // Purpose:
     //     Decodes the binary encoding of a VM252 instruction
@@ -827,14 +830,4 @@ public class VM252Utilities
 
     //endregion
 
-    //region Private Class Methods
-    //endregion
-
-    //region Public Instance Methods
-
-
-    //endregion
-
-    //region Private Instance Methods
-    //endregion
 }
