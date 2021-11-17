@@ -106,6 +106,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
         vm252FileChooser.setFileFilter(vm252ExtensionFilter);
 
 
+        // Component for taking a file as input from the user using a dialog box
         fileMenuItem.addActionListener(
                 actionEvent -> {
                     int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
@@ -177,8 +178,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
                     };
                     threadObject = new Thread(runnable);
                     threadObject.start();
-                    // while(!vm252.isLastInstructionCausedHalt()){
-                    // 	vm252.runNextInstruction();}
                 }
         );
         runMenu.add(runItem);
