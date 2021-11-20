@@ -48,17 +48,9 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         nextInstructionButton.addActionListener(
                 actionEvent -> {
                     if (!vm252.isLastInstructionCausedHalt()) {
-                        System.out.print("Before: ");
-                        System.out.print("PC: ");
-                        System.out.print(vm252.getProgramCounter());
-                        System.out.print(" | ACC: ");
-                        System.out.println(vm252.getAccumulator());
                         vm252.runNextInstruction();
-                        System.out.print("After : ");
-                        System.out.print("PC: ");
-                        System.out.print(vm252.getProgramCounter());
-                        System.out.print(" | ACC: ");
-                        System.out.println(vm252.getAccumulator());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "REACHED STOP OPCODE");
                     }
                 }
         );

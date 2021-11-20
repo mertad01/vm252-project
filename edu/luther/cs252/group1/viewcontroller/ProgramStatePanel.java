@@ -65,9 +65,23 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
 
         // Listen for changes to the programCounter and accumulator fields
-        StateInputAction inputAction = new StateInputAction();
-        programCounterField.addActionListener(inputAction);
-        accumulatorField.addActionListener(inputAction);
+        programCounterField.addActionListener(
+                actionEvent -> {
+                    vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
+                    // Allow user to turn continue interacting after reaching STOP if they change programCounter
+                    vm252.toggleLastInstructionCausedHalt();
+                    vm252.toggleSuppressPcIncrement();
+                }
+        );
+        accumulatorField.addActionListener(
+                actionEvent -> {
+                    vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
+                    // Allow user to turn continue interacting after reaching STOP if they change accumulator
+                    vm252.toggleLastInstructionCausedHalt();
+                    vm252.toggleSuppressPcIncrement();
+                }
+        );
+
     }
 
     //
@@ -78,22 +92,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
     // Public Mutators
     //
 
-    //
-    // Listeners
-    //
-    private class StateInputAction implements ActionListener {
-
-        public StateInputAction() {
-
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            // Set the programCounter and accumulator of the VM252 to be what has been inputted
-            vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
-            vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
-        }
-    }
 
     @Override
     public void update() {

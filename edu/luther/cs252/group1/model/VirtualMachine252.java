@@ -229,11 +229,8 @@ public class VirtualMachine252 extends BasicObservable {
 	//     O(1)
 	//
 	public void loadFile(String objectFileName) {
-		this.accumulator = 0;
-		this.programCounter = 0;
+		reinitialize();
 		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
-		this.lastInstructionCausedHalt = false;
-		this.suppressPcIncrement = false;
 
 		byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
 		if (program != null) {
@@ -244,6 +241,35 @@ public class VirtualMachine252 extends BasicObservable {
 			// Copy the program bytes into memory
 			System.arraycopy(program, 0, memory, 0, program.length);
 		}
+		announceChange();
+	}
+
+	//
+	// Public Instance Method Void reinitialize()
+	//
+	// Purpose:
+	//     Reset fields to their initial values
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void reinitialize() {
+		this.accumulator = 0;
+		this.programCounter = 0;
+		this.lastInstructionCausedHalt = false;
+		this.suppressPcIncrement = false;
 		announceChange();
 	}
 
@@ -323,6 +349,31 @@ public class VirtualMachine252 extends BasicObservable {
 	//
 	public void toggleLastInstructionCausedHalt() {
 		this.lastInstructionCausedHalt = !this.lastInstructionCausedHalt;
+	}
+
+	//
+	// Public Instance Method Void toggleSuppressPcIncrement()
+	//
+	// Purpose:
+	//     Flip the value of whether the program counter increment should be suppressed
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void toggleSuppressPcIncrement() {
+		this.suppressPcIncrement = !this.suppressPcIncrement;
 	}
 
 	//
