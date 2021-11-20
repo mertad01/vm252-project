@@ -176,7 +176,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 								//runs the nextinstruction in the object file
 								vm252.runNextInstruction();
 							}
-
+							vm252.toggleLastInstructionCausedHalt();
 
 						}
 					};

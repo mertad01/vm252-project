@@ -301,6 +301,31 @@ public class VirtualMachine252 extends BasicObservable {
 
 
 	//
+	// Public Instance Method Void toggleLastInstructionCausedHalt()
+	//
+	// Purpose:
+	//     Flip the value of whether the last instruction caused a halt or not
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void toggleLastInstructionCausedHalt() {
+		this.lastInstructionCausedHalt = !this.lastInstructionCausedHalt;
+	}
+
+	//
 	// Public Instance Method Void runNextInstruction()
 	// Based on Zaring's Phase02 Example Solution runProgram() method
 	//
