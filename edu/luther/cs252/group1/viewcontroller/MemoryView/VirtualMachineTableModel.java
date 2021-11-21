@@ -2,7 +2,6 @@ package edu.luther.cs252.group1.viewcontroller.MemoryView;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
-import edu.luther.cs252.group1.observation.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
