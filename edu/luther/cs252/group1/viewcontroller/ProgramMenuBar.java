@@ -5,13 +5,11 @@ import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.event.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ProgramMenuBar extends JMenuBar implements BasicObserver {
-	private AtomicBoolean paused;
-	private VirtualMachine252 vm252;
-	private JTextField fileNameField;
+	private final AtomicBoolean paused;
+	private final JTextField fileNameField;
 	private JTextField runDelayField;
 	private Thread threadObject;
 
@@ -19,8 +17,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 	// Constructor
 	//
 	public ProgramMenuBar(VirtualMachine252 vm252) {
-
-		this.vm252 = vm252;
 
 		//
 		// Create menu items
@@ -30,7 +26,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		JMenu helpMenu = new JMenu("Help");
 		JMenu loadMenu = new JMenu("File");
 		JMenu runMenu = new JMenu("Run");
-//		JMenu reinitializeMenu = new JMenu("Z");
 		JButton reinitializeButton = new JButton("Z");
 		JMenu fileNameLabel = new JMenu("File Name:");
 
@@ -41,7 +36,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		runDelayField = new JTextField("Delay", 10);
 
 		//
-		// Set the textfield as read-only
+		// Set the text field as read-only
 		//
 
 		fileNameField.setEditable(false);
@@ -55,7 +50,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		helpMenu.setToolTipText("Spawn a help dialog explaining the application");
 		loadMenu.setToolTipText("Load a vm252 object file");
 		runMenu.setToolTipText("Run program until breakpoint reached");
-//		reinitializeMenu.setToolTipText("Reinitialize the program");
 		reinitializeButton.setToolTipText("Reinitialize the program");
 		fileNameLabel.setToolTipText("The name of the loaded vm252 object file");
 		runDelayField.setToolTipText("Delay executing each instruction of the program");
@@ -66,7 +60,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		//
 
 		//
-		// Adding the Help menu item separated into quick tips and a full commandlist
+		// Adding the Help menu item separated into quick tips and a full command list
 		// that appear on button click
 		//
 
@@ -79,13 +73,28 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 					"To receive fast help for the program you can hover over a component and read the tooltip."
 					+ "Otherwise you can view the full command list for all program controls and inputs"));
 		command_list.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
-					"n button: Run Next Program Instruction \n\n"
-					+ "Load: Load a vm252 object file \n\nRun: Run program until breakpoint reached \n\n"
-					+ "Pause: Pause the execution of the program \n\nStop: Stop the execution of the program \n\n"
-					+ "File Name: The name of the loaded vm252 object file \n\n"
-					+ "Delay: Delay executing each instruction of the program \n\n"
-					+ "Input/Output: Enter input or receive output here \n\nPC: View or edit the program counter \n\n"
-					+ "ACC: View or edit the accumulator \n\nNext: View the next instruction that will be ran"));
+				"""
+						n button: Run Next Program Instruction\s
+
+						Load: Load a vm252 object file\s
+
+						Run: Run program until breakpoint reached\s
+
+						Pause: Pause the execution of the program\s
+
+						Stop: Stop the execution of the program\s
+
+						File Name: The name of the loaded vm252 object file\s
+
+						Delay: Delay executing each instruction of the program\s
+
+						Input/Output: Enter input or receive output here\s
+
+						PC: View or edit the program counter\s
+
+						ACC: View or edit the accumulator\s
+
+						Next: View the next instruction that will be ran"""));
 
 
 		//
@@ -140,7 +149,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		add(fileNameField);
 		add(runMenu);
 		add(runDelayField);
-//		add(reinitializeMenu);
 		add(reinitializeButton);
 
 		//menu item to run the program, when pressed makes a new thread and runs the program till the lastInstruction is found
@@ -152,17 +160,17 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 						public void run() {
 							while (!vm252.isLastInstructionCausedHalt()) {
 
-								//if paused menu item is pressed, the thread waits untill an exception occurs
+								//if paused menu item is pressed, the thread waits until an exception occurs
 								if (paused.get()) {
 									synchronized (threadObject) {
 										// Pause
 										try {
 											threadObject.wait();
-										} catch (InterruptedException e) {
+										} catch (InterruptedException ignored) {
 										}
 									}
 								}
-								//delays the program by reading the input in  **seconds** in delay textfield, the input is multiplied
+								//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
 								//by 1000 inorder to convert it into milliseconds.
 								//delays the program for as long as the user wants until an exception occurs
 								try {
@@ -174,10 +182,10 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 									} catch (InterruptedException ex) {
 										System.out.println("no delay inserted");
 									}
-								} catch (NumberFormatException e) {
+								} catch (NumberFormatException ignored) {
 								}
 
-								//runs the nextinstruction in the object file
+								//runs the next instruction in the object file
 								vm252.runNextInstruction();
 							}
 
@@ -209,9 +217,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 				);
 		runMenu.add(pauseItem);
 		reinitializeButton.addActionListener(
-				actionEvent -> {
-					vm252.reinitialize();
-				}
+				actionEvent -> vm252.reinitialize()
 		);
 	}
 

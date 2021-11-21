@@ -4,19 +4,17 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ProgramStatePanel extends JPanel implements BasicObserver {
 
     //
     // Private Instance Fields
     //
-    private VirtualMachine252 vm252;
+    private final VirtualMachine252 vm252;
 
-    private JTextField programCounterField;
-    private JTextField accumulatorField;
-    private JTextField nextInstructionField;
+    private final JTextField programCounterField;
+    private final JTextField accumulatorField;
+    private final JTextField nextInstructionField;
 
     //
     // Constructor
@@ -66,20 +64,10 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
         // Listen for changes to the programCounter and accumulator fields
         programCounterField.addActionListener(
-                actionEvent -> {
-                    vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
-                    // Allow user to turn continue interacting after reaching STOP if they change programCounter
-//                    vm252.toggleLastInstructionCausedHalt();
-//                    vm252.toggleSuppressPcIncrement();
-                }
+                actionEvent -> vm252.setProgramCounter(Short.parseShort(programCounterField.getText()))
         );
         accumulatorField.addActionListener(
-                actionEvent -> {
-                    vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
-                    // Allow user to turn continue interacting after reaching STOP if they change accumulator
-//                    vm252.toggleLastInstructionCausedHalt();
-//                    vm252.toggleSuppressPcIncrement();
-                }
+                actionEvent -> vm252.setAccumulator(Short.parseShort(accumulatorField.getText()))
         );
 
     }

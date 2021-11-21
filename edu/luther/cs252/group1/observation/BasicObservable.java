@@ -5,12 +5,12 @@ import java.util.ArrayList;
 // Based on 2021-10-21 lecture simple-observable.java
 public class BasicObservable implements Observable {
 
-    private ArrayList< Observer > myObservers;
+    private final ArrayList< Observer > myObservers;
 
     public BasicObservable()
     {
 
-        myObservers = new ArrayList< Observer >();
+        myObservers = new ArrayList<>();
 
     }
 

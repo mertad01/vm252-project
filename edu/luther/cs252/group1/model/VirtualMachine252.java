@@ -230,8 +230,7 @@ public class VirtualMachine252 extends BasicObservable {
 	//
 	public void loadFile(String objectFileName) {
 		reinitialize();
-//		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
-		// Fill memory with default 0 values
+		// Empty the memory (fill with 0)
 		Arrays.fill(this.memory, (byte) 0x0);
 
 		byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
@@ -327,56 +326,6 @@ public class VirtualMachine252 extends BasicObservable {
 		announceChange();
 	}
 
-
-	//
-	// Public Instance Method Void toggleLastInstructionCausedHalt()
-	//
-	// Purpose:
-	//     Flip the value of whether the last instruction caused a halt or not
-	//
-	// Formals:
-	//     none
-	//
-	// Pre-conditions:
-	//     none
-	//
-	// Post-conditions:
-	//     none
-	//
-	// Returns:
-	//     Void
-	//
-	// Worst-case asymptotic runtime:
-	//     O(1)
-	//
-	public void toggleLastInstructionCausedHalt() {
-		this.lastInstructionCausedHalt = !this.lastInstructionCausedHalt;
-	}
-
-	//
-	// Public Instance Method Void toggleSuppressPcIncrement()
-	//
-	// Purpose:
-	//     Flip the value of whether the program counter increment should be suppressed
-	//
-	// Formals:
-	//     none
-	//
-	// Pre-conditions:
-	//     none
-	//
-	// Post-conditions:
-	//     none
-	//
-	// Returns:
-	//     Void
-	//
-	// Worst-case asymptotic runtime:
-	//     O(1)
-	//
-	public void toggleSuppressPcIncrement() {
-		this.suppressPcIncrement = !this.suppressPcIncrement;
-	}
 
 	//
 	// Public Instance Method Void runNextInstruction()

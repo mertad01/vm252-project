@@ -11,17 +11,7 @@ import java.awt.*;
 
 public class ProgramFrame extends JFrame implements BasicObserver {
 
-    public int foo = 5;
-
-    //
-    // Private Instance Fields
-    //
-    private ProgramMenuBar programMenuBar;
-    private ProgramButtonPanel programButtonPanel;
-    private ProgramStatePanel programStatePanel;
-    private ProgramInputPanel programInputPanel;
-    private JTable memoryTable;
-    private VirtualMachineTableModel myTableModel;
+    private final VirtualMachineTableModel vm252TableModel;
 
     //
     // Constructor
@@ -41,26 +31,31 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         //
         // Create View-Controller Panels
         //
-        programMenuBar = new ProgramMenuBar(vm252);
-        programButtonPanel = new ProgramButtonPanel(vm252);
-        programStatePanel = new ProgramStatePanel(vm252);
-        programInputPanel = new ProgramInputPanel(vm252);
-        //memoryTable = new MemoryTable(vm252);
+        //
+        // Private Instance Fields
+        //
+        ProgramMenuBar programMenuBar = new ProgramMenuBar(vm252);
+        ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
+        ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
+//        programInputPanel = new ProgramInputPanel(vm252); // no longer used
 
-        myTableModel = new VirtualMachineTableModel(vm252);
-        memoryTable = new JTable(
-                myTableModel
+        // Table model which allows the table to represent the VirtualMachine252
+        vm252TableModel = new VirtualMachineTableModel(vm252);
+        // Create new JTable using VirtualMachineTableModel as the model
+        JTable memoryTable = new JTable(
+                vm252TableModel
         );
+        // Add a listener. Not in use but can be used to help debug table model issues
         memoryTable.getModel().addTableModelListener(tableModelEvent -> {
             int row = tableModelEvent.getFirstRow();
             int column = tableModelEvent.getColumn();
             TableModel model = (TableModel) tableModelEvent.getSource();
             String columnName = model.getColumnName(column);
             Object data = model.getValueAt(row, column);
-//            System.out.println(data.toString());
+            System.out.println(columnName + "\n" + data);
         });
 
-        // Center cells
+        // Use a custom table cell renderer to center the text in each column
         CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer();
         memoryTable.getColumnModel().getColumn(0).setCellRenderer(tableCellCenterRenderer);
         memoryTable.getColumnModel().getColumn(1).setCellRenderer(tableCellCenterRenderer);
@@ -90,9 +85,8 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         vm252.attach(programMenuBar);
         vm252.attach(programButtonPanel);
         vm252.attach(programStatePanel);
-        vm252.attach(programInputPanel);
+//        vm252.attach(programInputPanel); // no longer used
         vm252.attach(this);
-        //vm252.attach(memoryTable);
 
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
@@ -105,11 +99,12 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
-        //getContentPane().add(BorderLayout.SOUTH, programInputPanel);
+        //getContentPane().add(BorderLayout.SOUTH, programInputPanel); // no longer used
     }
 
     @Override
     public void update() {
-        myTableModel.fireTableDataChanged();
+        // Keep the vm252TableModel up-to-date when the data changes
+        vm252TableModel.fireTableDataChanged();
     }
 }
