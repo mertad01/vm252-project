@@ -8,7 +8,8 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
 
     public CustomTableCellRenderer() {
         super();
+        // Center align
         this.setHorizontalAlignment(0);
-        this.setBackground(Color.LIGHT_GRAY);
+        //this.setBackground(Color.LIGHT_GRAY);
     }
 }
