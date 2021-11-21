@@ -1,11 +1,15 @@
 package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.observation.BasicObserver;
+import edu.luther.cs252.group1.viewcontroller.MemoryView.CustomTableCellRenderer;
+import edu.luther.cs252.group1.viewcontroller.MemoryView.VirtualMachineTableModel;
 
 import javax.swing.*;
+import javax.swing.table.*;
 import java.awt.*;
 
-public class ProgramFrame extends JFrame {
+public class ProgramFrame extends JFrame implements BasicObserver {
 
     public int foo = 5;
 
@@ -16,7 +20,8 @@ public class ProgramFrame extends JFrame {
     private ProgramButtonPanel programButtonPanel;
     private ProgramStatePanel programStatePanel;
     private ProgramInputPanel programInputPanel;
-    private MemoryTable memoryTable;
+    private JTable memoryTable;
+    private VirtualMachineTableModel myTableModel;
 
     //
     // Constructor
@@ -40,7 +45,44 @@ public class ProgramFrame extends JFrame {
         programButtonPanel = new ProgramButtonPanel(vm252);
         programStatePanel = new ProgramStatePanel(vm252);
         programInputPanel = new ProgramInputPanel(vm252);
-        memoryTable = new MemoryTable(vm252);
+        //memoryTable = new MemoryTable(vm252);
+
+        myTableModel = new VirtualMachineTableModel(vm252);
+        memoryTable = new JTable(
+                myTableModel
+        );
+        memoryTable.getModel().addTableModelListener(tableModelEvent -> {
+            int row = tableModelEvent.getFirstRow();
+            int column = tableModelEvent.getColumn();
+            TableModel model = (TableModel) tableModelEvent.getSource();
+            String columnName = model.getColumnName(column);
+            Object data = model.getValueAt(row, column);
+//            System.out.println(data.toString());
+        });
+
+        // Center cells
+        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer();
+        memoryTable.getColumnModel().getColumn(0).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(1).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(2).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(3).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(4).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(5).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(6).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(7).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(8).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(9).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(10).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(11).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(12).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(13).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(14).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(15).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(16).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(17).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(18).setCellRenderer(tableCellCenterRenderer);
+        memoryTable.getColumnModel().getColumn(19).setCellRenderer(tableCellCenterRenderer);
+
 
         //
         // Attach observers to check for changes
@@ -49,7 +91,8 @@ public class ProgramFrame extends JFrame {
         vm252.attach(programButtonPanel);
         vm252.attach(programStatePanel);
         vm252.attach(programInputPanel);
-        vm252.attach(memoryTable);
+        vm252.attach(this);
+        //vm252.attach(memoryTable);
 
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
@@ -63,5 +106,10 @@ public class ProgramFrame extends JFrame {
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
         //getContentPane().add(BorderLayout.SOUTH, programInputPanel);
+    }
+
+    @Override
+    public void update() {
+        myTableModel.fireTableDataChanged();
     }
 }

@@ -69,16 +69,16 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
                 actionEvent -> {
                     vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
                     // Allow user to turn continue interacting after reaching STOP if they change programCounter
-                    vm252.toggleLastInstructionCausedHalt();
-                    vm252.toggleSuppressPcIncrement();
+//                    vm252.toggleLastInstructionCausedHalt();
+//                    vm252.toggleSuppressPcIncrement();
                 }
         );
         accumulatorField.addActionListener(
                 actionEvent -> {
                     vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
                     // Allow user to turn continue interacting after reaching STOP if they change accumulator
-                    vm252.toggleLastInstructionCausedHalt();
-                    vm252.toggleSuppressPcIncrement();
+//                    vm252.toggleLastInstructionCausedHalt();
+//                    vm252.toggleSuppressPcIncrement();
                 }
         );
 
