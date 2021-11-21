@@ -27,11 +27,11 @@ public class ProgramFrame extends JFrame implements BasicObserver {
     // Constructor
     //
     public ProgramFrame() {
+        VirtualMachine252 vm252 = new VirtualMachine252();
 
         //
         // Create Model Object
         //
-        VirtualMachine252 vm252 = new VirtualMachine252();
 
         // FIXME: Debugging code, set memory to phase0 solution
         vm252.setMemory(new byte[] {

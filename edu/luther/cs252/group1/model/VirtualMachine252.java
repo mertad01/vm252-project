@@ -230,7 +230,9 @@ public class VirtualMachine252 extends BasicObservable {
 	//
 	public void loadFile(String objectFileName) {
 		reinitialize();
-		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
+//		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
+		// Fill memory with default 0 values
+		Arrays.fill(this.memory, (byte) 0x0);
 
 		byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
 		if (program != null) {
