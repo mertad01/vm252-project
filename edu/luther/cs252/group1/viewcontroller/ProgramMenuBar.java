@@ -30,7 +30,8 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		JMenu helpMenu = new JMenu("Help");
 		JMenu loadMenu = new JMenu("File");
 		JMenu runMenu = new JMenu("Run");
-		JMenu stopMenu = new JMenu("Stop");
+//		JMenu reinitializeMenu = new JMenu("Z");
+		JButton reinitializeButton = new JButton("Z");
 		JMenu fileNameLabel = new JMenu("File Name:");
 
 		//
@@ -54,7 +55,8 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		helpMenu.setToolTipText("Spawn a help dialog explaining the application");
 		loadMenu.setToolTipText("Load a vm252 object file");
 		runMenu.setToolTipText("Run program until breakpoint reached");
-		stopMenu.setToolTipText("Stop the execution of the program");
+//		reinitializeMenu.setToolTipText("Reinitialize the program");
+		reinitializeButton.setToolTipText("Reinitialize the program");
 		fileNameLabel.setToolTipText("The name of the loaded vm252 object file");
 		runDelayField.setToolTipText("Delay executing each instruction of the program");
 
@@ -138,7 +140,9 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		add(fileNameField);
 		add(runMenu);
 		add(runDelayField);
-		add(stopMenu);
+//		add(reinitializeMenu);
+		add(reinitializeButton);
+
 		//menu item to run the program, when pressed makes a new thread and runs the program till the lastInstruction is found
 		JMenuItem runItem = new JMenuItem("Run");
 		runItem.addActionListener(
@@ -177,7 +181,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 								vm252.runNextInstruction();
 							}
 
-
 						}
 					};
 					//initialize a thread and run it
@@ -205,6 +208,11 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 				}
 				);
 		runMenu.add(pauseItem);
+		reinitializeButton.addActionListener(
+				actionEvent -> {
+					vm252.reinitialize();
+				}
+		);
 	}
 
 	@Override

@@ -229,11 +229,10 @@ public class VirtualMachine252 extends BasicObservable {
 	//     O(1)
 	//
 	public void loadFile(String objectFileName) {
-		this.accumulator = 0;
-		this.programCounter = 0;
-		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
-		this.lastInstructionCausedHalt = false;
-		this.suppressPcIncrement = false;
+		reinitialize();
+//		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
+		// Fill memory with default 0 values
+		Arrays.fill(this.memory, (byte) 0x0);
 
 		byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
 		if (program != null) {
@@ -244,6 +243,35 @@ public class VirtualMachine252 extends BasicObservable {
 			// Copy the program bytes into memory
 			System.arraycopy(program, 0, memory, 0, program.length);
 		}
+		announceChange();
+	}
+
+	//
+	// Public Instance Method Void reinitialize()
+	//
+	// Purpose:
+	//     Reset fields to their initial values
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void reinitialize() {
+		this.accumulator = 0;
+		this.programCounter = 0;
+		this.lastInstructionCausedHalt = false;
+		this.suppressPcIncrement = false;
 		announceChange();
 	}
 
@@ -299,6 +327,56 @@ public class VirtualMachine252 extends BasicObservable {
 		announceChange();
 	}
 
+
+	//
+	// Public Instance Method Void toggleLastInstructionCausedHalt()
+	//
+	// Purpose:
+	//     Flip the value of whether the last instruction caused a halt or not
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void toggleLastInstructionCausedHalt() {
+		this.lastInstructionCausedHalt = !this.lastInstructionCausedHalt;
+	}
+
+	//
+	// Public Instance Method Void toggleSuppressPcIncrement()
+	//
+	// Purpose:
+	//     Flip the value of whether the program counter increment should be suppressed
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Void
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public void toggleSuppressPcIncrement() {
+		this.suppressPcIncrement = !this.suppressPcIncrement;
+	}
 
 	//
 	// Public Instance Method Void runNextInstruction()
