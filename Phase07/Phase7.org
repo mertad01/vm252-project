@@ -10,7 +10,7 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 
 * Progress Report
 
-This phase of the project went well. Thanks to our efforts in the previous stage of the project we already had the running, pausing, continuing, and single-step features working. We also had previously implemented a load program menu which loaded a new object-file into the vm252 memory. Having this groundwork laid already made the rest progress smoothly. Because much of the work had already been done by certain group members everyone did not have to work as much individually on this phase.
+This phase of the project went well. Thanks to our efforts in the previous stage of the project we already had the running, pausing, continuing, and single-step features working. We also had previously implemented a load program menu which loaded a new object-file into the vm252 memory. Having this groundwork laid already made the rest progress smoothly. Because much of the work had already been done most of the work done was cleaning up code after getting the final requirements fulfilled.
 
 To display the contents of memory as the program runs we used a JTable. JTables have TableModels which represent the data stored within them. We wrote an extended AbstractTableModel which represents our virtual machines data within the table. Each cell represents a byte of memory as a hex value converted to a string. Using the AbstractTableModel will allow us to further extend the functionality of our program by changing how the data is displayed, which will be useful for implementing future debugging commands.
 
@@ -39,11 +39,10 @@ The only serious issue encountered, and solved, was making sure the table was al
 | Total:   | ~13             |
 
 ** Kritib Bhattarai
-| Date   | Hours Worked |
-|--------+--------------|
-|        |              |
-|        |              |
-|        |              |
-|        |              |
-|--------+--------------|
-| Total: |              |
+| Date     | Hours Worked    |
+|----------+-----------------|
+| 11/19/21 | 08:00am-10:00am |
+| 11/20/21 | 12:00pm-02:00pm |
+| 11/21/21 | 08:00pm-10:00am |
+|----------+-----------------|
+| Total:   |                 |
