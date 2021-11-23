@@ -42,6 +42,6 @@ The only serious issue encountered, and solved, was making sure the table was al
 |----------+-----------------|
 | 11/19/21 | 08:00am-10:00am |
 | 11/20/21 | 12:00pm-02:00pm |
-| 11/21/21 | 08:00pm-10:00am |
+| 11/21/21 | 08:00am-10:00am |
 |----------+-----------------|
-| Total:   |                 |
+| Total:   | ~6              |
