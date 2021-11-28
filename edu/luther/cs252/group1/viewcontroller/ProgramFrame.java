@@ -56,7 +56,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         });
 
         // Use a custom table cell renderer to center the text in each column
-        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer();
+        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer(vm252);
         memoryTable.getColumnModel().getColumn(0).setCellRenderer(tableCellCenterRenderer);
         memoryTable.getColumnModel().getColumn(1).setCellRenderer(tableCellCenterRenderer);
         memoryTable.getColumnModel().getColumn(2).setCellRenderer(tableCellCenterRenderer);

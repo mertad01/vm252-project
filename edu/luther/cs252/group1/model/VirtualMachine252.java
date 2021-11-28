@@ -33,6 +33,7 @@ public class VirtualMachine252 extends BasicObservable {
 	//     O(1)
 	//
 	public VirtualMachine252() {
+		// Allow access to VM252 statically
 		this.accumulator = 0;
 		this.programCounter = 0;
 		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
@@ -64,6 +65,7 @@ public class VirtualMachine252 extends BasicObservable {
 	//     O(1)
 	//
 	public VirtualMachine252(String objectFileName) {
+		// Allow access to VM252 statically
 		this.accumulator = 0;
 		this.programCounter = 0;
 		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
