@@ -48,14 +48,18 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component currentCell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-        // If current cell being rendered matches program counter location indicate with a yello background
-        if (((row * 20) + column) == vm252.getProgramCounter()) {
-            currentCell.setBackground(Color.YELLOW);
-        } else
-            currentCell.setBackground(Color.WHITE);
+        // If current cell being rendered matches program counter location indicate with a yellow background
+        try {
+            if (((row * 20) + column) == vm252.getProgramCounter()) {
+                currentCell.setBackground(Color.YELLOW);
+            } else
+                currentCell.setBackground(Color.WHITE);
 
-        if (vm252.getBreakpoints()[((row * 20) + column)])
-            currentCell.setBackground(Color.PINK);
+            if (vm252.getBreakpoints()[((row * 20) + column)])
+                currentCell.setBackground(Color.PINK);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            // Do nothing
+        }
         return currentCell;
     }
 }
