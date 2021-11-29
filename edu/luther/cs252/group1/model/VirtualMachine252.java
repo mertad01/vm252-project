@@ -38,6 +38,10 @@ public class VirtualMachine252 extends BasicObservable {
 		this.programCounter = 0;
 		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
 
+		// Create breakpoints defaulting to false
+		this.breakpoints = new boolean[VM252Utilities.numberOfMemoryBytes];
+		Arrays.fill(this.breakpoints, false);
+
 		// Initialize each element of the memory to 0
 		Arrays.fill(this.memory, (byte) 0x0);
 
@@ -70,6 +74,10 @@ public class VirtualMachine252 extends BasicObservable {
 		this.programCounter = 0;
 		this.memory = new byte[VM252Utilities.numberOfMemoryBytes];
 
+		// Create breakpoints defaulting to false
+		this.breakpoints = new boolean[VM252Utilities.numberOfMemoryBytes];
+		Arrays.fill(this.breakpoints, false);
+
 		byte[] program = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
 		if (program != null) {
 
@@ -90,6 +98,7 @@ public class VirtualMachine252 extends BasicObservable {
 	private short accumulator;
 	private short programCounter;
 	private byte[] memory;
+	private final boolean[] breakpoints;
 
 	private boolean suppressPcIncrement;
 	private boolean lastInstructionCausedHalt;
@@ -150,6 +159,32 @@ public class VirtualMachine252 extends BasicObservable {
 	//
 	public short getAccumulator() {
 		return accumulator;
+	}
+
+
+	//
+	// Public Instance Method boolean[] getBreakpoints()
+	//
+	// Purpose:
+	//     Acquire the contents of the virtual machine's breakpoints
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Boolean array of breakpoints
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public boolean[] getBreakpoints() {
+		return breakpoints;
 	}
 
 	//

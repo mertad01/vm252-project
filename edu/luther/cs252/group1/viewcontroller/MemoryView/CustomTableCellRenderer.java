@@ -50,10 +50,12 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
 
         // If current cell being rendered matches program counter location indicate with a yello background
         if (((row * 20) + column) == vm252.getProgramCounter()) {
-            System.out.println(vm252.getMemory()[(row * 20) + column] & 0xFF);
             currentCell.setBackground(Color.YELLOW);
         } else
             currentCell.setBackground(Color.WHITE);
+
+        if (vm252.getBreakpoints()[((row * 20) + column)])
+            currentCell.setBackground(Color.PINK);
         return currentCell;
     }
 }
