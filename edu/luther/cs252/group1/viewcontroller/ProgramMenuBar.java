@@ -12,6 +12,8 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 	private final JTextField fileNameField;
 	private JTextField runDelayField;
 	private Thread threadObject;
+	private final VirtualMachine252 vm252;
+	private boolean[] breakpoints;
 
 	//
 	// Constructor
@@ -21,6 +23,9 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		//
 		// Create menu items
 		//
+		this.vm252=vm252;
+		this.breakpoints=vm252.getBreakpoints();
+
 
 		paused = new AtomicBoolean(false);
 		JMenu helpMenu = new JMenu("Help");
@@ -158,37 +163,47 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 					Runnable runnable = new Runnable() {
 						@Override
 						public void run() {
-							while (!vm252.isLastInstructionCausedHalt()) {
+							//loop until the last instruction is reached
+							while (!vm252.isLastInstructionCausedHalt()){
+								//only run the instruction if the breakpoints area false in the current instruction memory location else display there is a breakpoint
+								if (!breakpoints[vm252.getProgramCounter()]){
 
-								//if paused menu item is pressed, the thread waits until an exception occurs
-								if (paused.get()) {
-									synchronized (threadObject) {
-										// Pause
-										try {
-											threadObject.wait();
-										} catch (InterruptedException ignored) {
+									// System.out.println(breakpoints[vm252.getProgramCounter()]+ "pc is" + vm252.getProgramCounter());
+									//if paused menu item is pressed, the thread waits until an exception occurs
+									if (paused.get()) {
+										synchronized (threadObject) {
+											// Pause
+											try {
+												threadObject.wait();
+											} catch (InterruptedException ignored) {
+											}
 										}
 									}
-								}
-								//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
-								//by 1000 inorder to convert it into milliseconds.
-								//delays the program for as long as the user wants until an exception occurs
-								try {
-									long delayValue = (Long.parseLong(runDelayField.getText())) * 1000;
+									//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
+									//by 1000 inorder to convert it into milliseconds.
+									//delays the program for as long as the user wants until an exception occurs
 									try {
-										System.out.println("sleeping");
-										Thread.sleep(delayValue);
-										System.out.println("slept for " + delayValue);
-									} catch (InterruptedException ex) {
-										System.out.println("no delay inserted");
+										long delayValue = (Long.parseLong(runDelayField.getText())) * 1000;
+										try {
+											System.out.println("sleeping");
+											Thread.sleep(delayValue);
+											System.out.println("slept for " + delayValue);
+										} catch (InterruptedException ex) {
+											System.out.println("no delay inserted");
+										}
+									} catch (NumberFormatException ignored) {
 									}
-								} catch (NumberFormatException ignored) {
+
+									//runs the next instruction in the object file
+									vm252.runNextInstruction();
 								}
-
-								//runs the next instruction in the object file
-								vm252.runNextInstruction();
+								//else display where the breakpoint is and print it on the terminal
+								else{
+									JOptionPane.showMessageDialog(getRootPane(),"Breakpoint at: " + vm252.getProgramCounter());
+									System.out.println("Breakpoint at: " + vm252.getProgramCounter());
+									break;
+								}
 							}
-
 						}
 					};
 					//initialize a thread and run it

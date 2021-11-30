@@ -5,14 +5,21 @@ import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
 
+	private final VirtualMachine252 vm252;
+	private byte[] memory;
+	private boolean[] breakpoints;
     //
     // Constructor
     //
     public ProgramButtonPanel(VirtualMachine252 vm252) {
+	    this.vm252=vm252;
+	    this.memory=vm252.getMemory();
+	    this.breakpoints=vm252.getBreakpoints();
 
         //
         // We create a vertical box to contain buttons and have them displayed in blocks
@@ -20,13 +27,17 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         //
 
         Box leftControlBox = Box.createVerticalBox();
-        JButton breakpointAddButton = new JButton("ba");
+	//jlabel for breakpoint textfield
+        JLabel breakpoint = new JLabel("Breakpoint: ");
+	//buttons and textfields
+        JButton breakpointClearButton = new JButton("Clear BP");
         JButton nextInstructionButton = new JButton("N");
-
+	JTextField breakpointlocation= new JTextField(2);
         //
         // Set help tooltips
         //
-        breakpointAddButton.setToolTipText("Add a breakpoint at selected location");
+        breakpoint.setToolTipText("Add a breakpoint at selected location");
+        breakpointClearButton.setToolTipText("Clear breakpoints in all location");
         nextInstructionButton.setToolTipText("Run Next Program Instruction");
 
         //
@@ -35,9 +46,11 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         // with the help of createRigidArea as the Box filler
         //
         
-        leftControlBox.add(breakpointAddButton);
-        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(breakpoint);
+        leftControlBox.add(breakpointlocation);
+        leftControlBox.add(breakpointClearButton);
         leftControlBox.add(nextInstructionButton);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
         add(leftControlBox);
 
         // Run the next instruction when the button is pressed
@@ -48,6 +61,19 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
                     } else {
                         JOptionPane.showMessageDialog(null, "REACHED STOP OPCODE");
                     }
+                }
+        );
+	//read the memory location from breakpoint textfield and then assign true to the breakpoint boolean at that location.
+
+        breakpointlocation.addActionListener(
+                actionEvent -> {
+		breakpoints[Short.parseShort(breakpointlocation.getText())]=true;
+		});
+	//
+	//clear all the breakpoints by setting all the breakpoints boolean false
+        breakpointClearButton.addActionListener(
+                actionEvent -> {
+			Arrays.fill(breakpoints, false);
                 }
         );
     }

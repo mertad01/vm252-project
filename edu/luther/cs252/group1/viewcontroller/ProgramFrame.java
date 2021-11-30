@@ -52,7 +52,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
             TableModel model = (TableModel) tableModelEvent.getSource();
             String columnName = model.getColumnName(column);
             Object data = model.getValueAt(row, column);
-            System.out.println(columnName + "\n" + data);
+            // System.out.println(columnName + "\n" + data);
         });
 
         // Use a custom table cell renderer to center the text in each column
