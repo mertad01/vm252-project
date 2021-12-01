@@ -67,13 +67,15 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
         breakpointlocation.addActionListener(
                 actionEvent -> {
-		breakpoints[Short.parseShort(breakpointlocation.getText())]=true;
+                    breakpoints[Short.parseShort(breakpointlocation.getText())]=true;
+                    vm252.announceChange();
 		});
 	//
 	//clear all the breakpoints by setting all the breakpoints boolean false
         breakpointClearButton.addActionListener(
                 actionEvent -> {
-			Arrays.fill(breakpoints, false);
+                    Arrays.fill(breakpoints, false);
+                    vm252.announceChange();
                 }
         );
     }
