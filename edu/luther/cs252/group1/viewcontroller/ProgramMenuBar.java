@@ -12,8 +12,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 	private final JTextField fileNameField;
 	private JTextField runDelayField;
 	private Thread threadObject;
-	private final VirtualMachine252 vm252;
-	private boolean[] breakpoints;
 
 	//
 	// Constructor
@@ -23,9 +21,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		//
 		// Create menu items
 		//
-		this.vm252=vm252;
-		this.breakpoints=vm252.getBreakpoints();
-
 
 		paused = new AtomicBoolean(false);
 		JMenu helpMenu = new JMenu("Help");
@@ -75,8 +70,8 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		helpMenu.add(quick_tips);
 		helpMenu.add(command_list);
 		quick_tips.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
-					"To receive fast help for the program you can hover over a component and read the tooltip."
-					+ "Otherwise you can view the full command list for all program controls and inputs"));
+				"To receive fast help for the program you can hover over a component and read the tooltip."
+						+ "Otherwise you can view the full command list for all program controls and inputs"));
 		command_list.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
 				"""
 						n button: Run Next Program Instruction\s
@@ -118,7 +113,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
 		FileNameExtensionFilter vm252ExtensionFilter = new FileNameExtensionFilter(
 				"VM252 Object File", "vm252obj"
-				);
+		);
 		vm252FileChooser.setFileFilter(vm252ExtensionFilter);
 
 
@@ -158,52 +153,58 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 
 		//menu item to run the program, when pressed makes a new thread and runs the program till the lastInstruction is found
 		JMenuItem runItem = new JMenuItem("Run");
+		JMenuItem pauseItem = new JMenuItem("Pause");
 		runItem.addActionListener(
 				actionEvent -> {
 					Runnable runnable = new Runnable() {
 						@Override
 						public void run() {
-							//loop until the last instruction is reached
-							while (!vm252.isLastInstructionCausedHalt()){
-								//only run the instruction if the breakpoints area false in the current instruction memory location else display there is a breakpoint
-								if (!breakpoints[vm252.getProgramCounter()]){
+							while (!vm252.isLastInstructionCausedHalt()) {
 
-									// System.out.println(breakpoints[vm252.getProgramCounter()]+ "pc is" + vm252.getProgramCounter());
-									//if paused menu item is pressed, the thread waits until an exception occurs
-									if (paused.get()) {
-										synchronized (threadObject) {
-											// Pause
-											try {
-												threadObject.wait();
-											} catch (InterruptedException ignored) {
-											}
-										}
-									}
-									//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
-									//by 1000 inorder to convert it into milliseconds.
-									//delays the program for as long as the user wants until an exception occurs
-									try {
-										long delayValue = (Long.parseLong(runDelayField.getText())) * 1000;
+								//if paused menu item is pressed, the thread waits until an exception occurs
+								if (paused.get()) {
+									synchronized (threadObject) {
+										// Pause
 										try {
-											System.out.println("sleeping");
-											Thread.sleep(delayValue);
-											System.out.println("slept for " + delayValue);
-										} catch (InterruptedException ex) {
-											System.out.println("no delay inserted");
+											threadObject.wait();
+										} catch (InterruptedException ignored) {
 										}
-									} catch (NumberFormatException ignored) {
 									}
-
-									//runs the next instruction in the object file
-									vm252.runNextInstruction();
 								}
-								//else display where the breakpoint is and print it on the terminal
-								else{
-									JOptionPane.showMessageDialog(getRootPane(),"Breakpoint at: " + vm252.getProgramCounter());
-									System.out.println("Breakpoint at: " + vm252.getProgramCounter());
-									break;
+								//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
+								//by 1000 inorder to convert it into milliseconds.
+								//delays the program for as long as the user wants until an exception occurs
+								try {
+									long delayValue = (Long.parseLong(runDelayField.getText())) * 1000;
+									try {
+										System.out.println("sleeping");
+										Thread.sleep(delayValue);
+										System.out.println("slept for " + delayValue);
+									} catch (InterruptedException ex) {
+										System.out.println("no delay inserted");
+									}
+								} catch (NumberFormatException ignored) {
+								}
+
+								//runs the next instruction in the object file
+								vm252.runNextInstruction();
+								if (vm252.isPreviousInstructionHitBreakpoint()) {
+									JOptionPane.showMessageDialog(getRootPane(), "Breakpoint at: " + vm252.getProgramCounter());
+									if (!paused.get()) {
+										pauseItem.setText("Start");
+										paused.set(true);
+									} else {
+										pauseItem.setText("Pause");
+										paused.set(false);
+
+										//resumes the code once start is pressed and the thread is notified.
+										synchronized (threadObject) {
+											threadObject.notify();
+										}
+									}
 								}
 							}
+
 						}
 					};
 					//initialize a thread and run it
@@ -212,7 +213,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 				}
 		);
 		runMenu.add(runItem);
-		JMenuItem pauseItem = new JMenuItem("Pause");
 		//when pause button is pressed, it changes the name to start and sets itself true
 		pauseItem.addActionListener(
 				actionEvent -> {
@@ -229,7 +229,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 						}
 					}
 				}
-				);
+		);
 		runMenu.add(pauseItem);
 		reinitializeButton.addActionListener(
 				actionEvent -> vm252.reinitialize()

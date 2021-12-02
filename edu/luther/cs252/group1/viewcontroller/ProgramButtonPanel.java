@@ -58,8 +58,10 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
                 actionEvent -> {
                     if (!vm252.isLastInstructionCausedHalt()) {
                         vm252.runNextInstruction();
+                        if (vm252.isPreviousInstructionHitBreakpoint())
+                            JOptionPane.showMessageDialog(getRootPane(),"Breakpoint at: " + vm252.getProgramCounter());
                     } else {
-                        JOptionPane.showMessageDialog(null, "REACHED STOP OPCODE");
+                        JOptionPane.showMessageDialog(getRootPane(), "REACHED STOP OPCODE");
                     }
                 }
         );

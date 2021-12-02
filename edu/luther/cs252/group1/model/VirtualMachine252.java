@@ -213,6 +213,32 @@ public class VirtualMachine252 extends BasicObservable {
 		return lastInstructionCausedHalt;
 	}
 
+
+	//
+	// Public Instance Method boolean isPreviousInstructionHitBreakpoint()
+	//
+	// Purpose:
+	//     Determine whether the execution of the virtual machine has been halted by a breakpoint
+	//
+	// Formals:
+	//     none
+	//
+	// Pre-conditions:
+	//     none
+	//
+	// Post-conditions:
+	//     none
+	//
+	// Returns:
+	//     Boolean value representing whether the previous instruction attempted to be executed was broken point
+	//
+	// Worst-case asymptotic runtime:
+	//     O(1)
+	//
+	public boolean isPreviousInstructionHitBreakpoint() {
+		return previousInstructionHitBreakpoint;
+	}
+
 	//
 	// Public Instance Method byte[] getMemory()
 	//
@@ -411,13 +437,6 @@ public class VirtualMachine252 extends BasicObservable {
 		suppressPcIncrement = false;
 		lastInstructionCausedHalt = false;
 
-		// Store the previous breakpoint program counter to later reinstate the breakpoints
-		short breakpointProgramCounter = programCounter;
-		if (previousInstructionHitBreakpoint) {
-			//
-		}
-
-
 		//
 		// Simulate execution of a VM252 instruction represented by opcode
 		//     (and for instructions that have an operand, operand), altering
@@ -427,10 +446,10 @@ public class VirtualMachine252 extends BasicObservable {
 		//     instruction was executed
 		//
 
-		if (breakpoints[programCounter] && !previousInstructionHitBreakpoint) {
-			JOptionPane.showMessageDialog(null,"Breakpoint at: " + programCounter);
+		// Trigger breakpoint message if reached
+		if (breakpoints[programCounter] && !previousInstructionHitBreakpoint)
 			previousInstructionHitBreakpoint = true;
-		} else {
+		else {
 			switch (opcode) {
 
 				case VM252Utilities.LOAD_OPCODE -> accumulator = VM252Utilities.fetchIntegerValue(memory, operand);
