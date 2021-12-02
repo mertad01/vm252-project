@@ -26,10 +26,6 @@ Some difficulties faced were related to the breakpoints. Currently we have users
 |--------+---------------|
 |11/29/21|01:30pm-04:00pm|
 |11/30/21|10:30pm-11:30pm|
-|        |               |
-|        |               |
-|        |               |
-|        |               |
 |--------+---------------|
 | Total: |3.5 hours      |
 
