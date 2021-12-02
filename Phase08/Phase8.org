@@ -43,11 +43,11 @@ Some difficulties faced were related to the breakpoints. Currently we have users
 ** Kritib Bhattarai
 | Date   | Hours Worked |
 |--------+--------------|
-|        |              |
-|        |              |
+|11/29/21|2pm-4pm       |
+|11/30/21|10am-1pm      |
 |        |              |
 |        |              |
 |        |              |
 |        |              |
 |--------+--------------|
-| Total: |              |
+| Total: |5 hours       |
