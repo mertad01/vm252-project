@@ -102,6 +102,7 @@ public class VirtualMachine252 extends BasicObservable {
 
 	private boolean suppressPcIncrement;
 	private boolean lastInstructionCausedHalt;
+	private boolean previousInstructionHitBreakpoint;
 
 	private int input_data = 0;
 
@@ -410,6 +411,13 @@ public class VirtualMachine252 extends BasicObservable {
 		suppressPcIncrement = false;
 		lastInstructionCausedHalt = false;
 
+		// Store the previous breakpoint program counter to later reinstate the breakpoints
+		short breakpointProgramCounter = programCounter;
+		if (previousInstructionHitBreakpoint) {
+			//
+		}
+
+
 		//
 		// Simulate execution of a VM252 instruction represented by opcode
 		//     (and for instructions that have an operand, operand), altering
@@ -419,96 +427,100 @@ public class VirtualMachine252 extends BasicObservable {
 		//     instruction was executed
 		//
 
-		switch (opcode) {
+		if (breakpoints[programCounter] && !previousInstructionHitBreakpoint) {
+			JOptionPane.showMessageDialog(null,"Breakpoint at: " + programCounter);
+			previousInstructionHitBreakpoint = true;
+		} else {
+			switch (opcode) {
 
-			case VM252Utilities.LOAD_OPCODE -> accumulator = VM252Utilities.fetchIntegerValue(memory, operand);
+				case VM252Utilities.LOAD_OPCODE -> accumulator = VM252Utilities.fetchIntegerValue(memory, operand);
 
-			case VM252Utilities.SET_OPCODE -> accumulator = operand;
+				case VM252Utilities.SET_OPCODE -> accumulator = operand;
 
-			case VM252Utilities.STORE_OPCODE -> VM252Utilities.storeIntegerValue(memory, operand, accumulator);
+				case VM252Utilities.STORE_OPCODE -> VM252Utilities.storeIntegerValue(memory, operand, accumulator);
 
-			case VM252Utilities.ADD_OPCODE -> accumulator += VM252Utilities.fetchIntegerValue(memory, operand);
+				case VM252Utilities.ADD_OPCODE -> accumulator += VM252Utilities.fetchIntegerValue(memory, operand);
 
-			case VM252Utilities.SUBTRACT_OPCODE -> accumulator -= VM252Utilities.fetchIntegerValue(memory, operand);
+				case VM252Utilities.SUBTRACT_OPCODE -> accumulator -= VM252Utilities.fetchIntegerValue(memory, operand);
 
-			case VM252Utilities.JUMP_OPCODE -> {
+				case VM252Utilities.JUMP_OPCODE -> {
 
-				programCounter = operand;
-				suppressPcIncrement = true;
-
-			}
-
-			case VM252Utilities.JUMP_ON_ZERO_OPCODE -> {
-
-				if (accumulator == 0) {
 					programCounter = operand;
 					suppressPcIncrement = true;
+
 				}
 
-			}
+				case VM252Utilities.JUMP_ON_ZERO_OPCODE -> {
 
-			case VM252Utilities.JUMP_ON_POSITIVE_OPCODE -> {
-
-				if (accumulator > 0) {
-					programCounter = operand;
-					suppressPcIncrement = true;
-				}
-
-			}
-
-			case VM252Utilities.INPUT_OPCODE -> {
-
-
-				//
-				// loops until a valid integer is passed. 
-				//
-
-
-				//initialize a input joptionpane to get user input and then check if it can be parsed as an integer.
-				String input_integer = JOptionPane.showInputDialog("INPUT: ");
-				while (true) {
-					try {
-						input_data = Integer.parseInt(input_integer);
-						break;
-					} catch (NumberFormatException e) {
-
-						input_integer = JOptionPane.showInputDialog("Enter Valid Integer: ");
+					if (accumulator == 0) {
+						programCounter = operand;
+						suppressPcIncrement = true;
 					}
-				}
-				//modification required, if lastInstruction is not true then store the input value in accumulator,else show the end of the program 
-				lastInstructionCausedHalt = false;
-
-				//
-				// Issue an error message if no input was available
-				//
-
-				if (lastInstructionCausedHalt) {
-
-					JOptionPane.showMessageDialog(null, "End of file reading input: ");
 
 				}
 
-				//
-				// Otherwise, let accumulator = the next integer read
-				//     from the standard input stream
-				//
+				case VM252Utilities.JUMP_ON_POSITIVE_OPCODE -> {
 
-				else
-					accumulator = (short) input_data;
+					if (accumulator > 0) {
+						programCounter = operand;
+						suppressPcIncrement = true;
+					}
+
+				}
+
+				case VM252Utilities.INPUT_OPCODE -> {
+
+
+					//
+					// loops until a valid integer is passed.
+					//
+
+
+					//initialize a input joptionpane to get user input and then check if it can be parsed as an integer.
+					String input_integer = JOptionPane.showInputDialog("INPUT: ");
+					while (true) {
+						try {
+							input_data = Integer.parseInt(input_integer);
+							break;
+						} catch (NumberFormatException e) {
+
+							input_integer = JOptionPane.showInputDialog("Enter Valid Integer: ");
+						}
+					}
+					//modification required, if lastInstruction is not true then store the input value in accumulator,else show the end of the program
+					lastInstructionCausedHalt = false;
+
+					//
+					// Issue an error message if no input was available
+					//
+
+					if (lastInstructionCausedHalt) {
+
+						JOptionPane.showMessageDialog(null, "End of file reading input: ");
+
+					}
+
+					//
+					// Otherwise, let accumulator = the next integer read
+					//     from the standard input stream
+					//
+
+					else
+						accumulator = (short) input_data;
+
+				}
+				//display the output in message dialogbox of joptionpane
+				case VM252Utilities.OUTPUT_OPCODE -> JOptionPane.showMessageDialog(null, "OUTPUT: " + accumulator);
+
+				case VM252Utilities.NO_OP_OPCODE -> {
+
+					// do nothing
+
+				}
+
+				case VM252Utilities.STOP_OPCODE -> lastInstructionCausedHalt = true;
 
 			}
-			//display the output in message dialogbox of joptionpane
-			case VM252Utilities.OUTPUT_OPCODE -> JOptionPane.showMessageDialog(null, "OUTPUT: " + accumulator);
-
-													  case VM252Utilities.NO_OP_OPCODE -> {
-
-														  // do nothing
-
-													  }
-
-													  case VM252Utilities.STOP_OPCODE -> lastInstructionCausedHalt = true;
-
-		}
 
 		//
 		// Increment the program counter to contain the address of the next
@@ -516,13 +528,15 @@ public class VirtualMachine252 extends BasicObservable {
 		//     adjusted or the program is not continuing
 		//
 
-		if (!lastInstructionCausedHalt && !suppressPcIncrement)
+			if (!lastInstructionCausedHalt && !suppressPcIncrement)
 
-			programCounter
-				= ((short)
+				programCounter
+						= ((short)
 						((programCounter + VM252Utilities.instructionSize(opcode))
-						 % VM252Utilities.numberOfMemoryBytes)
-				  );
+								% VM252Utilities.numberOfMemoryBytes)
+				);
+			previousInstructionHitBreakpoint = false;
+		}
 
 		announceChange();
 	}
