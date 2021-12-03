@@ -6,7 +6,6 @@ import edu.luther.cs252.group1.viewcontroller.MemoryView.CustomTableCellRenderer
 import edu.luther.cs252.group1.viewcontroller.MemoryView.VirtualMachineTableModel;
 
 import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.*;
 
 public class ProgramFrame extends JFrame implements BasicObserver {
@@ -40,44 +39,16 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 //        programInputPanel = new ProgramInputPanel(vm252); // no longer used
 
         // Table model which allows the table to represent the VirtualMachine252
-        vm252TableModel = new VirtualMachineTableModel(vm252);
+        vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
         // Create new JTable using VirtualMachineTableModel as the model
+
         JTable memoryTable = new JTable(
                 vm252TableModel
         );
-        // Add a listener. Not in use but can be used to help debug table model issues
-        memoryTable.getModel().addTableModelListener(tableModelEvent -> {
-            int row = tableModelEvent.getFirstRow();
-            int column = tableModelEvent.getColumn();
-            TableModel model = (TableModel) tableModelEvent.getSource();
-            String columnName = model.getColumnName(column);
-            Object data = model.getValueAt(row, column);
-            // System.out.println(columnName + "\n" + data);
-        });
 
-        // Use a custom table cell renderer to center the text in each column
-        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer(vm252);
-        memoryTable.getColumnModel().getColumn(0).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(1).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(2).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(3).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(4).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(5).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(6).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(7).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(8).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(9).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(10).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(11).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(12).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(13).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(14).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(15).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(16).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(17).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(18).setCellRenderer(tableCellCenterRenderer);
-        memoryTable.getColumnModel().getColumn(19).setCellRenderer(tableCellCenterRenderer);
-
+        // Use a custom table cell renderer to center the text in each column by default
+        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer(vm252, vm252TableModel);
+        memoryTable.setDefaultRenderer(memoryTable.getColumnClass(0), tableCellCenterRenderer);
 
         //
         // Attach observers to check for changes
