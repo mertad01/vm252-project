@@ -1,0 +1,47 @@
+#+TITLE: Group 1: Phase 9
+
+* Repository Information
+
+Below you will find our repository URL, hosted on GitHub, as well as the revision number and date of our final commit for this phase of the project.
+
+| URL      | https://github.com/mertad01/vm252-project |
+| Revision |                                           |
+| Date     |                                           |
+
+* Progress Report
+
+
+* Work Log
+** Michael Musa
+| Date   | Hours Worked |
+|--------+--------------|
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|--------+--------------|
+| Total: |              |
+
+** Adam Mertzenich
+| Date   | Hours Worked |
+|--------+--------------|
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|--------+--------------|
+| Total: |              |
+
+** Kritib Bhattarai
+| Date   | Hours Worked |
+|--------+--------------|
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|        |              |
+|--------+--------------|
+| Total: |              |
