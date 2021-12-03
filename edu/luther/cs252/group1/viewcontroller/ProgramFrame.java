@@ -36,7 +36,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         ProgramMenuBar programMenuBar = new ProgramMenuBar(vm252);
         ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
         ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
-//        programInputPanel = new ProgramInputPanel(vm252); // no longer used
 
         // Table model which allows the table to represent the VirtualMachine252
         vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
@@ -56,7 +55,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         vm252.attach(programMenuBar);
         vm252.attach(programButtonPanel);
         vm252.attach(programStatePanel);
-//        vm252.attach(programInputPanel); // no longer used
         vm252.attach(this);
 
         // Make the memory scrollable
@@ -70,7 +68,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
-        //getContentPane().add(BorderLayout.SOUTH, programInputPanel); // no longer used
     }
 
     @Override
