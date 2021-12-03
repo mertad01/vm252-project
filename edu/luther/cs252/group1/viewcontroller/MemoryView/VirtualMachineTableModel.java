@@ -7,8 +7,20 @@ import javax.swing.table.AbstractTableModel;
 
 public class VirtualMachineTableModel extends AbstractTableModel{
 
-    VirtualMachine252 vm252;
-    byte[] memory;
+    private final VirtualMachine252 vm252;
+    private final byte[] memory;
+
+    // Row and Column counts for the table model
+    private int rowCount;
+    private int columnCount;
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
 
     //
     // Constructor
@@ -35,9 +47,11 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    public VirtualMachineTableModel(VirtualMachine252 vm252) {
+    public VirtualMachineTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
         this.vm252 = vm252;
         this.memory = vm252.getMemory();
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
     }
 
 
@@ -84,7 +98,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     //     none
     //
     // Returns:
-    //     410
+    //     rowCount
     //
     // Worst-case asymptotic runtime:
     //     O(1)
@@ -92,7 +106,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     @Override
     public int getRowCount() {
         // Standard number of rows for vm252 memory to fill
-        return 410;
+        return rowCount;
     }
 
     //
@@ -111,7 +125,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     //     none
     //
     // Returns:
-    //     20
+    //     columnCount
     //
     // Worst-case asymptotic runtime:
     //     O(1)
@@ -119,7 +133,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     @Override
     public int getColumnCount() {
         // Standard number of columns for vm252 memory to fill
-        return 20;
+        return columnCount;
     }
 
     //
@@ -149,7 +163,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             // Display hex string representation of appropriate memory address
-            String outputHexString = intToHexString(memory[(rowIndex * 20) + columnIndex] & 0xFF);
+            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
             // Return the output string if length is less than one, pad with a zero otherwise
             if (outputHexString.length() > 1)
                 return outputHexString;
@@ -188,7 +202,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         // Location of the cell within the vm252 memory
-        short address = (short) ((rowIndex * 20) + columnIndex);
+        short address = (short) ((rowIndex * columnCount) + columnIndex);
         // aValue string as an integer
         int dataValue = hexStringToInteger((String) aValue);
 
@@ -275,4 +289,5 @@ public class VirtualMachineTableModel extends AbstractTableModel{
 
         return resultInteger;
     }
+
 }
