@@ -32,7 +32,9 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 	//buttons and textfields
         JButton breakpointClearButton = new JButton("Clear BP");
         JButton nextInstructionButton = new JButton("N");
-	JTextField breakpointlocation= new JTextField(2);
+	    JTextField breakpointlocation= new JTextField(2);
+        JButton newTable = new JButton("New Table");
+
         //
         // Set help tooltips
         //
@@ -51,7 +53,15 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         leftControlBox.add(breakpointClearButton);
         leftControlBox.add(nextInstructionButton);
         leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(newTable);
         add(leftControlBox);
+
+        newTable.addActionListener(actionEvent -> {
+            // do work
+            System.out.println(Arrays.toString(getRootPane().getContentPane().getComponents()));
+            System.out.println(getRootPane().getContentPane().getComponents()[1]);
+            getRootPane().updateUI();
+        });
 
         // Run the next instruction when the button is pressed
         nextInstructionButton.addActionListener(

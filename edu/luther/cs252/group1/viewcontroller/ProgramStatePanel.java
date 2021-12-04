@@ -14,7 +14,7 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
     private final JTextField programCounterField;
     private final JTextField accumulatorField;
-    private final JTextField nextInstructionField;
+    private final JLabel nextInstructionLabel;
 
     //
     // Constructor
@@ -30,14 +30,14 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
         programCounterField = new JTextField(4);
         accumulatorField = new JTextField(4);
-        nextInstructionField = new JTextField(4);
+        nextInstructionLabel = new JLabel(vm252.getNextInstruction());
 
         //
         // Set help tooltips
         //
         programCounterField.setToolTipText("View or edit the program counter");
         accumulatorField.setToolTipText("View or edit the accumulator");
-        nextInstructionField.setToolTipText("View the next instruction that will be ran");
+        nextInstructionLabel.setToolTipText("View the next instruction that will be ran");
 
         //
         // Add menus and fields to the machine state box
@@ -47,7 +47,7 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         machineStateBox.add(accumulatorMenu);
         machineStateBox.add(accumulatorField);
         machineStateBox.add(nextInstructionMenu);
-        machineStateBox.add(nextInstructionField);
+        machineStateBox.add(nextInstructionLabel);
 
         //
         // Initialize all machine states to 0 for visualization
@@ -56,7 +56,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         programCounterField.setText("0");
         accumulatorField.setText("0");
         // TODO: update and display the next instruction (for the "s" command)
-        nextInstructionField.setText("INPUT");
 
         // Add the machine state box to the panel
         add(machineStateBox);
@@ -86,6 +85,7 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         // Update the programCounter and accumulator whenever the model changes
         programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
         accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
-        nextInstructionField.setText("todo");
+        nextInstructionLabel.setText(vm252.getNextInstruction());
+
     }
 }
