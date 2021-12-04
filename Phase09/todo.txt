@@ -1,6 +1,5 @@
 "Especially Desired" Features:
 - ~bl~ command (set a breakpoint at source-line number)
-- ~mi~ command (display machine memory as instructions, data, and labels)
 - ~oi~ command (display the portion of machine memory holding object code as instructions, data, and labels)
 
 Extra:
