@@ -11,6 +11,7 @@ import java.awt.*;
 public class ProgramFrame extends JFrame implements BasicObserver {
 
     private final VirtualMachineTableModel vm252TableModel;
+    private final VirtualMachineTableModel vm252MachineInstructionsModel;
 
     //
     // Constructor
@@ -39,15 +40,27 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 
         // Table model which allows the table to represent the VirtualMachine252
         vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
-        // Create new JTable using VirtualMachineTableModel as the model
+        // Table model representing VirtualMachine252 as instructions, data, and labels (=MI= command)
+        vm252MachineInstructionsModel = new VirtualMachineTableModel(vm252, 8192, 1);
 
+        // Create new JTable using VirtualMachineTableModel as the model
         JTable memoryTable = new JTable(
                 vm252TableModel
+        );
+        JTable machineInstructionMemoryTable = new JTable(
+                vm252MachineInstructionsModel
         );
 
         // Use a custom table cell renderer to center the text in each column by default
         CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer(vm252, vm252TableModel);
         memoryTable.setDefaultRenderer(memoryTable.getColumnClass(0), tableCellCenterRenderer);
+
+        CustomTableCellRenderer machineInstructionMemoryRenderer = new CustomTableCellRenderer(vm252, vm252MachineInstructionsModel);
+        machineInstructionMemoryTable.setDefaultRenderer(machineInstructionMemoryTable.getColumnClass(0), machineInstructionMemoryRenderer);
+
+        // Make the memory scrollable
+        JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
+        JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
 
         //
         // Attach observers to check for changes
@@ -57,22 +70,27 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         vm252.attach(programStatePanel);
         vm252.attach(this);
 
-        // Make the memory scrollable
-        JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
-
         //
         // Utilizing BorderLayout to position elements across the debugger GUI
         //
 
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
-        getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
+//        getContentPane().add(BorderLayout.CENTER, scrollableMemoryPane);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
+
+        // EXAMPLE
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        tabbedPane.addTab("MB", scrollableMemoryPane);
+        tabbedPane.addTab("MI", scrollableMachineInstructionMemoryPane);
+        getContentPane().add(BorderLayout.CENTER, tabbedPane);
     }
 
     @Override
     public void update() {
         // Keep the vm252TableModel up-to-date when the data changes
         vm252TableModel.fireTableDataChanged();
+        vm252MachineInstructionsModel.fireTableDataChanged();
     }
 }
