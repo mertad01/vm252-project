@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class VM252Utilities
@@ -26,6 +31,8 @@ public class VM252Utilities
     public static final int numberOfMemoryBytes = 8192;
     //endregion
 
+    // Memory Labels related to their location in memory
+    public static HashMap<Integer, ArrayList<Character>> memoryLabels = new HashMap<>();
 
     //region Public Class Methods
 
@@ -238,6 +245,23 @@ public class VM252Utilities
                 throw new IOException();
 
             objectFile.close();
+
+            // HashMap containing memory addresses as keys and a byte array with it's name as a value
+            HashMap<Integer, ArrayList<Character>> memoryAddressLabelsMap = new HashMap<>();
+            // Add the labels to a map using memory location as a key
+            ArrayList<Character> labelNameArray = new ArrayList<>();
+            for (int i = 0; i < symbolicAddressInformation.length; ++i) {
+                if (symbolicAddressInformation[i] == 0) {
+                    int tester = ((symbolicAddressInformation[i+1] << 24) | (symbolicAddressInformation[i+2] << 16) | (symbolicAddressInformation[i+3] << 8) | (symbolicAddressInformation[i+4]));
+                    memoryAddressLabelsMap.put(tester, (ArrayList<Character>) labelNameArray.clone());
+                    labelNameArray.clear();
+                    i += 4;
+                } else {
+                    labelNameArray.add((char) symbolicAddressInformation[i]);
+                }
+            }
+
+            memoryLabels = memoryAddressLabelsMap;
 
         } catch (FileNotFoundException exception) {
 
