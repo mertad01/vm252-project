@@ -50,9 +50,11 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         
         leftControlBox.add(breakpoint);
         leftControlBox.add(breakpointlocation);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(breakpointClearButton);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(nextInstructionButton);
-        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(newTable);
         add(leftControlBox);
 
