@@ -14,7 +14,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
     private final JTextField programCounterField;
     private final JTextField accumulatorField;
-    private final JLabel nextInstructionLabel;
 
     //
     // Constructor
@@ -26,18 +25,15 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
         JMenu programCounterMenu = new JMenu("PC: ");
         JMenu accumulatorMenu = new JMenu("ACC: ");
-        JMenu nextInstructionMenu = new JMenu("Next: ");
 
         programCounterField = new JTextField(4);
         accumulatorField = new JTextField(4);
-        nextInstructionLabel = new JLabel(vm252.getNextInstruction());
 
         //
         // Set help tooltips
         //
         programCounterField.setToolTipText("View or edit the program counter");
         accumulatorField.setToolTipText("View or edit the accumulator");
-        nextInstructionLabel.setToolTipText("View the next instruction that will be ran");
 
         //
         // Add menus and fields to the machine state box
@@ -46,8 +42,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         machineStateBox.add(programCounterField);
         machineStateBox.add(accumulatorMenu);
         machineStateBox.add(accumulatorField);
-        machineStateBox.add(nextInstructionMenu);
-        machineStateBox.add(nextInstructionLabel);
 
         //
         // Initialize all machine states to 0 for visualization
@@ -85,7 +79,6 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
         // Update the programCounter and accumulator whenever the model changes
         programCounterField.setText(String.valueOf(vm252.getProgramCounter()));
         accumulatorField.setText(String.valueOf(vm252.getAccumulator()));
-        nextInstructionLabel.setText(vm252.getNextInstruction());
 
     }
 }
