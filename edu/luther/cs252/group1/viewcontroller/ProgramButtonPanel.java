@@ -66,6 +66,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         });
 
         // Run the next instruction when the button is pressed
+	    
         nextInstructionButton.addActionListener(
                 actionEvent -> {
                     if (!vm252.isLastInstructionCausedHalt()) {
@@ -77,6 +78,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
                     }
                 }
         );
+	    
 	//read the memory location from breakpoint textfield and then assign true to the breakpoint boolean at that location.
 
         breakpointlocation.addActionListener(
@@ -86,6 +88,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 		});
 	//
 	//clear all the breakpoints by setting all the breakpoints boolean false
+	    
         breakpointClearButton.addActionListener(
                 actionEvent -> {
                     Arrays.fill(breakpoints, false);
