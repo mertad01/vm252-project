@@ -30,6 +30,7 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
 
         add(nextInstructionMenu);
         add(nextInstructionLabel);
+
     }
 
     @Override
