@@ -365,12 +365,14 @@ public class ProgramFrame extends JFrame implements BasicObserver {
                 getContentPane().add(BorderLayout.WEST, programButtonPanel);
                 getContentPane().add(BorderLayout.EAST, programStatePanel);
                 getContentPane().add(BorderLayout.SOUTH, programInputPanel);
+                
 
                 // EXAMPLE
                 JTabbedPane tabbedPane = new JTabbedPane();
 
                 tabbedPane.addTab("MB", scrollableMemoryPane);
                 tabbedPane.addTab("MI", scrollableMachineInstructionMemoryPane);
+                getContentPane().setBackground(Color.darkGray);
                 getContentPane().add(BorderLayout.CENTER, tabbedPane);
         }
 
