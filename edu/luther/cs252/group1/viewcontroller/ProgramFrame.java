@@ -321,9 +321,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
                 ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
                 ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
                 ProgramInputPanel programInputPanel = new ProgramInputPanel(vm252);
-                
-                programButtonPanel.setBackground(Color.white);
-                programStatePanel.setBackground(Color.white);
 
                 // Table model which allows the table to represent the VirtualMachine252
                 vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
