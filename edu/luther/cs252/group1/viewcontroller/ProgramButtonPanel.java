@@ -27,13 +27,22 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         //
 
         Box leftControlBox = Box.createVerticalBox();
-	//jlabel for breakpoint textfield
+        // jlabel for breakpoint textfield
         JLabel breakpoint = new JLabel("Breakpoint: ");
-	//buttons and textfields
-        JButton breakpointClearButton = new JButton("Clear BP");
-        JButton nextInstructionButton = new JButton("N");
-	    JTextField breakpointlocation= new JTextField(2);
+        // buttons and textfields
+        JButton breakpointClearButton = new JButton(" Clear BP  ");
+        JButton nextInstructionButton = new JButton("       N         ");
+        JTextField breakpointlocation = new JTextField(2);
         JButton newTable = new JButton("New Table");
+
+        //
+        // Set custom button sizes for consistency and better visual appearance
+        //
+
+        breakpoint.setPreferredSize(new Dimension(85, 20));
+        breakpointClearButton.setPreferredSize(new Dimension(85, 20));
+        nextInstructionButton.setPreferredSize(new Dimension(85, 20));
+        newTable.setPreferredSize(new Dimension(85, 20));
 
         //
         // Set help tooltips
