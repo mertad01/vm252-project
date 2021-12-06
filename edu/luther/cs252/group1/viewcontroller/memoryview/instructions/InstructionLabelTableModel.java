@@ -1,11 +1,10 @@
-package edu.luther.cs252.group1.viewcontroller.MemoryView;
+package edu.luther.cs252.group1.viewcontroller.memoryview.instructions;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
-import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import javax.swing.table.AbstractTableModel;
 
-public class VirtualMachineTableModel extends AbstractTableModel{
+public class InstructionLabelTableModel extends AbstractTableModel{
 
     protected final VirtualMachine252 vm252;
     protected final byte[] memory;
@@ -39,7 +38,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    public VirtualMachineTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
+    public InstructionLabelTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
         this.vm252 = vm252;
         this.memory = vm252.getMemory();
         this.rowCount = rowCount;
@@ -71,8 +70,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         // Only allow editing of cells which contain vm252 memory
-        // FIXME: calculate values programmatically
-        return rowIndex != 409 || columnIndex < 12;
+        return false;
     }
 
     //
@@ -156,7 +154,8 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             // Display hex string representation of appropriate memory address
-            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
+//            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
+            String outputHexString = vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex));
             // Return the output string if length is less than one, pad with a zero otherwise
             if (outputHexString.length() > 1)
                 return outputHexString;

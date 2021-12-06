@@ -1,4 +1,4 @@
-package edu.luther.cs252.group1.viewcontroller.MemoryView;
+package edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte;
 
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
