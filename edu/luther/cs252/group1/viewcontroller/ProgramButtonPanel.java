@@ -36,12 +36,11 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         JButton newTable = new JButton("New Table");
 	
 	//
-        // Set clear-breakpoint colour to red for high-visibility
+        // Set clear-breakpoint text colour to red for high-visibility
         // Set new-table button to green for aesthetics
         //
 
-        breakpointClearButton.setBackground(Color.RED);
-        breakpointClearButton.setForeground(Color.WHITE);
+        breakpointClearButton.setForeground(Color.RED);
         breakpointClearButton.setOpaque(true);
 
         newTable.setBackground(Color.GREEN);
