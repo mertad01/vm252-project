@@ -5,7 +5,7 @@ import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import javax.swing.table.AbstractTableModel;
 
-public class VirtualMachineTableModel extends AbstractTableModel{
+public class TwoByteHexTableModel extends AbstractTableModel{
 
     protected final VirtualMachine252 vm252;
     protected final byte[] memory;
@@ -39,7 +39,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    public VirtualMachineTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
+    public TwoByteHexTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
         this.vm252 = vm252;
         this.memory = vm252.getMemory();
         this.rowCount = rowCount;
