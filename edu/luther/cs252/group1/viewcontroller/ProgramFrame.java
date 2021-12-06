@@ -3,6 +3,8 @@ package edu.luther.cs252.group1.viewcontroller;
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 import edu.luther.cs252.group1.viewcontroller.MemoryView.CustomTableCellRenderer;
+import edu.luther.cs252.group1.viewcontroller.MemoryView.TwoByteHexCellRenderer;
+import edu.luther.cs252.group1.viewcontroller.MemoryView.TwoByteHexTableModel;
 import edu.luther.cs252.group1.viewcontroller.MemoryView.VirtualMachineTableModel;
 
 import javax.swing.*;
@@ -12,6 +14,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 
     private final VirtualMachineTableModel vm252TableModel;
     private final VirtualMachineTableModel vm252MachineInstructionsModel;
+    private final TwoByteHexTableModel vm252TwoByteHexTableModel;
 
     //
     // Constructor
@@ -38,10 +41,12 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
         ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
 
-        // Table model which allows the table to represent the VirtualMachine252
+        // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
         vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
         // Table model representing VirtualMachine252 as instructions, data, and labels (=MI= command)
         vm252MachineInstructionsModel = new VirtualMachineTableModel(vm252, 8192, 1);
+        // Table model displaying the portion of machine memory holding object code as 2-byte data in hex (=OD= & =MD= command)
+        vm252TwoByteHexTableModel = new TwoByteHexTableModel(vm252, 410, 10);
 
         // Create new JTable using VirtualMachineTableModel as the model
         JTable memoryTable = new JTable(
@@ -49,6 +54,9 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         );
         JTable machineInstructionMemoryTable = new JTable(
                 vm252MachineInstructionsModel
+        );
+        JTable twoByteHexMemoryTable = new JTable(
+                vm252TwoByteHexTableModel
         );
 
         // Use a custom table cell renderer to center the text in each column by default
@@ -58,9 +66,13 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         CustomTableCellRenderer machineInstructionMemoryRenderer = new CustomTableCellRenderer(vm252, vm252MachineInstructionsModel);
         machineInstructionMemoryTable.setDefaultRenderer(machineInstructionMemoryTable.getColumnClass(0), machineInstructionMemoryRenderer);
 
+        TwoByteHexCellRenderer twoByteHexMemoryRenderer = new TwoByteHexCellRenderer(vm252, vm252TwoByteHexTableModel);
+        twoByteHexMemoryTable.setDefaultRenderer(twoByteHexMemoryTable.getColumnClass(0), twoByteHexMemoryRenderer);
+
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
         JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
+        JScrollPane scrollableTwoByteHexMemoryPane = new JScrollPane(twoByteHexMemoryTable);
 
         //
         // Attach observers to check for changes
@@ -80,8 +92,9 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 
         // Use tabbed pane for different memory views
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("MB", scrollableMemoryPane);
-        tabbedPane.addTab("MI", scrollableMachineInstructionMemoryPane);
+        tabbedPane.addTab("MB/OB", scrollableMemoryPane);
+        tabbedPane.addTab("MI/OI", scrollableMachineInstructionMemoryPane); //FIXME
+        tabbedPane.addTab("MD/OD", scrollableTwoByteHexMemoryPane);
         getContentPane().add(BorderLayout.CENTER, tabbedPane);
     }
 
@@ -90,5 +103,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         // Keep the vm252TableModel up-to-date when the data changes
         vm252TableModel.fireTableDataChanged();
         vm252MachineInstructionsModel.fireTableDataChanged();
+        vm252TwoByteHexTableModel.fireTableDataChanged();
     }
 }

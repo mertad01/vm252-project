@@ -204,11 +204,6 @@ public class VirtualMachineTableModel extends AbstractTableModel{
             // Only update if the new value is within the range for a byte (prevent accidental truncation)
             if (dataValue < 0x100)
                 memory[address] = (byte) dataValue;
-
-            // Print the new value to the console
-            System.out.println(
-                    intToHexString(VM252Utilities.fetchBytePair(memory, address)[0] & 0xFF)
-            );
         }
         // Catch number formatting errors (such as trying to supply a signed/unsupported integer)
         catch (NumberFormatException exception) {

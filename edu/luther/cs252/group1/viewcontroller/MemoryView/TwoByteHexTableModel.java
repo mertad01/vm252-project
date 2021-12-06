@@ -4,6 +4,7 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.Arrays;
 
 public class TwoByteHexTableModel extends AbstractTableModel{
 
@@ -155,13 +156,21 @@ public class TwoByteHexTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
-            // Display hex string representation of appropriate memory address
-            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
-            // Return the output string if length is less than one, pad with a zero otherwise
-            if (outputHexString.length() > 1)
-                return outputHexString;
-            else
-                return "0" + outputHexString;
+//            byte[] bytePair = VM252Utilities.fetchBytePair(memory, (short) ((rowIndex * columnCount) + columnIndex));
+            byte[] bytePair = VM252Utilities.fetchBytePair(
+                    memory,
+                    (short) ((columnIndex * 2) + (rowIndex * 20))
+            );
+            String firstByte = intToHexString(bytePair[0] & 0xFF);
+            String secondByte = intToHexString(bytePair[1] & 0xFF);
+
+            if (firstByte.length() < 2)
+                firstByte = "0" + firstByte;
+            if (secondByte.length() < 2)
+                secondByte = "0" + secondByte;
+
+            return firstByte + secondByte;
+
         } catch(ArrayIndexOutOfBoundsException exception) {
             // Cells out of vm252 memory bounds are displayed empty
             return null;
@@ -195,20 +204,22 @@ public class TwoByteHexTableModel extends AbstractTableModel{
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         // Location of the cell within the vm252 memory
-        short address = (short) ((rowIndex * columnCount) + columnIndex);
+//        short address = (short) ((rowIndex * columnCount) + columnIndex);
+        short address = (short) ((columnIndex * 2) + (rowIndex * 20));
         // aValue string as an integer
         try {
             int dataValue = hexStringToInteger((String) aValue);
-
+            byte leftByte = (byte) ((dataValue >> 8) & 0xFF);
+            byte rightByte = (byte) (dataValue & 0xFF);
 
             // Only update if the new value is within the range for a byte (prevent accidental truncation)
-            if (dataValue < 0x100)
-                memory[address] = (byte) dataValue;
-
-            // Print the new value to the console
-            System.out.println(
-                    intToHexString(VM252Utilities.fetchBytePair(memory, address)[0] & 0xFF)
-            );
+            if (dataValue < 0x10000)
+                VM252Utilities.storeBytePair(
+                        memory,
+                        address,
+                        leftByte,
+                        rightByte
+                );
         }
         // Catch number formatting errors (such as trying to supply a signed/unsupported integer)
         catch (NumberFormatException exception) {
