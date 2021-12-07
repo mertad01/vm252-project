@@ -10,6 +10,7 @@ import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexCellR
 import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexTableModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
 public class ProgramFrame extends JFrame implements BasicObserver {

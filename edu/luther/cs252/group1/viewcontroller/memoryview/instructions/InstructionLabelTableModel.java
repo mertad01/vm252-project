@@ -1,8 +1,15 @@
 package edu.luther.cs252.group1.viewcontroller.memoryview.instructions;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
+
+import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.*;
 
 public class InstructionLabelTableModel extends AbstractTableModel{
 
@@ -152,15 +159,27 @@ public class InstructionLabelTableModel extends AbstractTableModel{
     //
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+
         try {
+            if (memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) != null) {
+//                System.out.println(memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex));
+//                System.out.println(memoryLabels);
+
+                System.out.println(
+                        Arrays.toString(fetchBytePair(memory, (short) ((rowIndex * columnCount) + columnIndex)))
+                );
+                System.out.println(vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex)));
+                return memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) + ": " + VM252Utilities.fetchIntegerValue(memory, (short) ((rowIndex * columnCount) + columnIndex));
+            }
+
             // Display hex string representation of appropriate memory address
-//            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
             String outputHexString = vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex));
             // Return the output string if length is less than one, pad with a zero otherwise
-            if (outputHexString.length() > 1)
-                return outputHexString;
-            else
-                return "0" + outputHexString;
+            if (Objects.equals(outputHexString, "UNKNOWN")) {
+                return null;
+            }
+
+            return outputHexString;
         } catch(ArrayIndexOutOfBoundsException exception) {
             // Cells out of vm252 memory bounds are displayed empty
             return null;
