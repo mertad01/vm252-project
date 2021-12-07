@@ -5,11 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class VM252Utilities
@@ -33,6 +30,7 @@ public class VM252Utilities
 
     // Memory Labels related to their location in memory
     public static HashMap<Integer, ArrayList<Character>> memoryLabels = new HashMap<>();
+    public static HashMap<Integer, String> memoryLabelHashMap = new HashMap<>();
 
     //region Public Class Methods
 
@@ -241,6 +239,7 @@ public class VM252Utilities
 
             int byteContentMapReadStatus = objectFile.read(byteContentMap);
 
+
             if (byteContentMapReadStatus == -1)
                 throw new IOException();
 
@@ -260,8 +259,19 @@ public class VM252Utilities
                     labelNameArray.add((char) symbolicAddressInformation[i]);
                 }
             }
-
             memoryLabels = memoryAddressLabelsMap;
+
+
+            memoryLabelHashMap = new HashMap<>();
+            for (int index = 0; index < byteContentMap.length ; index += 2) {
+                ArrayList<Character> memoryLabel = memoryLabels.get(index);
+                if (memoryLabel != null) {
+                    StringBuilder label = new StringBuilder();
+                    for (char labelCharacter : memoryLabel)
+                        label.append(labelCharacter);
+                    memoryLabelHashMap.put(index, label.toString());
+                }
+            }
 
         } catch (FileNotFoundException exception) {
 
@@ -272,6 +282,7 @@ public class VM252Utilities
             ; // do nothing
 
         }
+
 
         return objectCode;
 
