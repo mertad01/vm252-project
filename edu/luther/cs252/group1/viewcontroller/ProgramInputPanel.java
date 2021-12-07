@@ -20,7 +20,7 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
         //
         // Create Input/Output Menu and Text Field
         //
-        JMenu nextInstructionMenu = new JMenu("Next: ");
+        JLabel nextLabel = new JLabel("Next Instruction:️");
         nextInstructionLabel = new JLabel(vm252.getNextInstruction());
 
         //
@@ -28,7 +28,7 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
         //
         nextInstructionLabel.setToolTipText("View the next instruction that will be ran");
 
-        add(nextInstructionMenu);
+        add(nextLabel);
         add(nextInstructionLabel);
 
     }
