@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -31,6 +32,7 @@ public class VM252Utilities
     // Memory Labels related to their location in memory
     public static HashMap<Integer, ArrayList<Character>> memoryLabels = new HashMap<>();
     public static HashMap<Integer, String> memoryLabelHashMap = new HashMap<>();
+    public static HashMap<Integer, Integer> memorySourceLineHashMap = new HashMap<>();
 
     //region Public Class Methods
 
@@ -262,6 +264,7 @@ public class VM252Utilities
             memoryLabels = memoryAddressLabelsMap;
 
 
+            // Create new memory address to label hash map
             memoryLabelHashMap = new HashMap<>();
             for (int index = 0; index < byteContentMap.length ; index += 2) {
                 ArrayList<Character> memoryLabel = memoryLabels.get(index);
@@ -271,6 +274,17 @@ public class VM252Utilities
                         label.append(labelCharacter);
                     memoryLabelHashMap.put(index, label.toString());
                 }
+            }
+
+            // Create new source line to memory address hash map
+            memorySourceLineHashMap = new HashMap<>();
+            for (int index = 0; index < executableSourceLineMap.length; ++index) {
+                int lineNumber = (executableSourceLineMap[index] << 24) | (executableSourceLineMap[index+1] << 16) | (executableSourceLineMap[index+2] << 8) | (executableSourceLineMap[index+3]) & 0xFF;
+                int memoryAddress = (executableSourceLineMap[index+4] << 24) | (executableSourceLineMap[index+5] << 16) | (executableSourceLineMap[index+6] << 8) | (executableSourceLineMap[index+7]) & 0xFF;
+                memorySourceLineHashMap.put(lineNumber, memoryAddress);
+                // TODO: Add input panel for adding breakpoints using line number
+
+                index += 7;
             }
 
         } catch (FileNotFoundException exception) {

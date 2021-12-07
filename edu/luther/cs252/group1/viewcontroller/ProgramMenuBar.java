@@ -121,7 +121,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		fileMenuItem.addActionListener(
 				actionEvent -> {
 					int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
-					System.out.println(returnVal);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						String file_name = vm252FileChooser.getSelectedFile().toString();
 
