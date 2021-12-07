@@ -191,7 +191,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 								if (vm252.isPreviousInstructionHitBreakpoint()) {
 									JOptionPane.showMessageDialog(getRootPane(), "Breakpoint at: " + vm252.getProgramCounter());
 									if (!paused.get()) {
-										pauseItem.setText("Start");
+										pauseItem.setText("Resume");
 										paused.set(true);
 									} else {
 										pauseItem.setText("Pause");
@@ -217,7 +217,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		pauseItem.addActionListener(
 				actionEvent -> {
 					if (!paused.get()) {
-						pauseItem.setText("Start");
+						pauseItem.setText("Resume");
 						paused.set(true);
 					} else {
 						pauseItem.setText("Pause");
