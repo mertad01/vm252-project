@@ -680,13 +680,25 @@ public class VirtualMachine252 extends BasicObservable {
 
 					//initialize a input joptionpane to get user input and then check if it can be parsed as an integer.
 					String input_integer = JOptionPane.showInputDialog("INPUT: ");
+					// if ((input_integer != null) && (input_integer.length() > 0)) {
+					// }
 					while (true) {
 						try {
+							//take input only if the input field in not empty else set the input to zero and break out of the loop to progress to the next line
+							if (input_integer!=null){
 							input_data = Integer.parseInt(input_integer);
 							break;
+							}
+							else{
+								input_data=0;
+								break;
+							}
 						} catch (NumberFormatException e) {
 
 							input_integer = JOptionPane.showInputDialog("Enter Valid Integer: ");
+							if ((input_integer == null)) {
+								break;
+							}
 						}
 					}
 					//modification required, if lastInstruction is not true then store the input value in accumulator,else show the end of the program

@@ -231,7 +231,9 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		);
 		runMenu.add(pauseItem);
 		reinitializeButton.addActionListener(
-				actionEvent -> vm252.reinitialize()
+				actionEvent -> {
+					vm252.reinitialize();
+				}
 		);
 	}
 
