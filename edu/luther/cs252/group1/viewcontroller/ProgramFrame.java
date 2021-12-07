@@ -4,17 +4,20 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelCellRenderer;
 import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelTableModel;
-import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.CustomTableCellRenderer;
-import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.VirtualMachineTableModel;
+import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexCellRenderer;
+import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexTableModel;
 import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexCellRenderer;
 import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexTableModel;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.*;
+import java.awt.event.*;
 
 public class ProgramFrame extends JFrame implements BasicObserver {
 
-    private final VirtualMachineTableModel vm252TableModel;
+    private final SingleByteHexTableModel vm252TableModel;
     private final InstructionLabelTableModel vm252MachineInstructionsModel;
     private final TwoByteHexTableModel vm252TwoByteHexTableModel;
 
@@ -328,7 +331,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         ProgramInputPanel programInputPanel = new ProgramInputPanel(vm252);
 
         // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
-        vm252TableModel = new VirtualMachineTableModel(vm252, 410, 20);
+        vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);
         // Table model representing VirtualMachine252 as instructions, data, and labels
         // (=MI= command)
         vm252MachineInstructionsModel = new InstructionLabelTableModel(vm252, 8192, 1);
@@ -345,8 +348,33 @@ public class ProgramFrame extends JFrame implements BasicObserver {
                 vm252TwoByteHexTableModel
         );
 
+        memoryTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int row = memoryTable.rowAtPoint(e.getPoint());
+                int column = memoryTable.columnAtPoint(e.getPoint());
+                boolean[] breakpoints = vm252.getBreakpoints();
+                breakpoints[(row * memoryTable.getColumnCount()) + column] = !breakpoints[(row * memoryTable.getColumnCount()) + column];
+                vm252.announceChange();
+            }
+        });
+
+        twoByteHexMemoryTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int row = memoryTable.rowAtPoint(e.getPoint());
+                int column = memoryTable.columnAtPoint(e.getPoint());
+                boolean[] breakpoints = vm252.getBreakpoints();
+                breakpoints[(row * memoryTable.getColumnCount()) + column] = !breakpoints[(row * memoryTable.getColumnCount()) + column];
+                vm252.announceChange();
+            }
+        });
+
+
         // Use a custom table cell renderer to center the text in each column by default
-        CustomTableCellRenderer tableCellCenterRenderer = new CustomTableCellRenderer(vm252, vm252TableModel);
+        SingleByteHexCellRenderer tableCellCenterRenderer = new SingleByteHexCellRenderer(vm252, vm252TableModel);
         memoryTable.setDefaultRenderer(memoryTable.getColumnClass(0), tableCellCenterRenderer);
 
         InstructionLabelCellRenderer machineInstructionMemoryRenderer = new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel);

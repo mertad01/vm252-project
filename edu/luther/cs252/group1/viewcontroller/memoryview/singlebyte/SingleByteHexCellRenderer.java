@@ -7,10 +7,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-public class CustomTableCellRenderer extends DefaultTableCellRenderer {
+public class SingleByteHexCellRenderer extends DefaultTableCellRenderer {
 
     private VirtualMachine252 vm252;
-    private VirtualMachineTableModel vm252TableModel;
+    private SingleByteHexTableModel vm252TableModel;
 
     //
     // Constructor
@@ -37,7 +37,7 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    public CustomTableCellRenderer(VirtualMachine252 vm252, VirtualMachineTableModel vm252TableModel) {
+    public SingleByteHexCellRenderer(VirtualMachine252 vm252, SingleByteHexTableModel vm252TableModel) {
         super();
         this.vm252 = vm252;
         this.vm252TableModel = vm252TableModel;
@@ -58,10 +58,14 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
                 currentCell.setBackground(Color.WHITE);
 
             if (vm252.getBreakpoints()[((row * vm252TableModel.getColumnCount()) + column)])
-                currentCell.setBackground(Color.PINK);
+                if (((row * vm252TableModel.getColumnCount()) + column) == vm252.getProgramCounter())
+                    currentCell.setBackground(Color.ORANGE);
+                else
+                    currentCell.setBackground(Color.PINK);
         } catch (ArrayIndexOutOfBoundsException exception) {
             // Do nothing
         }
+
         return currentCell;
     }
 }
