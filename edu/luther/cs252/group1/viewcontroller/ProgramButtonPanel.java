@@ -27,13 +27,33 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         //
 
         Box leftControlBox = Box.createVerticalBox();
-	//jlabel for breakpoint textfield
+        // jlabel for breakpoint textfield
         JLabel breakpoint = new JLabel("Breakpoint: ");
-	//buttons and textfields
-        JButton breakpointClearButton = new JButton("Clear BP");
-        JButton nextInstructionButton = new JButton("N");
-	    JTextField breakpointlocation= new JTextField(2);
+        // buttons and textfields
+        JButton breakpointClearButton = new JButton(" Clear BP  ");
+        JButton nextInstructionButton = new JButton("       N         ");
+        JTextField breakpointlocation = new JTextField(2);
         JButton newTable = new JButton("New Table");
+	
+	//
+        // Set clear-breakpoint text colour to red for high-visibility
+        // Set new-table button to green for aesthetics
+        //
+
+        breakpointClearButton.setForeground(Color.RED);
+        breakpointClearButton.setOpaque(true);
+
+        newTable.setBackground(Color.GREEN);
+        newTable.setOpaque(true);
+
+        //
+        // Set custom button sizes for consistency and better visual appearance
+        //
+
+        breakpoint.setPreferredSize(new Dimension(85, 20));
+        breakpointClearButton.setPreferredSize(new Dimension(85, 20));
+        nextInstructionButton.setPreferredSize(new Dimension(85, 20));
+        newTable.setPreferredSize(new Dimension(85, 20));
 
         //
         // Set help tooltips
@@ -50,9 +70,11 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         
         leftControlBox.add(breakpoint);
         leftControlBox.add(breakpointlocation);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(breakpointClearButton);
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(nextInstructionButton);
-        leftControlBox.add(Box.createRigidArea(new Dimension(0, 45)));
+        leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(newTable);
         add(leftControlBox);
 
@@ -64,6 +86,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         });
 
         // Run the next instruction when the button is pressed
+	    
         nextInstructionButton.addActionListener(
                 actionEvent -> {
                     if (!vm252.isLastInstructionCausedHalt()) {
@@ -75,6 +98,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
                     }
                 }
         );
+	    
 	//read the memory location from breakpoint textfield and then assign true to the breakpoint boolean at that location.
 
         breakpointlocation.addActionListener(
@@ -84,6 +108,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 		});
 	//
 	//clear all the breakpoints by setting all the breakpoints boolean false
+	    
         breakpointClearButton.addActionListener(
                 actionEvent -> {
                     Arrays.fill(breakpoints, false);
