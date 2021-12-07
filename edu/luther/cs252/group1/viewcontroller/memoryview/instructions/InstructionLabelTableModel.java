@@ -1,26 +1,24 @@
-package edu.luther.cs252.group1.viewcontroller.MemoryView;
+package edu.luther.cs252.group1.viewcontroller.memoryview.instructions;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
 
-public class VirtualMachineTableModel extends AbstractTableModel{
+import static edu.luther.cs252.group1.model.vm252utilities.VM252Utilities.*;
 
-    private final VirtualMachine252 vm252;
-    private final byte[] memory;
+public class InstructionLabelTableModel extends AbstractTableModel{
+
+    protected final VirtualMachine252 vm252;
+    protected final byte[] memory;
 
     // Row and Column counts for the table model
-    private int rowCount;
-    private int columnCount;
-
-    public void setColumnCount(int columnCount) {
-        this.columnCount = columnCount;
-    }
-
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
-    }
+    protected final int rowCount;
+    protected final int columnCount;
 
     //
     // Constructor
@@ -47,7 +45,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    public VirtualMachineTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
+    public InstructionLabelTableModel(VirtualMachine252 vm252, int rowCount, int columnCount) {
         this.vm252 = vm252;
         this.memory = vm252.getMemory();
         this.rowCount = rowCount;
@@ -79,7 +77,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         // Only allow editing of cells which contain vm252 memory
-        return rowIndex != 409 || columnIndex < 12;
+        return false;
     }
 
     //
@@ -161,14 +159,27 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     //
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+
         try {
+            if (memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) != null) {
+//                System.out.println(memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex));
+//                System.out.println(memoryLabels);
+
+                System.out.println(
+                        Arrays.toString(fetchBytePair(memory, (short) ((rowIndex * columnCount) + columnIndex)))
+                );
+                System.out.println(vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex)));
+                return memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) + ": " + VM252Utilities.fetchIntegerValue(memory, (short) ((rowIndex * columnCount) + columnIndex));
+            }
+
             // Display hex string representation of appropriate memory address
-            String outputHexString = intToHexString(memory[(rowIndex * columnCount) + columnIndex] & 0xFF);
+            String outputHexString = vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex));
             // Return the output string if length is less than one, pad with a zero otherwise
-            if (outputHexString.length() > 1)
-                return outputHexString;
-            else
-                return "0" + outputHexString;
+            if (Objects.equals(outputHexString, "UNKNOWN")) {
+                return null;
+            }
+
+            return outputHexString;
         } catch(ArrayIndexOutOfBoundsException exception) {
             // Cells out of vm252 memory bounds are displayed empty
             return null;
@@ -204,16 +215,18 @@ public class VirtualMachineTableModel extends AbstractTableModel{
         // Location of the cell within the vm252 memory
         short address = (short) ((rowIndex * columnCount) + columnIndex);
         // aValue string as an integer
-        int dataValue = hexStringToInteger((String) aValue);
+        try {
+            int dataValue = hexStringToInteger((String) aValue);
 
-        // Only update if the new value is within the range for a byte (prevent accidental truncation)
-        if (dataValue < 0x100)
-            memory[address] = (byte) dataValue;
 
-        // Print the new value to the console
-        System.out.println(
-                intToHexString(VM252Utilities.fetchBytePair(memory, address)[0] & 0xFF)
-        );
+            // Only update if the new value is within the range for a byte (prevent accidental truncation)
+            if (dataValue < 0x100)
+                memory[address] = (byte) dataValue;
+        }
+        // Catch number formatting errors (such as trying to supply a signed/unsupported integer)
+        catch (NumberFormatException exception) {
+            // Do Nothing
+        }
     }
 
     //
@@ -237,7 +250,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(1)
     //
-    private static String intToHexString(int originalInteger) {
+    protected static String intToHexString(int originalInteger) {
         return Integer.toHexString(originalInteger).toUpperCase();
     }
 
@@ -263,7 +276,7 @@ public class VirtualMachineTableModel extends AbstractTableModel{
     // Worst-case asymptotic runtime:
     //     O(n) (length of the hexString)
     //
-    private static int hexStringToInteger(String hexString) {
+    protected static int hexStringToInteger(String hexString) {
         // Resulting value to be returned
         int resultInteger = 0;
         // Location of value within hexString

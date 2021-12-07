@@ -265,12 +265,104 @@ public class VirtualMachine252 extends BasicObservable {
 		return memory;
 	}
 
-	// TODO: Preface
+	// TODO: Preface getNextInstruction()
 	public String getNextInstruction() {
 		String instructionSymbolicForm;
 
 		byte[] encodedInstruction
 				= VM252Utilities.fetchBytePair(memory, programCounter);
+
+		int[] decodedInstruction
+				= VM252Utilities.decodedInstructionComponents(encodedInstruction);
+		int opcode = decodedInstruction[0];
+		short operand
+				= decodedInstruction.length == 2
+				? ((short) (decodedInstruction[1]))
+				: 0;
+
+		switch (opcode) {
+			case VM252Utilities.LOAD_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "LOAD ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.STORE_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "STORE ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.ADD_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "ADD ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.SUBTRACT_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "SUBTRACT ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.JUMP_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "JUMP ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.JUMP_ON_ZERO_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "JUMPZ ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.JUMP_ON_POSITIVE_OPCODE -> {
+				if (VM252Utilities.memoryLabels.get((int) operand) != null) {
+					instructionSymbolicForm = "JUMPP ";
+					for (char i : VM252Utilities.memoryLabels.get((int) operand))
+						instructionSymbolicForm += i;
+				}
+				else
+					instructionSymbolicForm = "UNKNOWN";
+			}
+			case VM252Utilities.SET_OPCODE -> {
+				instructionSymbolicForm = "SET " + operand;
+			}
+			case VM252Utilities.INPUT_OPCODE -> instructionSymbolicForm = "INPUT";
+			case VM252Utilities.OUTPUT_OPCODE -> instructionSymbolicForm = "OUTPUT";
+			case VM252Utilities.NO_OP_OPCODE -> instructionSymbolicForm = "NOOP";
+			case VM252Utilities.STOP_OPCODE -> instructionSymbolicForm = "STOP";
+			default -> throw new IllegalStateException("Unexpected value: " + opcode);
+		}
+
+		return instructionSymbolicForm;
+	}
+
+	// TODO: Preface getInstruction(short address)
+	public String getInstruction(short address) {
+		String instructionSymbolicForm;
+
+		byte[] encodedInstruction
+				= VM252Utilities.fetchBytePair(memory, address);
 
 		int[] decodedInstruction
 				= VM252Utilities.decodedInstructionComponents(encodedInstruction);
