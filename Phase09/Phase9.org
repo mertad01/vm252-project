@@ -43,11 +43,11 @@ We spent a large amount of time working on the MI/OI commands but in the end dec
 ** Kritib Bhattarai
 | Date   | Hours Worked |
 |--------+--------------|
-|        |              |
-|        |              |
-|        |              |
+|12/04/21|8:00pm-10:00pm|
+|12/05/22|10:0pm-12:00am|              
+|12/06/22|08am-10am     |              
 |        |              |
 |        |              |
 |        |              |
 |--------+--------------|
-| Total: |              |
+| Total: |   ~6         |
