@@ -31,8 +31,8 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         // JLabel for breakpoint textfield
         JLabel breakpoint = new JLabel("Breakpoint Line #: ");
         // buttons and text fields
-        JButton breakpointClearButton = new JButton(" Clear BP  ");
-        JButton nextInstructionButton = new JButton("       N         ");
+        JButton breakpointClearButton = new JButton("Clear Breaks");
+        JButton nextInstructionButton = new JButton("Execute Next");
         JTextField sourceBreakpointLocation = new JTextField(2);
 
 	//
