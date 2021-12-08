@@ -31,8 +31,9 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 | 12/05/21 | 06:30pm-11:30pm |
 | 12/06/21 | 11:30am-02:30pm |
 | 12/06/21 | 05:00pm-11:00pm |
+| 12/07/21 | 06:30pm-09:00pm |
 |----------+-----------------|
-| Total:   |                 |
+| Total:   | ~29             |
 
 ** Kritib Bhattarai
 | Date   | Hours Worked |
