@@ -45,8 +45,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 
         // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
         vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);
-        // Table model representing VirtualMachine252 as instructions, data, and labels
-        // (=MI= command)
+        // Table model representing VirtualMachine252 as instructions, data, and labels (=MI= command)
         vm252MachineInstructionsModel = new InstructionLabelTableModel(vm252, 8192, 1);
         // Table model displaying the portion of machine memory holding object code as 2-byte data in hex (=OD= & =MD= command)
         vm252TwoByteHexTableModel = new TwoByteHexTableModel(vm252, 410, 10);
