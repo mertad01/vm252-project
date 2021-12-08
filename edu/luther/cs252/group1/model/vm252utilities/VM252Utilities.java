@@ -33,6 +33,7 @@ public class VM252Utilities
     public static HashMap<Integer, ArrayList<Character>> memoryLabels = new HashMap<>();
     public static HashMap<Integer, String> memoryLabelHashMap = new HashMap<>();
     public static HashMap<Integer, Integer> memorySourceLineHashMap = new HashMap<>();
+    public static HashMap<Integer, Boolean> memoryByteContentHashMap = new HashMap<>();
 
     //region Public Class Methods
 
@@ -267,6 +268,7 @@ public class VM252Utilities
             // Create new memory address to label hash map
             memoryLabelHashMap = new HashMap<>();
             for (int index = 0; index < byteContentMap.length ; index += 2) {
+                memoryByteContentHashMap.put(index, byteContentMap[index] == 0); // Store whether each byte is a data directive or instruction
                 ArrayList<Character> memoryLabel = memoryLabels.get(index);
                 if (memoryLabel != null) {
                     StringBuilder label = new StringBuilder();
@@ -275,6 +277,7 @@ public class VM252Utilities
                     memoryLabelHashMap.put(index, label.toString());
                 }
             }
+            System.out.println(memoryByteContentHashMap);
 
             // Create new source line to memory address hash map
             memorySourceLineHashMap = new HashMap<>();

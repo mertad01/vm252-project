@@ -162,14 +162,8 @@ public class InstructionLabelTableModel extends AbstractTableModel{
 
         try {
             if (memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) != null) {
-//                System.out.println(memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex));
-//                System.out.println(memoryLabels);
-
-                System.out.println(
-                        Arrays.toString(fetchBytePair(memory, (short) ((rowIndex * columnCount) + columnIndex)))
-                );
-                System.out.println(vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex)));
-                return memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) + ": " + VM252Utilities.fetchIntegerValue(memory, (short) ((rowIndex * columnCount) + columnIndex));
+                if (memoryByteContentHashMap.get((rowIndex * columnCount) + columnIndex))
+                    return memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) + ": " + VM252Utilities.fetchIntegerValue(memory, (short) ((rowIndex * columnCount) + columnIndex));
             }
 
             // Display hex string representation of appropriate memory address
