@@ -1,6 +1,7 @@
 package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
@@ -28,11 +29,11 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
         Box leftControlBox = Box.createVerticalBox();
         // JLabel for breakpoint textfield
-        JLabel breakpoint = new JLabel("Breakpoint: ");
+        JLabel breakpoint = new JLabel("Breakpoint Line #: ");
         // buttons and text fields
         JButton breakpointClearButton = new JButton(" Clear BP  ");
         JButton nextInstructionButton = new JButton("       N         ");
-        JTextField breakpointLocation = new JTextField(2);
+        JTextField sourceBreakpointLocation = new JTextField(2);
 
 	//
         // Set clear-breakpoint text colour to red for high-visibility
@@ -46,16 +47,17 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         // Set custom button sizes for consistency and better visual appearance
         //
 
-        breakpoint.setPreferredSize(new Dimension(85, 20));
-        breakpointClearButton.setPreferredSize(new Dimension(85, 20));
-        nextInstructionButton.setPreferredSize(new Dimension(85, 20));
+        breakpoint.setPreferredSize(new Dimension(100, 20));
+        breakpointClearButton.setPreferredSize(new Dimension(100, 20));
+        nextInstructionButton.setPreferredSize(new Dimension(100, 20));
 
         //
         // Set help tooltips
         //
-        breakpoint.setToolTipText("Add a breakpoint at selected location");
+        breakpoint.setToolTipText("Toggle a breakpoint at selected source-line location");
         breakpointClearButton.setToolTipText("Clear breakpoints in all location");
         nextInstructionButton.setToolTipText("Run Next Program Instruction");
+        sourceBreakpointLocation.setToolTipText("Source line number containing code where you'd like a breakpoint to be placed");
 
         //
         // We create a vertical spacer that separates elements for every 45 pixels
@@ -64,7 +66,7 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
         //
         
         leftControlBox.add(breakpoint);
-        leftControlBox.add(breakpointLocation);
+        leftControlBox.add(sourceBreakpointLocation);
         leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
         leftControlBox.add(breakpointClearButton);
         leftControlBox.add(Box.createRigidArea(new Dimension(0, 25)));
@@ -88,9 +90,16 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 	    
 	//read the memory location from breakpoint textfield and then assign true to the breakpoint boolean at that location.
 
-        breakpointLocation.addActionListener(
+        sourceBreakpointLocation.addActionListener(
                 actionEvent -> {
-                    breakpoints[Short.parseShort(breakpointLocation.getText())]=true;
+                    // Catch NullPointerException if number isn't a valid source line
+                    try {
+                        Integer sourceLine = VM252Utilities.memorySourceLineHashMap.get(Integer.valueOf(sourceBreakpointLocation.getText()));
+                        breakpoints[sourceLine] = !breakpoints[sourceLine];
+                    } catch (NullPointerException ignored) {
+                        // Do nothing
+                    }
+
                     vm252.announceChange();
 		});
 	//

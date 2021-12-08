@@ -277,7 +277,6 @@ public class VM252Utilities
                     memoryLabelHashMap.put(index, label.toString());
                 }
             }
-            System.out.println(memoryByteContentHashMap);
 
             // Create new source line to memory address hash map
             memorySourceLineHashMap = new HashMap<>();
