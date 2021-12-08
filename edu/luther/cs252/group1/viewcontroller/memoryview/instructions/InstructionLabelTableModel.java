@@ -167,6 +167,7 @@ public class InstructionLabelTableModel extends MemoryTableModel {
                     return memoryLabelHashMap.get((rowIndex * columnCount) + columnIndex) + ": " + VM252Utilities.fetchIntegerValue(memory, (short) ((rowIndex * columnCount) + columnIndex));
             }
 
+
             // Display hex string representation of appropriate memory address
             String outputHexString = vm252.getInstruction((short) ((rowIndex * columnCount) + columnIndex));
             // Return the output string if length is less than one, pad with a zero otherwise

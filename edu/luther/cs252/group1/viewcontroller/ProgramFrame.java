@@ -18,7 +18,7 @@ import java.awt.event.*;
 public class ProgramFrame extends JFrame implements BasicObserver {
 
     private final SingleByteHexTableModel vm252TableModel;
-    private final InstructionLabelTableModel vm252MachineInstructionsModel;
+//    private final InstructionLabelTableModel vm252MachineInstructionsModel;
     private final TwoByteHexTableModel vm252TwoByteHexTableModel;
 
     //
@@ -45,10 +45,10 @@ public class ProgramFrame extends JFrame implements BasicObserver {
 
         // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
         vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);
-        // Table model representing VirtualMachine252 as instructions, data, and labels (=MI= command)
-        vm252MachineInstructionsModel = new InstructionLabelTableModel(vm252, 8192, 1);
         // Table model displaying the portion of machine memory holding object code as 2-byte data in hex (=OD= & =MD= command)
         vm252TwoByteHexTableModel = new TwoByteHexTableModel(vm252, 410, 10);
+        // Table model representing VirtualMachine252 as instructions, data, and labels (=MI/OI= commands)
+//        vm252MachineInstructionsModel = new InstructionLabelTableModel(vm252, 8192, 1);
 
 
         // Create new JTable using VirtualMachineTableModel as the model
@@ -60,31 +60,21 @@ public class ProgramFrame extends JFrame implements BasicObserver {
                 vm252TwoByteHexTableModel,
                 new TwoByteHexCellRenderer(vm252, vm252TwoByteHexTableModel)
         );
-        MemoryTable machineInstructionMemoryTable = new MemoryTable(
-                vm252MachineInstructionsModel,
-                new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel)
-        );
+//        MemoryTable machineInstructionMemoryTable = new MemoryTable(
+//                vm252MachineInstructionsModel,
+//                new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel)
+//        );
 
 
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
-        JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
+//        JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
         JScrollPane scrollableTwoByteHexMemoryPane = new JScrollPane(twoByteHexMemoryTable);
 
         // Create breakpoints using middle mouse click
         MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, memoryTable);
         memoryTable.addMouseListener(middleClickBreakpointEvent);
         twoByteHexMemoryTable.addMouseListener(middleClickBreakpointEvent);
-
-        memoryTable.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                super.mouseMoved(e);
-                int row = memoryTable.rowAtPoint(e.getPoint());
-                int column = memoryTable.columnAtPoint(e.getPoint());
-                System.out.println(row + " | " + column);
-            }
-        });
 
         //
         // Attach observers to check for changes
@@ -108,8 +98,9 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         // Use tabbed pane for different memory views
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        tabbedPane.addTab("MB/OB", scrollableMemoryPane);
-        tabbedPane.addTab("MD/OD", scrollableTwoByteHexMemoryPane); tabbedPane.addTab("MI/OI", scrollableMachineInstructionMemoryPane); //FIXME
+        tabbedPane.addTab("Single-Byte Hex (MB/OB)", scrollableMemoryPane);
+        tabbedPane.addTab("Double-Byte Hex (MD/OD)", scrollableTwoByteHexMemoryPane);
+//        tabbedPane.addTab("MI/OI", scrollableMachineInstructionMemoryPane); //FIXME
 
         tabbedPane.setForeground(Color.red);
         getContentPane().setBackground(Color.white);
@@ -121,7 +112,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
     public void update() {
         // Keep the vm252TableModel up-to-date when the data changes
         vm252TableModel.fireTableDataChanged();
-        vm252MachineInstructionsModel.fireTableDataChanged();
         vm252TwoByteHexTableModel.fireTableDataChanged();
+//        vm252MachineInstructionsModel.fireTableDataChanged();
     }
 }
