@@ -23,16 +23,16 @@ Below you will find our repository URL, hosted on GitHub, as well as the revisio
 | Total: |              |
 
 ** Adam Mertzenich
-| Date   | Hours Worked |
-|--------+--------------|
-|        |              |
-|        |              |
-|        |              |
-|        |              |
-|        |              |
-|        |              |
-|--------+--------------|
-| Total: |              |
+| Date     | Hours Worked    |
+|----------+-----------------|
+| 12/02/21 | 08:00pm-10:00pm |
+| 12/03/21 | 05:00pm-09:00pm |
+| 12/04/21 | 11:00am-05:00pm |
+| 12/05/21 | 06:30pm-11:30pm |
+| 12/06/21 | 11:30am-02:30pm |
+| 12/06/21 | 05:00pm-11:00pm |
+|----------+-----------------|
+| Total:   |                 |
 
 ** Kritib Bhattarai
 | Date   | Hours Worked |

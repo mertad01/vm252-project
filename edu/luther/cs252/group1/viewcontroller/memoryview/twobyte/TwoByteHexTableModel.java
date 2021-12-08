@@ -71,8 +71,7 @@ public class TwoByteHexTableModel extends AbstractTableModel{
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         // Only allow editing of cells which contain vm252 memory
-        // FIXME: calculate values programmatically
-        return rowIndex != 409 || columnIndex < 12;
+        return rowIndex < 409 || columnIndex <= 5;
     }
 
     //

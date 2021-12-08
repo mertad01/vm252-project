@@ -121,7 +121,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		fileMenuItem.addActionListener(
 				actionEvent -> {
 					int returnVal = vm252FileChooser.showOpenDialog(fileMenuItem);
-					System.out.println(returnVal);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						String file_name = vm252FileChooser.getSelectedFile().toString();
 
@@ -191,7 +190,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 								if (vm252.isPreviousInstructionHitBreakpoint()) {
 									JOptionPane.showMessageDialog(getRootPane(), "Breakpoint at: " + vm252.getProgramCounter());
 									if (!paused.get()) {
-										pauseItem.setText("Start");
+										pauseItem.setText("Resume");
 										paused.set(true);
 									} else {
 										pauseItem.setText("Pause");
@@ -217,7 +216,7 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		pauseItem.addActionListener(
 				actionEvent -> {
 					if (!paused.get()) {
-						pauseItem.setText("Start");
+						pauseItem.setText("Resume");
 						paused.set(true);
 					} else {
 						pauseItem.setText("Pause");
@@ -232,7 +231,9 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 		);
 		runMenu.add(pauseItem);
 		reinitializeButton.addActionListener(
-				actionEvent -> vm252.reinitialize()
+				actionEvent -> {
+					vm252.reinitialize();
+				}
 		);
 	}
 

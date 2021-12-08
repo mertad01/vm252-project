@@ -57,8 +57,11 @@ public class TwoByteHexCellRenderer extends DefaultTableCellRenderer {
             } else
                 currentCell.setBackground(Color.WHITE);
 
-            if (vm252.getBreakpoints()[((row * vm252TwoByteHexTableModel.getColumnCount()) + column)])
-                currentCell.setBackground(Color.PINK);
+            if (vm252.getBreakpoints()[address])
+                if (address == vm252.getProgramCounter() || address+1 == vm252.getProgramCounter())
+                    currentCell.setBackground(Color.ORANGE);
+                else
+                    currentCell.setBackground(Color.PINK);
         } catch (ArrayIndexOutOfBoundsException exception) {
             // Do nothing
         }

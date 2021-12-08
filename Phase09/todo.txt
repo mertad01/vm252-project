@@ -1,9 +1,6 @@
 "Especially Desired" Features:
 - ~bl~ command (set a breakpoint at source-line number)
-- ~oi~ command (display the portion of machine memory holding object code as instructions, data, and labels)
+- ~oi/mi~ command (display the portion of machine memory holding object code as instructions, data, and labels)
 
 Extra:
 - amd MA SD ⇒ Alter contents of the two-byte pair at MA to signed integer value SD
-- amdx MA HD ⇒ Alter contents of the two-byte pair at MA to unsigned hex value HD
-- md ⇒ Display all machine memory as 2-byte data in hex
-- od ⇒ Display the portion of machine memory holding object code as 2-byte data in hex
