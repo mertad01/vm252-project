@@ -2,12 +2,13 @@ package edu.luther.cs252.group1.viewcontroller.memoryview.instructions;
 
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTableCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-public class InstructionLabelCellRenderer extends DefaultTableCellRenderer {
+public class InstructionLabelCellRenderer extends MemoryTableCellRenderer {
 
     private VirtualMachine252 vm252;
     private InstructionLabelTableModel vm252TableModel;

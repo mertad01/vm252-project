@@ -22,7 +22,6 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
         //
         JLabel nextLabel = new JLabel("Next Instruction:️");
         nextInstructionLabel = new JLabel(vm252.getNextInstruction());
-
         //
         // Set help tooltips
         //

@@ -2,6 +2,8 @@ package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
+import edu.luther.cs252.group1.viewcontroller.events.MiddleClickBreakpointEvent;
+import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTable;
 import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelCellRenderer;
 import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelTableModel;
 import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexCellRenderer;
@@ -10,8 +12,6 @@ import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexCellR
 import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexTableModel;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -51,59 +51,41 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         // Table model displaying the portion of machine memory holding object code as 2-byte data in hex (=OD= & =MD= command)
         vm252TwoByteHexTableModel = new TwoByteHexTableModel(vm252, 410, 10);
 
+
         // Create new JTable using VirtualMachineTableModel as the model
-        JTable memoryTable = new JTable(
-                vm252TableModel);
-        JTable machineInstructionMemoryTable = new JTable(
-                vm252MachineInstructionsModel
+        MemoryTable memoryTable = new MemoryTable(
+                vm252TableModel,
+                new SingleByteHexCellRenderer(vm252, vm252TableModel)
         );
-        JTable twoByteHexMemoryTable = new JTable(
-                vm252TwoByteHexTableModel
+        MemoryTable twoByteHexMemoryTable = new MemoryTable(
+                vm252TwoByteHexTableModel,
+                new TwoByteHexCellRenderer(vm252, vm252TwoByteHexTableModel)
+        );
+        MemoryTable machineInstructionMemoryTable = new MemoryTable(
+                vm252MachineInstructionsModel,
+                new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel)
         );
 
-        memoryTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (e.getButton() == MouseEvent.BUTTON2) {
-                    int row = memoryTable.rowAtPoint(e.getPoint());
-                    int column = memoryTable.columnAtPoint(e.getPoint());
-                    boolean[] breakpoints = vm252.getBreakpoints();
-                    breakpoints[(row * memoryTable.getColumnCount()) + column] = !breakpoints[(row * memoryTable.getColumnCount()) + column];
-                    vm252.announceChange();
-                }
-            }
-        });
-
-        twoByteHexMemoryTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (e.getButton() == MouseEvent.BUTTON2) {
-                    int row = memoryTable.rowAtPoint(e.getPoint());
-                    int column = memoryTable.columnAtPoint(e.getPoint());
-                    boolean[] breakpoints = vm252.getBreakpoints();
-                    breakpoints[(row * memoryTable.getColumnCount()) + column] = !breakpoints[(row * memoryTable.getColumnCount()) + column];
-                    vm252.announceChange();
-                }
-            }
-        });
-
-
-        // Use a custom table cell renderer to center the text in each column by default
-        SingleByteHexCellRenderer tableCellCenterRenderer = new SingleByteHexCellRenderer(vm252, vm252TableModel);
-        memoryTable.setDefaultRenderer(memoryTable.getColumnClass(0), tableCellCenterRenderer);
-
-        InstructionLabelCellRenderer machineInstructionMemoryRenderer = new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel);
-        machineInstructionMemoryTable.setDefaultRenderer(machineInstructionMemoryTable.getColumnClass(0), machineInstructionMemoryRenderer);
-
-        TwoByteHexCellRenderer twoByteHexMemoryRenderer = new TwoByteHexCellRenderer(vm252, vm252TwoByteHexTableModel);
-        twoByteHexMemoryTable.setDefaultRenderer(twoByteHexMemoryTable.getColumnClass(0), twoByteHexMemoryRenderer);
 
         // Make the memory scrollable
         JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
         JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
         JScrollPane scrollableTwoByteHexMemoryPane = new JScrollPane(twoByteHexMemoryTable);
+
+        // Create breakpoints using middle mouse click
+        MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, memoryTable);
+        memoryTable.addMouseListener(middleClickBreakpointEvent);
+        twoByteHexMemoryTable.addMouseListener(middleClickBreakpointEvent);
+
+        memoryTable.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                int row = memoryTable.rowAtPoint(e.getPoint());
+                int column = memoryTable.columnAtPoint(e.getPoint());
+                System.out.println(row + " | " + column);
+            }
+        });
 
         //
         // Attach observers to check for changes

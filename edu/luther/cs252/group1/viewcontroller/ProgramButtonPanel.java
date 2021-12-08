@@ -11,14 +11,14 @@ public class ProgramButtonPanel extends JPanel implements BasicObserver {
 
 
 	private final VirtualMachine252 vm252;
-	private final byte[] memory;
-	private final boolean[] breakpoints;
+    private final boolean[] breakpoints;
+
     //
     // Constructor
     //
     public ProgramButtonPanel(VirtualMachine252 vm252) {
 	    this.vm252=vm252;
-	    this.memory=vm252.getMemory();
+        byte[] memory = vm252.getMemory();
 	    this.breakpoints=vm252.getBreakpoints();
 
         //
