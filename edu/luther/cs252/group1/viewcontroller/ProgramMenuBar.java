@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ProgramMenuBar extends JMenuBar implements BasicObserver {
+public class ProgramMenuBar extends JMenuBar {
 	private final AtomicBoolean paused;
 	private final JTextField fileNameField;
 	private JTextField runDelayField;
@@ -235,11 +235,6 @@ public class ProgramMenuBar extends JMenuBar implements BasicObserver {
 					vm252.reinitialize();
 				}
 		);
-	}
-
-	@Override
-	public void update() {
-		// TODO: implement when model is integrated
 	}
 
 
