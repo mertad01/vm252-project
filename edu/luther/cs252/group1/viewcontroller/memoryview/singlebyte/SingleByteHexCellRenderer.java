@@ -54,15 +54,15 @@ public class SingleByteHexCellRenderer extends MemoryTableCellRenderer  {
         // If current cell being rendered matches program counter location indicate with a yellow background
         try {
             if (((row * vm252TableModel.getColumnCount()) + column) == vm252.getProgramCounter()) {
-                currentCell.setForeground(Color.ORANGE);
+                currentCell.setForeground(Color.GREEN);
             } else
                 currentCell.setForeground(Color.BLACK);
 
             if (vm252.getBreakpoints()[((row * vm252TableModel.getColumnCount()) + column)])
                 if (((row * vm252TableModel.getColumnCount()) + column) == vm252.getProgramCounter())
-                    currentCell.setForeground(Color.RED);
-                else
                     currentCell.setForeground(Color.PINK);
+                else
+                    currentCell.setForeground(Color.RED);
         } catch (ArrayIndexOutOfBoundsException exception) {
             // Do nothing
         }

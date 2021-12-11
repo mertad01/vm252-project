@@ -54,15 +54,15 @@ public class TwoByteHexCellRenderer extends MemoryTableCellRenderer {
         try {
             int address = ((column * 2) + (row * 20));
             if (address == vm252.getProgramCounter() || address+1 == vm252.getProgramCounter()) {
-                currentCell.setBackground(Color.YELLOW);
+                currentCell.setForeground(Color.GREEN);
             } else
-                currentCell.setBackground(Color.WHITE);
+                currentCell.setForeground(Color.BLACK);
 
             if (vm252.getBreakpoints()[address])
                 if (address == vm252.getProgramCounter() || address+1 == vm252.getProgramCounter())
-                    currentCell.setBackground(Color.ORANGE);
+                    currentCell.setForeground(Color.PINK);
                 else
-                    currentCell.setBackground(Color.PINK);
+                    currentCell.setForeground(Color.RED);
         } catch (ArrayIndexOutOfBoundsException exception) {
             // Do nothing
         }
