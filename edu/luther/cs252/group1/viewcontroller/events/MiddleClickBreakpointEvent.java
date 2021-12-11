@@ -35,7 +35,7 @@ public class MiddleClickBreakpointEvent extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent event) {
         super.mouseClicked(event);
-        if (event.getButton() == MouseEvent.BUTTON2) {
+        if (event.getButton() == MouseEvent.BUTTON3) {
             int row = memoryTable.rowAtPoint(event.getPoint());
             int column = memoryTable.columnAtPoint(event.getPoint());
             boolean[] breakpoints = vm252.getBreakpoints();
