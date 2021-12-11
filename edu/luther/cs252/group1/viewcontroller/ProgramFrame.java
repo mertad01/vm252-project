@@ -4,8 +4,6 @@ import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
 import edu.luther.cs252.group1.viewcontroller.events.MiddleClickBreakpointEvent;
 import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTable;
-import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelCellRenderer;
-import edu.luther.cs252.group1.viewcontroller.memoryview.instructions.InstructionLabelTableModel;
 import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexCellRenderer;
 import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexTableModel;
 import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexCellRenderer;
@@ -13,7 +11,6 @@ import edu.luther.cs252.group1.viewcontroller.memoryview.twobyte.TwoByteHexTable
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class ProgramFrame extends JFrame implements BasicObserver {
 
@@ -41,7 +38,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         ProgramMenuBar programMenuBar = new ProgramMenuBar(vm252);
         ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
         ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
-        ProgramInputPanel programInputPanel = new ProgramInputPanel(vm252);
+        ProgramInfoPanel programInputPanel = new ProgramInfoPanel(vm252);
 
         // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
         vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);

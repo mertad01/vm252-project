@@ -5,7 +5,7 @@ import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
 
-public class ProgramInputPanel extends JPanel implements BasicObserver {
+public class ProgramInfoPanel extends JPanel implements BasicObserver {
 
     private final VirtualMachine252 vm252;
     private final JLabel nextInstructionLabel;
@@ -13,7 +13,7 @@ public class ProgramInputPanel extends JPanel implements BasicObserver {
     //
     // Constructor
     //
-    public ProgramInputPanel(VirtualMachine252 vm252) {
+    public ProgramInfoPanel(VirtualMachine252 vm252) {
 
         this.vm252 = vm252;
 
