@@ -76,7 +76,6 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         //
         // Attach observers to check for changes
         //
-        vm252.attach(programMenuBar);
         vm252.attach(programButtonPanel);
         vm252.attach(programStatePanel);
         vm252.attach(programInputPanel);
