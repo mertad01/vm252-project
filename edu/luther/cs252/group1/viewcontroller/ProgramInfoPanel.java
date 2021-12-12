@@ -9,6 +9,7 @@ public class ProgramInfoPanel extends JPanel implements BasicObserver {
 
     private final VirtualMachine252 vm252;
     private final JLabel nextInstructionLabel;
+    private final JLabel selectedCellMemmoryAddressLabel;
 
     //
     // Constructor
@@ -22,18 +23,31 @@ public class ProgramInfoPanel extends JPanel implements BasicObserver {
         //
         JLabel nextLabel = new JLabel("Next Instruction:️");
         nextInstructionLabel = new JLabel(vm252.getNextInstruction());
+
+        JLabel selectCellLabel = new JLabel("Selected Memory Address:");
+        selectedCellMemmoryAddressLabel = new JLabel("0");
+
         //
         // Set help tooltips
         //
         nextInstructionLabel.setToolTipText("View the next instruction that will be ran");
 
+
+        add(selectCellLabel);
+        add(selectedCellMemmoryAddressLabel);
+
         add(nextLabel);
         add(nextInstructionLabel);
+
 
     }
 
     @Override
     public void update() {
         nextInstructionLabel.setText(vm252.getNextInstruction());
+    }
+
+    public JLabel getSelectedCellMemmoryAddressLabel() {
+        return selectedCellMemmoryAddressLabel;
     }
 }

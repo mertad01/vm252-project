@@ -1,25 +1,27 @@
 package edu.luther.cs252.group1.viewcontroller.events;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.viewcontroller.ProgramInfoPanel;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MiddleClickBreakpointEvent extends MouseAdapter {
+public class ClickCellMemoryAddressStateEvent extends MouseAdapter {
 
     VirtualMachine252 vm252;
     JTable memoryTable;
-    JPanel panel;
+    ProgramInfoPanel panel;
 
     //
     // Constructor
     //
 
-    public MiddleClickBreakpointEvent(VirtualMachine252 vm252, JTable memoryTable) {
+    public ClickCellMemoryAddressStateEvent(VirtualMachine252 vm252, JTable memoryTable, ProgramInfoPanel panel) {
 
         this.vm252 = vm252;
         this.memoryTable = memoryTable;
+        this.panel = panel;
 
     }
 
@@ -28,7 +30,7 @@ public class MiddleClickBreakpointEvent extends MouseAdapter {
     // Public Instance Method void mouseClicked(MouseEvent event)
     //
     // Purpose:
-    //     Create a breakpoint at the location in memory when clicked with the middle mouse button
+    //     Change the info panel memory address to the clicked cell
     //
     // Worst-case asymptotic runtime:
     //     O(1)
@@ -36,12 +38,10 @@ public class MiddleClickBreakpointEvent extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent event) {
         super.mouseClicked(event);
-        if (event.getButton() == MouseEvent.BUTTON3) {
+        if (event.getButton() == MouseEvent.BUTTON1) {
             int row = memoryTable.rowAtPoint(event.getPoint());
             int column = memoryTable.columnAtPoint(event.getPoint());
-            boolean[] breakpoints = vm252.getBreakpoints();
-            breakpoints[(row * memoryTable.getColumnCount()) + column] = !breakpoints[(row * memoryTable.getColumnCount()) + column];
-            vm252.announceChange();
+            panel.getSelectedCellMemmoryAddressLabel().setText(String.valueOf((row * memoryTable.getColumnCount()) + column));
         }
     }
 

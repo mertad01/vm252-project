@@ -2,6 +2,7 @@ package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
+import edu.luther.cs252.group1.viewcontroller.events.ClickCellMemoryAddressStateEvent;
 import edu.luther.cs252.group1.viewcontroller.events.MiddleClickBreakpointEvent;
 import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTable;
 import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexCellRenderer;
@@ -37,7 +38,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         ProgramMenuBar programMenuBar = new ProgramMenuBar(vm252);
         ProgramButtonPanel programButtonPanel = new ProgramButtonPanel(vm252);
         ProgramStatePanel programStatePanel = new ProgramStatePanel(vm252);
-        ProgramInfoPanel programInputPanel = new ProgramInfoPanel(vm252);
+        ProgramInfoPanel programInfoPanel = new ProgramInfoPanel(vm252);
 
         // Table model which allows the table to represent the VirtualMachine252 (=ob & /=mb= commands)
         vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);
@@ -64,6 +65,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, singleByteHexTable);
         singleByteHexTable.addMouseListener(middleClickBreakpointEvent);
         twoByteHexMemoryTable.addMouseListener(middleClickBreakpointEvent);
+        singleByteHexTable.addMouseListener(new ClickCellMemoryAddressStateEvent(vm252, singleByteHexTable, programInfoPanel));
 
 
         //
@@ -71,7 +73,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         //
         vm252.attach(programButtonPanel);
         vm252.attach(programStatePanel);
-        vm252.attach(programInputPanel);
+        vm252.attach(programInfoPanel);
         vm252.attach(this);
 
         //
@@ -81,7 +83,7 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         getContentPane().add(BorderLayout.NORTH, programMenuBar);
         getContentPane().add(BorderLayout.WEST, programButtonPanel);
         getContentPane().add(BorderLayout.EAST, programStatePanel);
-        getContentPane().add(BorderLayout.SOUTH, programInputPanel);
+        getContentPane().add(BorderLayout.SOUTH, programInfoPanel);
 
 
         // Use tabbed pane for different memory views
