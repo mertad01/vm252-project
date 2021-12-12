@@ -15,7 +15,6 @@ import java.awt.*;
 public class ProgramFrame extends JFrame implements BasicObserver {
 
     private final SingleByteHexTableModel vm252TableModel;
-//    private final InstructionLabelTableModel vm252MachineInstructionsModel;
     private final TwoByteHexTableModel vm252TwoByteHexTableModel;
 
     //
@@ -44,12 +43,10 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         vm252TableModel = new SingleByteHexTableModel(vm252, 410, 20);
         // Table model displaying the portion of machine memory holding object code as 2-byte data in hex (=OD= & =MD= command)
         vm252TwoByteHexTableModel = new TwoByteHexTableModel(vm252, 410, 10);
-        // Table model representing VirtualMachine252 as instructions, data, and labels (=MI/OI= commands)
-//        vm252MachineInstructionsModel = new InstructionLabelTableModel(vm252, 8192, 1);
 
 
         // Create new JTable using VirtualMachineTableModel as the model
-        MemoryTable memoryTable = new MemoryTable(
+        MemoryTable singleByteHexTable = new MemoryTable(
                 vm252TableModel,
                 new SingleByteHexCellRenderer(vm252, vm252TableModel)
         );
@@ -57,21 +54,17 @@ public class ProgramFrame extends JFrame implements BasicObserver {
                 vm252TwoByteHexTableModel,
                 new TwoByteHexCellRenderer(vm252, vm252TwoByteHexTableModel)
         );
-//        MemoryTable machineInstructionMemoryTable = new MemoryTable(
-//                vm252MachineInstructionsModel,
-//                new InstructionLabelCellRenderer(vm252, vm252MachineInstructionsModel)
-//        );
 
 
         // Make the memory scrollable
-        JScrollPane scrollableMemoryPane = new JScrollPane(memoryTable);
-//        JScrollPane scrollableMachineInstructionMemoryPane = new JScrollPane(machineInstructionMemoryTable);
+        JScrollPane scrollableMemoryPane = new JScrollPane(singleByteHexTable);
         JScrollPane scrollableTwoByteHexMemoryPane = new JScrollPane(twoByteHexMemoryTable);
 
         // Create breakpoints using middle mouse click
-        MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, memoryTable);
-        memoryTable.addMouseListener(middleClickBreakpointEvent);
+        MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, singleByteHexTable);
+        singleByteHexTable.addMouseListener(middleClickBreakpointEvent);
         twoByteHexMemoryTable.addMouseListener(middleClickBreakpointEvent);
+
 
         //
         // Attach observers to check for changes

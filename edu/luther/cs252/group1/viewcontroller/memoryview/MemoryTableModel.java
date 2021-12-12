@@ -4,6 +4,9 @@ import javax.swing.table.AbstractTableModel;
 
 public abstract class MemoryTableModel extends AbstractTableModel {
 
+    public static final int singleByteTableModelColumns = 20;
+    public static final int doubleByteTableModelColumns = 10;
+
     //
     // Protected Class Method String intToHexString(int originalInteger)
     //

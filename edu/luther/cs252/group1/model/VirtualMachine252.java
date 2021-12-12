@@ -543,7 +543,8 @@ public class VirtualMachine252 extends BasicObservable {
 	//     O(1)
 	//
 	public void setProgramCounter(short programCounter) {
-		this.programCounter = programCounter;
+		if (programCounter >= 0)
+			this.programCounter = programCounter;
 		announceChange();
 	}
 
