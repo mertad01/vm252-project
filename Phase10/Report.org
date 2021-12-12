@@ -1,0 +1,44 @@
+#+TITLE: Report
+#+AUTHOR: Adam Mertzenich, Kritib Bhattarai, Michael Musa
+#+EMAIL: mertad01@luther.edu, bhatkr01@luther.edu, musami01@luther.edu
+#+OPTIONS: toc:nil
+
+* Application Usage
+
+How-to-use-it instructions for your application, ideally with annotated diagrams/pictures (a video demonstration is not acceptable)
+
+* Minimum Requirements
+
+A description of how the minimum requirements for the assignment have been met or not met (i.e., the capabilities of the =aa=, =ap=, =amb=, =ba=, =h=, =mb=, =n=, =ob=, =q=, =r=, =s=, and =z= commands along with the capability of loading an object file for execution have been provided), with particular mention of all the aspects of the r command (see lines 40-52 of the Phase 4 handout)
+
+* Beyond the Minimum
+
+Mention of any of any capabilities above the minimum requirements that have been provided (e.g., the capabilities of the =bl=, =mi=, and =oi= commands)
+
+* Roles and Contributions
+
+A description of the roles and contributions of each of the members of the group over the lifetime of the project.
+
+* Libraries Used
+
+A list of which standard or third-party libraries the application uses, with an explanation of the purpose of third-party libraries
+
+* Class Relationship Family-Tree Diagram
+
+A family-tree diagram of the class relationships of the classes the group defined for its code
+
+* Design Patterns
+
+A discussion of how and where any design patterns and idioms (especially Model-View-Controller) are reflected in the application’s design
+
+* Original Coding
+
+Any other original coding in the application not related to assembling components for and interfacing with the GUI
+
+* Persistent Information
+
+How any persistent information (i.e., information that must survive across multiple executions of your application), if any, is handled by your application
+
+* Other Features
+
+Any other special design or implementation features of the final application the group feels should be pointed out
