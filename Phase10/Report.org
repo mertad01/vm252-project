@@ -7,6 +7,10 @@
 
 How-to-use-it instructions for your application, ideally with annotated diagrams/pictures (a video demonstration is not acceptable)
 
+In order to use the application you will need to compile the Main.java file. This can be done using the following command in the root project directory =javac edu/luther/cs252/group1/Main.java=. Next you may run it using =java edu.luther.cs252.group1.Main=. Alternatively, you can download the precompiled java jar file from github and run it using =java -jar vm252-project.jar=.
+
+After launching the application you can start using it. First, use the file+open menu and select a valid VM252 object file. In this document we will be using a simple multiplication program. You can verify that the object file has been loaded by seeing that the object file location has been loaded in the menu bar and that the memory table has values in the cells.
+
 * Minimum Requirements
 
 A description of how the minimum requirements for the assignment have been met or not met (i.e., the capabilities of the =aa=, =ap=, =amb=, =ba=, =h=, =mb=, =n=, =ob=, =q=, =r=, =s=, and =z= commands along with the capability of loading an object file for execution have been provided), with particular mention of all the aspects of the r command (see lines 40-52 of the Phase 4 handout)
