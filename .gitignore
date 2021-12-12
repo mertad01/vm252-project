@@ -11,3 +11,5 @@ build
 *.swp
 *.tex
 *.attach*
+*uml
+/Phase10/Presentation.org
