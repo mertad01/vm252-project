@@ -169,11 +169,9 @@ public class ProgramMenuBar extends JMenuBar {
 										}
 									}
 								}
-								//delays the program by reading the input in  **seconds** in delay text field, the input is multiplied
-								//by 1000 inorder to convert it into milliseconds.
-								//delays the program for as long as the user wants until an exception occurs
+								//delays the program by reading the input in  **milliseconds** in delay text field, 								//delays the program for as long as the user wants until an exception occurs
 								try {
-									long delayValue = (Long.parseLong(runDelayField.getText())) * 1000;
+									long delayValue = (Long.parseLong(runDelayField.getText()));
 									try {
 										System.out.println("sleeping");
 										Thread.sleep(delayValue);
