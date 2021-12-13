@@ -172,9 +172,12 @@ public class ProgramMenuBar extends JMenuBar {
 								try {
 									long delayValue = (Long.parseLong(runDelayField.getText()));
 									try {
-										System.out.println("sleeping");
-										Thread.sleep(delayValue);
-										System.out.println("slept for " + delayValue);
+										// Only delay if delay is above 0
+										if (delayValue > 0) {
+											System.out.println("sleeping");
+											Thread.sleep(delayValue);
+											System.out.println("slept for " + delayValue);
+										}
 									} catch (InterruptedException ex) {
 										System.out.println("no delay inserted");
 									}
