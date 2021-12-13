@@ -2,7 +2,8 @@ package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.observation.BasicObserver;
-import edu.luther.cs252.group1.viewcontroller.events.ClickCellMemoryAddressStateEvent;
+import edu.luther.cs252.group1.viewcontroller.events.DoubleClickCellMemoryAddressStateEvent;
+import edu.luther.cs252.group1.viewcontroller.events.SingleClickCellMemoryAddressStateEvent;
 import edu.luther.cs252.group1.viewcontroller.events.MiddleClickBreakpointEvent;
 import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTable;
 import edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte.SingleByteHexCellRenderer;
@@ -65,7 +66,8 @@ public class ProgramFrame extends JFrame implements BasicObserver {
         MiddleClickBreakpointEvent middleClickBreakpointEvent = new MiddleClickBreakpointEvent(vm252, singleByteHexTable);
         singleByteHexTable.addMouseListener(middleClickBreakpointEvent);
         twoByteHexMemoryTable.addMouseListener(middleClickBreakpointEvent);
-        singleByteHexTable.addMouseListener(new ClickCellMemoryAddressStateEvent(vm252, singleByteHexTable, programInfoPanel));
+        singleByteHexTable.addMouseListener(new SingleClickCellMemoryAddressStateEvent(vm252, singleByteHexTable, programInfoPanel));
+        twoByteHexMemoryTable.addMouseListener(new DoubleClickCellMemoryAddressStateEvent(vm252, twoByteHexMemoryTable, programInfoPanel));
 
 
         //

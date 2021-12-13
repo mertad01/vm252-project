@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ClickCellMemoryAddressStateEvent extends MouseAdapter {
+public class DoubleClickCellMemoryAddressStateEvent extends MouseAdapter {
 
     VirtualMachine252 vm252;
     JTable memoryTable;
@@ -17,7 +17,7 @@ public class ClickCellMemoryAddressStateEvent extends MouseAdapter {
     // Constructor
     //
 
-    public ClickCellMemoryAddressStateEvent(VirtualMachine252 vm252, JTable memoryTable, ProgramInfoPanel panel) {
+    public DoubleClickCellMemoryAddressStateEvent(VirtualMachine252 vm252, JTable memoryTable, ProgramInfoPanel panel) {
 
         this.vm252 = vm252;
         this.memoryTable = memoryTable;
@@ -41,7 +41,7 @@ public class ClickCellMemoryAddressStateEvent extends MouseAdapter {
         if (event.getButton() == MouseEvent.BUTTON1) {
             int row = memoryTable.rowAtPoint(event.getPoint());
             int column = memoryTable.columnAtPoint(event.getPoint());
-            panel.getSelectedCellMemmoryAddressLabel().setText(String.valueOf((row * memoryTable.getColumnCount()) + column));
+            panel.getSelectedCellMemmoryAddressLabel().setText(String.valueOf(((column * 2) + (row * 20))));
         }
     }
 

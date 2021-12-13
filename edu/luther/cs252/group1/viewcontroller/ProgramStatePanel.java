@@ -1,6 +1,7 @@
 package edu.luther.cs252.group1.viewcontroller;
 
 import edu.luther.cs252.group1.model.VirtualMachine252;
+import edu.luther.cs252.group1.model.vm252utilities.VM252Utilities;
 import edu.luther.cs252.group1.observation.BasicObserver;
 
 import javax.swing.*;
@@ -57,10 +58,29 @@ public class ProgramStatePanel extends JPanel implements BasicObserver {
 
         // Listen for changes to the programCounter and accumulator fields
         programCounterField.addActionListener(
-                actionEvent -> vm252.setProgramCounter(Short.parseShort(programCounterField.getText()))
+                actionEvent -> {
+                    try {
+                        // Make sure value does not go out of bounds for memory size
+                        if (Short.parseShort(programCounterField.getText()) < VM252Utilities.numberOfMemoryBytes)
+                            vm252.setProgramCounter(Short.parseShort(programCounterField.getText()));
+                        else
+                            vm252.setProgramCounter(vm252.getProgramCounter());
+                    } catch (NumberFormatException exception) {
+                        // If number is out of range for a short, don't change the program counter
+                        vm252.setProgramCounter(vm252.getProgramCounter());
+                    }
+
+                }
         );
         accumulatorField.addActionListener(
-                actionEvent -> vm252.setAccumulator(Short.parseShort(accumulatorField.getText()))
+                actionEvent -> {
+                    try {
+                        vm252.setAccumulator(Short.parseShort(accumulatorField.getText()));
+                    } catch (NumberFormatException exception) {
+                        // If number is out of range for a short, don't change the accumulator
+                        vm252.setAccumulator(vm252.getAccumulator());
+                    }
+                }
         );
 
     }
