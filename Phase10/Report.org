@@ -1,4 +1,5 @@
 #+TITLE: Group 1: Final Project Report
+#+SUBTITLE: VM252 Debugger Usage, Features, and Implementation
 #+AUTHOR: Adam Mertzenich, Kritib Bhattarai, Michael Musa
 #+EMAIL: mertad01@luther.edu, bhatkr01@luther.edu, musami01@luther.edu
 #+DATE: Tuesday, December 14th, 2021
