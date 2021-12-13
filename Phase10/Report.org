@@ -1,6 +1,9 @@
-#+TITLE: Report
+#+TITLE: Group 1: Final Project Report
 #+AUTHOR: Adam Mertzenich, Kritib Bhattarai, Michael Musa
 #+EMAIL: mertad01@luther.edu, bhatkr01@luther.edu, musami01@luther.edu
+#+DATE: Tuesday, December 14th, 2021
+#+DESCRIPTION: Final report explaining the usage, features, and implementation details of group one's VM252 debugger implementation.
+#+LANGUAGE: en
 #+OPTIONS: toc:nil
 
 * TODO Application Usage (Need Images)
@@ -8,10 +11,12 @@
 How-to-use-it instructions for your application, ideally with annotated diagrams/pictures (a video demonstration is not acceptable)
 #+end_comment
 
-
-How-to-use-it instructions for your application, ideally with annotated diagrams/pictures (a video demonstration is not acceptable)
-
-In order to use the application you will need to compile the Main.java file. This can be done using the following command in the root project directory =javac edu/luther/cs252/group1/Main.java=. Next you may run it using =java edu.luther.cs252.group1.Main=. Alternatively, you can download the precompiled java jar file from GitHub and run it using =java -jar vm252-project.jar=.
+In order to use the application you will need to compile the Main.java file. This can be done using the following commands in the root project directory:
+#+begin_src shell
+javac edu/luther/cs252/group1/Main.java
+java edu.luther.cs252.group1.Main
+#+end_src
+Alternatively, you can download the precompiled java jar file from GitHub and run it using =java -jar vm252-project.jar=.
 
 After launching the application you can start using it. First, use the file+open menu and select a valid VM252 object file. In this document we will be using a simple multiplication program. You can verify that the object file has been loaded by seeing that the object file location has been loaded in the menu bar and that the memory table has values in the cells. The current program counter will be rendered as the TK.color.yellow.
 
@@ -49,12 +54,16 @@ Using the "Double-Byte Hex" tab in the top center of the memory view you can cho
 
 * TODO Roles and Contributions
 
+#+begin_comment
 A description of the roles and contributions of each of the members of the group over the lifetime of the project.
+#+end_comment
 
-* TODO Libraries Used
+* DONE Libraries Used
 #+begin_comment
 A list of which standard or third-party libraries the application uses, with an explanation of the purpose of third-party libraries
 #+end_comment
+
+Java's Swing and the associated Abstract Window Toolkit graphical user interface libraries were the primary library for our application. This is what we used to create the entire user interface and all of the sub-components. Nothing outside of the Java Standard Library was used to prevent any unneccesary complication.
 
 * DONE Class Relationship Family-Tree Diagram
 #+begin_comment
@@ -63,24 +72,53 @@ A family-tree diagram of the class relationships of the classes the group define
 
 [[./ClassHierarchy.png]]
 
-* TODO Design Patterns
+* DONE Design Patterns
 #+begin_comment
 A discussion of how and where any design patterns and idioms (especially Model-View-Controller) are reflected in the application’s design
 #+end_comment
 
-We heavily rely upon both the Observer-Observed and the Model-View-Controller design patterns (hierarchy image at the bottom of this section).
-
 [[./MVC-OBS.png]]
 
-* TODO Original Coding
+We heavily rely upon both the Observer-Observed and the Model-View-Controller design patterns (hierarchy image at the bottom of this section). As an overview, we used implementations of BasicObserver to watch for changes on our VirtualMachine252 model (BasicObservable). Every relevant change in the model would notify everyone watching it. Our classes are held within packages representing observation, models, and views/controllers.
+
+Our views and controllers were often times combined thanks to the dynamic nature of many Java Swing components and tools at our disposal (contained within our modelview package). Our model, the VirtualMachine252 class, was where all operations on the memory are done through various accessor and mutator methods. At the end of every method that caused changes to the program state the announceChange() method is called to keep every view up to date.
+
+The ProgramStatePanel contains program counter and accumulator input boxes. These serve as both views and controllers. Editing the text of an input box and pressing enter will modify the modify and in turn update the MemoryTable (and other related views). Conversely, when running the program the state panel would also be updated as it views the new memory state. The aforementioned MemoryTable is our primary view and controller since it allows you to access and edit the memory, dynamically updating the "Next Instruction" indicator among others.
+
+The MemoryTable has both a MemoryTableCellRenderer and a MemoryTableModel, each with seperate implementations for the single and two byte views/controllers. These renderers and models are the principal way memory is viewed and controlled in the VirtualMachine252 model (implementation details in the Original Coding section). These classes allow the tables to view and control the memory similar to how a spreadsheet would work, using the VirtualMachine252 memory as the model behind the scenes.
+
+* DONE Original Coding
 #+begin_comment
 Any other original coding in the application not related to assembling components for and interfacing with the GUI
 #+end_comment
 
-* TODO Persistent Information
+The bulk of the original coding in our application belongs to the "Run" menu bar item and both of the table cell renderers and table models (SingleByte and DoubleByte). Utilizing the components such as JTable and by extending the default renderers allowed us to substantially lower the amount of code we otherwise would have needed to add to get our program operational.
+
+First we will discuss our abstract MemoryTableModel class and it's children, Two/SingleByteHexTableModel. The abstract class contains two helper functions. The first is =intToHexString(int originalInteger)= which takes an integer and returns a hex value as a string (used for displaying memory contents in a cell using hex). The other method we have is =hexStringToInteger(string hexString)= which returns an integer value based on a hex string, such as "3D" (used for converting and storing user input in memory). Below you can see the primary relevant portion of the code which adds each element of a string into the result integer.
+
+[[./hexStringToInteger.png]]
+
+This loop uses the formula $16^\(length - location\)$ where the length is the size of the string and the location is the index of the current character. When you iterate over a string adding the result to a variable each time the final value will be the resulting integer (we use the value 16 due to hexadecimal being base 16).
+
+SingleByteHexTableModel and TwoByteHexTableModel both extend the MemoryTableModel and make use of it's methods. Most of the code in these concrete classes is boilerplate because they must implement the AbstractTableModel methods, but the getValueAt and setValueAt methods required original code.
+
+Below we will explain the methods as implemented in the SingleByteHexTableModel. These methods are nearly identical in the TwoByteHexTableModel except for minor changes to use two bytes instead of one, the differences are minimal enough that they do not require focus.
+
+[[./byteGetValueAt.png]]
+
+The logic for getting the value of a cell, at the cross between rowIndex and columnIndex, is surprisingly rudimentary. Using the formula $((rowIndex * columnCount) + columnIndex)$ we can find the location of that cell in memory. We then use the bitwise AND operator with the hex value FF so that the value of memory doesn't appear signed when converted to an integer. The intToHexString method converts the value of memory into a hex string and a simple if statement pads the value so that each cell is always displayed two characters long. If the cell is out of the memory bounds the value is returned as null.
+
+[[./byteSetValueAt.png]]
+
+Setting the value of a cell is essentially the reverse of accessing it. The same formula is used to find the appropriate address in memory for the rowIndex and columnIndex. The dataValue which the user entered in a cell is treated as a string and is converted to an integer using hexStringToInteger. An if statement makes sure that the dataValue is not too large to fit in a single byte of the memory ray, if it's too large it does not modify the memory.
+
+
+* DONE Persistent Information
 #+begin_comment
 How any persistent information (i.e., information that must survive across multiple executions of your application), if any, is handled by your application
 #+end_comment
+
+We chose to not store persistent information for our debugger in favor of getting as many other features implemented with a good quality standard. If we were to store information, such as settings, we would probably use a binary format to store colors, boolean values, etc.
 
 
 * TODO Other Features

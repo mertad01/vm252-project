@@ -58,7 +58,7 @@ public abstract class MemoryTableModel extends AbstractTableModel {
         // Resulting value to be returned
         int resultInteger = 0;
         // Location of value within hexString
-        int index = 0;
+        int hexStringIndex = 0;
         int size = hexString.length();
 
         // Add each character from the hex string to the resultInteger
@@ -67,15 +67,15 @@ public abstract class MemoryTableModel extends AbstractTableModel {
             // Convert letters and numbers to the value they represent for their location within the hexString
             //   Ex: EC -> E0 + 0C
             switch (Character.toUpperCase(character)) {
-                case 'A' -> resultInteger += 10 * (Math.pow(16, size - (index + 1)));
-                case 'B' -> resultInteger += 11 * (Math.pow(16, size - (index + 1)));
-                case 'C' -> resultInteger += 12 * (Math.pow(16, size - (index + 1)));
-                case 'D' -> resultInteger += 13 * (Math.pow(16, size - (index + 1)));
-                case 'E' -> resultInteger += 14 * (Math.pow(16, size - (index + 1)));
-                case 'F' -> resultInteger += 15 * (Math.pow(16, size - (index + 1)));
-                default -> resultInteger += Integer.parseInt(String.valueOf(character)) * (Math.pow(16, size - (index + 1)));
+                case 'A' -> resultInteger += 10 * (Math.pow(16, size - (hexStringIndex + 1)));
+                case 'B' -> resultInteger += 11 * (Math.pow(16, size - (hexStringIndex + 1)));
+                case 'C' -> resultInteger += 12 * (Math.pow(16, size - (hexStringIndex + 1)));
+                case 'D' -> resultInteger += 13 * (Math.pow(16, size - (hexStringIndex + 1)));
+                case 'E' -> resultInteger += 14 * (Math.pow(16, size - (hexStringIndex + 1)));
+                case 'F' -> resultInteger += 15 * (Math.pow(16, size - (hexStringIndex + 1)));
+                default -> resultInteger += Integer.parseInt(String.valueOf(character)) * (Math.pow(16, size - (hexStringIndex + 1)));
             }
-            ++index;
+            ++hexStringIndex;
         }
 
         return resultInteger;

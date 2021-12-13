@@ -3,8 +3,6 @@ package edu.luther.cs252.group1.viewcontroller.memoryview.singlebyte;
 import edu.luther.cs252.group1.model.VirtualMachine252;
 import edu.luther.cs252.group1.viewcontroller.memoryview.MemoryTableModel;
 
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 
 public class SingleByteHexTableModel extends MemoryTableModel {
 

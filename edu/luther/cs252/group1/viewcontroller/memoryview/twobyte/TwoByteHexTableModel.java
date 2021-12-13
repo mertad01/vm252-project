@@ -153,7 +153,6 @@ public class TwoByteHexTableModel extends MemoryTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
-//            byte[] bytePair = VM252Utilities.fetchBytePair(memory, (short) ((rowIndex * columnCount) + columnIndex));
             byte[] bytePair = VM252Utilities.fetchBytePair(
                     memory,
                     (short) ((columnIndex * 2) + (rowIndex * 20))
@@ -201,7 +200,6 @@ public class TwoByteHexTableModel extends MemoryTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         // Location of the cell within the vm252 memory
-//        short address = (short) ((rowIndex * columnCount) + columnIndex);
         short address = (short) ((columnIndex * 2) + (rowIndex * 20));
         // aValue string as an integer
         try {
