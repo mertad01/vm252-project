@@ -32,7 +32,7 @@ public class ProgramMenuBar extends JMenuBar {
 		// TextField, fileNameField's, width in columns is 100.
 		//
 		fileNameField = new JTextField(100);
-		runDelayField = new JTextField("Delay", 10);
+		runDelayField = new JTextField("0", 10);
 
 		//
 		// Set the text field as read-only
@@ -40,7 +40,6 @@ public class ProgramMenuBar extends JMenuBar {
 
 		fileNameField.setEditable(false);
 
-		runDelayField = new JTextField("Delay", 10);
 
 		//
 		// Set help tooltips
