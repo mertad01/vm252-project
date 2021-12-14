@@ -181,8 +181,8 @@ We chose to not store persistent information for our debugger in favor of gettin
 ** Kritib Bhattarai
 | Date   | Hours Worked |
 |--------+--------------|
-|||
-|||
-|||
+|12/11/21| 1pm-5pm      |
+|12/13/21| 5pm-8:30pm   |
+|12/13/21|10am-1pm      |
 |--------+--------------|
-| Total: |   ~6         |
+| Total: |   ~10.5hours |
