@@ -72,9 +72,9 @@ public class ProgramMenuBar extends JMenuBar {
 						+ "Otherwise you can view the full command list for all program controls and inputs"));
 		command_list.addActionListener(actionEvent -> JOptionPane.showMessageDialog(getRootPane(),
 				"""
-						n button: Run Next Program Instruction\s
+						Execute Next: Run Next Program Instruction\s
 
-						Load: Load a vm252 object file\s
+						File/Open: Load a vm252 object file\s
 
 						Run: Run program until breakpoint reached\s
 
@@ -86,13 +86,19 @@ public class ProgramMenuBar extends JMenuBar {
 
 						Delay: Delay executing each instruction of the program\s
 
-						Input/Output: Enter input or receive output here\s
-
 						PC: View or edit the program counter\s
 
 						ACC: View or edit the accumulator\s
 
-						Next: View the next instruction that will be ran"""));
+						Next Instruction: View the next instruction that will be ran\s
+											    
+						Clear Breaks: Clears all breakpoints in the program\s
+											    
+						Breakpoint Line#: Toggle a breakpoint at selected source line location\s
+											    
+						Z button: Re-initialize the program\s
+											    
+						Selected Memory Address: User cursor selected location in memory"""));
 
 
 		//
