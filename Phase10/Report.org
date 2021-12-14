@@ -7,7 +7,7 @@
 #+LANGUAGE: en
 #+OPTIONS: toc:nil
 
-* TODO Application Usage (Need Images)
+* Application Usage
 #+begin_comment
 How-to-use-it instructions for your application, ideally with annotated diagrams/pictures (a video demonstration is not acceptable)
 #+end_comment
@@ -19,15 +19,26 @@ java edu.luther.cs252.group1.Main
 #+end_src
 Alternatively, you can download the precompiled java jar file from GitHub and run it using =java -jar vm252-project.jar=.
 
-After launching the application you can start using it. First, use the file+open menu and select a valid VM252 object file. In this document we will be using a simple multiplication program. You can verify that the object file has been loaded by seeing that the object file location has been loaded in the menu bar and that the memory table has values in the cells. The current program counter will be rendered as the TK.color.yellow.
+After launching the application you can start using it. First, use the file+open menu and select a valid VM252 object file. In this document we will be using a simple multiplication program. You can verify that the object file has been loaded by seeing that the object file location has been loaded in the menu bar and that the memory table has values in the cells. The current program counter will be rendered as the yellow text in the cell.
+
+[[./1.png]]
 
 Running the program to completion can be done by selecting the "Run" menu near the top right of the screen and then pressing the "Run" button within. You can also add a delay in milliseconds in the input box to the right of the "Run" menu and use the "Run", "Start", and "Pause" buttons to slowly step through the program. Alternatively, you can manually click "Execute Next" on the left hand side of the screen to run one instruction at a time. If you need to reset the program counter and accumulator use the "Z" button in the top right of the window's menu bar. You can also change the program counter and accumulator using the related input boxes on the right side panel by entering a number and pressing enter.
 
+[[./2.png]]
+
 Breakpoints will result in the program being paused if it's running and notify you with a popup, or just a popup if you are manually executing each instruction. You can toggle breakpoints at a memory address by right clicking a cell of the memory table and they will change to be TK.color.color. Alternatively you can add breakpoints by inputting the source-line number relating to an instruction in the "Breakpoint Line #" input box on the top left of the left side panel. Below you will find a "Clear Breakpoints" button to disable all breakpoints.
+
+[[./3.png]]
 
 There are two different views of the memory, the single-byte hex representation and the double-byte hex representation. In the single-byte hex view you see each cell representing a byte of memory, the two-byte hex view displays two bytes in each cell. You can double click a cell and enter a new value to change the memory (0-FF for single-byte, 0-FFFF for double-byte). Both tables will automatically be updated to represent changes in the memory model. You can see the next instruction to be executed in the bottom panel of the screen as well as the currently selected memory address location.
 
-* DONE Minimum Requirements
+[[./4.png]]
+
+[[./5.png]]
+
+
+* Minimum Requirements
 #+begin_comment
 A description of how the minimum requirements for the assignment have been met or not met (i.e., the capabilities of the aa, ap, amb, ba, h, mb, n, ob, q, r, s, and z commands along with the capability of loading an object file for execution have been provided), with particular mention of all the aspects of the r command (see lines 40-52 of the Phase 4 handout)
 #+end_comment
@@ -43,7 +54,7 @@ Breakpoints can be added by right clicking on a cell of the table, changing the 
 
 Our "Run" menu and the related delay input box fulfill the =r= command requirements. Without any delay entered you can select "Run" from the menu to execute the entire program. Alternatively, you can set a delay value in milliseconds in the input box and when you run it will slowly step through the program, with the ability to "Pause" and "Start" again. All views are automatically updated.
 
-* DONE Beyond the Minimum
+* Beyond the Minimum
 #+begin_comment
 Mention of any of any capabilities above the minimum requirements that have been provided (e.g., the capabilities of the bl, mi, and oi commands)
 #+end_comment
@@ -53,27 +64,41 @@ Our VM252 application fulfills the majority of the "extra" commands, going beyon
 
 Using the "Double-Byte Hex" tab in the top center of the memory view you can choose to view the machine memory and object code as 2-byte hex data (=od= and =md=). You can edit these cells to new unsigned hex values for the =amdx= command functionality.
 
-* TODO Roles and Contributions
+* Roles and Contributions
 
 #+begin_comment
 A description of the roles and contributions of each of the members of the group over the lifetime of the project.
 #+end_comment
 
-* DONE Libraries Used
+Below you will you find general information about each member of the group and their contributions. It should be noted that these are *general* and not exclusive. We met multiple times throughout the semester and worked across categories even if there were trends to certain focus areas in the development process.
+
+** Michael
+
+Michael primarily focused on the front-end graphical design of the application. Almost all of the initial graphical layouts were initially implemented by Michael and then later fleshed out by the entire group. Working on how the design interacted with the model, specifically colors and design considerations, were also a primary focus.
+
+** Adam
+
+Adam focused mainly on handling class hierarchy and implementing cell renderers and models. He made sure that the tables were always up-to-date and wrote helper methods for handling hex input. Adam was also in charge of submitting assignments and writing reports in an orderly fashion.
+
+** Kritib
+
+Kritib's focus during the lifetime of the project was on methods relating to running the application, such as the next instruction execution, running the application, and adding delays. Kritib offered testing time and added checks for various exceptions (especially relating to running the program).
+
+* Libraries Used
 #+begin_comment
 A list of which standard or third-party libraries the application uses, with an explanation of the purpose of third-party libraries
 #+end_comment
 
 Java's Swing and the associated Abstract Window Toolkit graphical user interface libraries were the primary library for our application. This is what we used to create the entire user interface and all of the sub-components. Nothing outside of the Java Standard Library was used to prevent any unneccesary complication.
 
-* DONE Class Relationship Family-Tree Diagram
+* Class Relationship Family-Tree Diagram
 #+begin_comment
 A family-tree diagram of the class relationships of the classes the group defined for its code
 #+end_comment
 
 [[./ClassHierarchy.png]]
 
-* DONE Design Patterns
+* Design Patterns
 #+begin_comment
 A discussion of how and where any design patterns and idioms (especially Model-View-Controller) are reflected in the application’s design
 #+end_comment
@@ -88,7 +113,7 @@ The ProgramStatePanel contains program counter and accumulator input boxes. Thes
 
 The MemoryTable has both a MemoryTableCellRenderer and a MemoryTableModel, each with seperate implementations for the single and two byte views/controllers. These renderers and models are the principal way memory is viewed and controlled in the VirtualMachine252 model (implementation details in the Original Coding section). These classes allow the tables to view and control the memory similar to how a spreadsheet would work, using the VirtualMachine252 memory as the model behind the scenes.
 
-* DONE Original Coding
+* Original Coding
 #+begin_comment
 Any other original coding in the application not related to assembling components for and interfacing with the GUI
 #+end_comment
@@ -114,15 +139,9 @@ The logic for getting the value of a cell, at the cross between rowIndex and col
 Setting the value of a cell is essentially the reverse of accessing it. The same formula is used to find the appropriate address in memory for the rowIndex and columnIndex. The dataValue which the user entered in a cell is treated as a string and is converted to an integer using hexStringToInteger. An if statement makes sure that the dataValue is not too large to fit in a single byte of the memory ray, if it's too large it does not modify the memory.
 
 
-* DONE Persistent Information
+* Persistent Information
 #+begin_comment
 How any persistent information (i.e., information that must survive across multiple executions of your application), if any, is handled by your application
 #+end_comment
 
 We chose to not store persistent information for our debugger in favor of getting as many other features implemented with a good quality standard. If we were to store information, such as settings, we would probably use a binary format to store colors, boolean values, etc.
-
-
-* TODO Other Features
-#+begin_comment
-Any other special design or implementation features of the final application the group feels should be pointed out
-#+end_comment
