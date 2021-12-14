@@ -36,7 +36,7 @@ public class SingleClickCellMemoryAddressStateEvent extends MouseAdapter {
     //     O(1)
     //
     @Override
-    public void mouseClicked(MouseEvent event) {
+    public void mousePressed(MouseEvent event) {
         super.mouseClicked(event);
         if (event.getButton() == MouseEvent.BUTTON1) {
             int row = memoryTable.rowAtPoint(event.getPoint());
