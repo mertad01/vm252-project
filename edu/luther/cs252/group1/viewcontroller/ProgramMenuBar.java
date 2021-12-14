@@ -145,6 +145,7 @@ public class ProgramMenuBar extends JMenuBar {
 		add(fileNameLabel);
 		add(fileNameField);
 		add(runMenu);
+		add(new JLabel("Delay:"));
 		add(runDelayField);
 		add(reinitializeButton);
 
