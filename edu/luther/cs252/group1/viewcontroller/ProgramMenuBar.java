@@ -78,9 +78,7 @@ public class ProgramMenuBar extends JMenuBar {
 
 						Run: Run program until breakpoint reached\s
 
-						Pause: Pause the execution of the program\s
-
-						Stop: Stop the execution of the program\s
+						Run/Pause: Pause the execution of the program\s
 
 						File Name: The name of the loaded vm252 object file\s
 
